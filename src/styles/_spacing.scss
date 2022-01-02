@@ -1,0 +1,55 @@
+@mixin spacing($super-property) {
+    /*
+     * $super-property is either 'margin' or 'padding'
+     *
+     * A 'spacing' selector is a selector which is only responsible for margins
+     * or padding. The @each loop in this @mixin iterates over each side that
+     * spacing may be applied to (either right, left, top, or bottom). It then
+     * constructs the proper selectors with the correct size applied. For
+     * example:
+     *
+     * ```
+     * .m {
+     *     &b {
+     *         &-sm {
+     *             margin-bottom: 0.5rem;
+     *         }
+     *
+     *         [...other sizes]
+     *     }
+     *
+     *     [...other sides]
+     * }
+     * ```
+     * This exposes selectors such as 'mb-xs', 'mb-md', 'mt-xxl', etc.
+    */
+    @each $size, $value in $spacing-sizes {
+        &-#{$size} {
+            #{$super-property}: $value;
+        }
+    }
+
+    @each $side, $side-property in $spacing-sides {
+        &#{$side} {
+            @each $size, $value in $spacing-sizes { 
+                &-#{$size} {
+                    @if type-of($side-property) == list {
+                        @each $sub-property in $side-property {
+                            #{'#{$super-property}-#{$sub-property}'}: $value;
+                        }
+                    } @else {
+                        #{'#{$super-property}-#{$side-property}'}: $value;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.m {
+    @include spacing('margin');
+}
+
+.p {
+    @include spacing('padding');
+}

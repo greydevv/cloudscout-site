@@ -1,0 +1,45 @@
+@import 'styles/global';
+@import 'styles/mixins';
+
+.footer {
+    padding: 2rem 2rem 1rem 2rem;
+    background-color: $primary-color;
+    color: $primary-light-color;
+
+    &__content {
+        @include section;
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+
+        &__set {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        &__category {
+            margin: 0;
+            color: $primary-light-color;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        &__link {
+            color: $primary-light-color !important;
+        }
+    }
+
+    &__copyright {
+        margin-top: 2rem;
+        padding: 1rem 0;
+        border-top: 1px solid $secondary-color;
+
+        &__text {
+            color: $primary-light-color !important;
+        }
+    }
+}

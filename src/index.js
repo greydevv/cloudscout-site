@@ -11,8 +11,8 @@ import Landing from 'pages/Landing';
 import NotFound from 'pages/NotFound';
 import About from 'pages/About';
 import Pricing from 'pages/Pricing';
-import './index.scss';
 import { Auth0Provider } from '@auth0/auth0-react';
+import './index.scss';
 
 ReactDOM.render(
     <Router>

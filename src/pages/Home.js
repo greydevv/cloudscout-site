@@ -1,11 +1,43 @@
 import NavBar from 'components/NavBar';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from 'pages/Loading';
+import Footer from 'components/Footer';
 import './Home.scss';
 
 function Home() {
     const { isLoading } = useAuth0();
+    const navLinks = [
+        {
+            url: '/contact',
+            text: 'Contact',
+        },
+        {
+            url: '/about',
+            text: 'About',
+        },
+        {
+            url: '/pricing',
+            text: 'Pricing',
+        }
+    ];
+
+    const footerLinkSets = [
+        {
+            category: 'General',
+            links: [
+                'Login',
+                'Register',
+            ],
+        },
+        {
+            category: 'Company',
+            links: [
+                'About',
+                'Email',
+            ],
+        },
+    ];
 
     if (isLoading) {
         return <Loading />;
@@ -13,31 +45,9 @@ function Home() {
 
     return (
         <div className='home'>
-            <NavBar>
-                <NavLink className='basic-link' to='/contact'>Contact</NavLink>
-                <NavLink className='basic-link' to='/about'>About</NavLink>
-                <NavLink className='basic-link' to='/pricing'>Pricing</NavLink>
-            </NavBar>
+            <NavBar links={ navLinks } />
             <Outlet />
-            <div className='footer'>
-                <div className='footer-content'>
-                    <div className='footer-links'>
-                        <div className='footer-link-set'>
-                            <h1>General</h1>
-                            <p>Login</p>
-                            <p>Register</p>
-                        </div>
-                        <div className='footer-link-set'>
-                            <h1>Company</h1>
-                            <p>About</p>
-                            <p>Email</p>
-                        </div>
-                    </div>
-                    <div className='copyright'>
-                        <p>© 2021, GNA Software</p>
-                    </div>
-                </div>
-            </div>
+            <Footer linkSets={ footerLinkSets } copyrightText={ '© cloudscout, Inc.' }/>
         </div>
     );
 }

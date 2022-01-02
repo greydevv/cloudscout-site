@@ -1,4 +1,31 @@
+$blue: #177bf2;
+$grey: #7f848b;
 
-$default-fon
+$base-font-size: 1rem;
 
-$h1-font-size
+$h1-font-size: $base-font-size * 1.75;
+$h2-font-size: $base-font-size * 1.5;
+$h3-font-size: $base-font-size * 1.25;
+$h4-font-size: $base-font-size;
+$h5-font-size: $base-font-size * 0.75;
+$h6-font-size: $base-font-size * 0.5;
+
+$spacing-sizes: (
+    auto: auto,
+    xxs: 0.25rem,
+    xs: 0.5rem,
+    sm: 1rem,
+    md: 1.5rem,
+    lg: 2rem,
+    xl: 3rem,
+    xxl: 4rem,
+);
+
+$spacing-sides: (
+    r: 'right',
+    l: 'left',
+    t: 'top',
+    b: 'bottom',
+    x: ('right', 'left'),
+    y: ('top', 'bottom'),
+)

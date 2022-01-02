@@ -1,37 +1,24 @@
 @import 'styles/global';
 @import 'styles/mixins';
 
-.section-head {
-    @include margin-x-auto;
-    @include header;
-
-    text-align: center;
-    margin-bottom: 0.25rem;
+.landing__slogan {
+    font-weight: 600;
+    color: $primary-dark-color;
 }
 
-.section-subtext {
-    @include small-text;
-    @include margin-x-auto;
-
-    text-align: center;
-    color: $secondary-dark-color;
-}
-
-.features-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
-}
-
-.landing-container {
+.landing__container {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-.pricing-container {
-    @include margin-x-auto;
+.features__container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
 
+.pricing__container {
     width: 80%;
     display: flex;
     flex-direction: row;
@@ -39,45 +26,12 @@
     gap: 1rem;
 }
 
-// .h1-left {
-//     @include header;
-
-//     text-align: left;
-//     color: $primary-dark-color;
-//     font-weight: 600;
-//     margin-bottom: 0.5rem;
-// }
-
-.h3-left {
-    @include sub-header;
-
-    text-align: left;
-    color: $primary-color;
-    letter-spacing: 0.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.p-left {
-    @include small-text;
-
-    text-align: left;
-    color: $secondary-dark-color;
-}
-
-.landing-hook {
-    margin-bottom: 2rem;
-}
-
-.w-80 {
-    width: 80%;
-}
-
-.landing-text {
+.landing__left {
     flex-grow: 1;
     flex-basis: 0;
 }
 
-.landing-img {
+.landing__thumbnail {
     flex-grow: 1;
     flex-basis: 0;
     background-color: $secondary-color;

@@ -1,20 +1,6 @@
 @import 'styles/global';
 @import 'styles/mixins';
 
-@mixin nav-link {
-    @include plain-link;
-    @include margin-y-auto;
-
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.navbar-wrapper {
-    color: $primary-dark-color;
-    padding: 1.5rem 0;
-    box-sizing: border-box;
-}
-
 .navbar {
     @include section-1;
 
@@ -23,46 +9,38 @@
     flex-direction: row;
     justify-content: space-between;
     font-family: $primary-font;
+
+    &__link {
+        @include plain-link;
+
+        color: $primary-dark-color;
+        font-size: 12px;
+        font-weight: 500;
+
+        &__btn {
+            @extend .navbar__link;
+            color: $primary-light-color;
+            padding: 10px 15px;
+            border-radius: 6px;
+            background-color: $primary-color;
+        }
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    &__brand {
+        &__container {
+            height: 40px;
+        }
+
+        &__img {
+            color: $primary-dark-color;
+            object-fit: cover;
+            height: 100%;
+        }
+    }
 }
-
-.navbar-links {
-    @include margin-x-auto;
-
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-}
-
-.navbar svg {
-    color: $primary-dark-color;
-    object-fit: cover;
-    height: 100%;
-}
-
-.logo {
-    @include margin-y-auto;
-
-    height: 40px;
-}
-
-.navbar-auth-links {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-}
-
-.basic-link {
-    @include nav-link;
-
-    color: $primary-dark-color;
-}
-
-.signup-btn {
-    @include nav-link;
-    
-    padding: 10px 15px;
-    border-radius: 6px;
-    color: $primary-light-color;
-    background-color: $primary-color;
-}
-

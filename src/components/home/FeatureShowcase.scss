@@ -1,5 +1,7 @@
 @import 'styles/global';
 @import 'styles/mixins';
+@import 'styles/variables';
+@import 'styles/text';
 
 .feature {
     width: 100%;
@@ -8,41 +10,37 @@
     display: flex;
     flex-direction: row;
     overflow: clip;
+
+    &__info {
+        flex: 1;
+    }
+
+    &__thumbnail {
+        flex: 1.2;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        object-fit: cover;
+    }
+
+    &__name {
+        color: $primary-color;
+    }
+
+    &__hook {
+        font-weight: 600;
+        color: $primary-dark-color;
+    }
+    
+    &__descrip {
+        font-weight: 400;
+        font-size: 14px;
+        color: $grey;
+    }
+
 }
 
-.feature-meta {
-    flex: 1;
-    padding: 1.5rem;
-}
-
-.feature-name {
-    @include sub-header;
-
-    color: $primary-color;
-    letter-spacing: 0.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.feature-hook {
-    @include header;
-
-    margin-bottom: 1rem;
-}
-
-.feature-descrip {
-    @include small-text;
-
-    color: $secondary-dark-color;
-}
-
-.feature-thumbnail {
-    flex: 1.2;
-}
-
-.feature-thumbnail img {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    object-fit: cover;
-}

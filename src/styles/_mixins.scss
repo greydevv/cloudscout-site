@@ -29,8 +29,7 @@
 }
 
 @mixin section {
-    margin-left: auto;
-    margin-right: auto;
+    @include margin-x-auto;
     width: 75%;
     max-width: 1200px;
 }

@@ -8,16 +8,42 @@
 @import 'styles/global';
 @import 'styles/variables';
 
-h1, p {
+h1, h2, h3, h4, h5, h6, p {
     margin: 0;
 }
 
-.h1-left {
-    text-align: left;
-    color: $primary-dark-color;
-    font-weight: 600;
+h1 {
+    font-size: $h1-font-size;
 }
 
-.p--body-left {
+h2 {
+    font-size: $h2-font-size;
+}
 
+h3 {
+    font-size: $h3-font-size;
+}
+
+h4 {
+    font-size: $h4-font-size;
+}
+
+h5 {
+    font-size: $h5-font-size;
+}
+
+h6 {
+    font-size: $h6-font-size;
+}
+
+.h5-spaced {
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.p-body-sm {
+    font-size: 14px;
+    font-weight: 400;
+    color: $secondary-dark-color;
 }
