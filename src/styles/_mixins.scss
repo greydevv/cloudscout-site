@@ -1,0 +1,56 @@
+@import 'styles/global';
+
+@mixin margin-x-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin margin-y-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+@mixin header {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+}
+
+@mixin sub-header {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+@mixin small-text {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+}
+
+@mixin section {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    max-width: 1200px;
+}
+
+@mixin section-1 {
+    @include section;
+    width: 90%;
+    max-width: 1400px;
+}
+
+@mixin plain-button {
+    font-family: $primary-font;
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+@mixin plain-link {
+    text-decoration: none;
+}

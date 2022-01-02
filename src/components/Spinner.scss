@@ -1,0 +1,30 @@
+@import 'styles/global';
+
+.spinner {
+    height: 100%;
+    width: 100%;
+    border: 5px solid $neutral-1-color;
+    border-color: $neutral-1-color transparent $neutral-1-color transparent;
+    border-radius: 999px;
+    padding: 1.25rem;
+    box-sizing: border-box;
+    animation: spinner 1.2s linear infinite;
+}
+
+.spinner-icon {
+    vertical-align: top;
+    color: $neutral-0-color;
+    height: 100%;
+    width: 100%;
+    // stop this icon from spinning
+    animation: spinner 1.2s linear infinite reverse;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,53 @@
+@import 'styles/global';
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-header {
+    background-color: $primary-dark-color;
+    border-radius: 5px;
+}
+
+.institution {
+    width: 35%;
+}
+
+.table-content {
+    overflow-x: auto;
+    margin-top: 0px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding-bottom: 2rem;
+}
+
+.date-entered {
+    text-align: right;
+}
+
+td.date-entered {
+    font-size: 14px;
+    color: $neutral-0-color;
+}
+
+th,
+td {
+    text-align: left;
+}
+
+th {
+    color: $primary-light-color;
+    padding: 15px 15px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+td {
+    color: $primary-dark-color;
+    padding: 20px 15px;
+    vertical-align:middle;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 2px solid $neutral-1-color;
+}

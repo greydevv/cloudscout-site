@@ -1,0 +1,125 @@
+@import 'styles/global';
+@import 'styles/mixins';
+
+/* 
+ * Following calculations are for lining up elements in each tier while
+ * maintaining a larger height for the featured tier.
+*/
+
+$height-above: 1.5rem;
+$crown-height: 18px;
+$inner-padding: 1rem;
+$featured-padding-top: calc($height-above + $inner-padding - $crown-height);
+$featured-padding-bottom: calc($height-above + $inner-padding);
+
+@mixin pricing-tier {
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 250px;
+    min-width: 200px;
+    border-radius: 10px;
+    padding: $inner-padding;
+    transition: 0.3s ease;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
+    }
+}
+
+.featured-crown {
+    width: $crown-height;
+    height: $crown-height;
+}
+
+.pricing-tier-featured {
+    @include pricing-tier;
+
+    padding-top: $featured-padding-top;
+    padding-bottom: $featured-padding-bottom;
+    background: linear-gradient(315deg, $primary-gradient-dark, $primary-gradient-light);
+    color: $primary-light-color;
+}
+
+.pricing-tier-regular {
+    @include pricing-tier;
+
+    margin: $height-above 0;
+    border: 2px solid $secondary-color;
+    background-color: $primary-background-color;
+}
+
+.pricing-tier-featured .h3-left,
+.pricing-tier-featured .h1-left,
+.pricing-tier-featured .p-left {
+    color: $primary-light-color;
+}
+
+.pricing-tier-featured .select-pricing {
+    color: $primary-light-color;
+    background-color: $primary-color;
+}
+
+.pricing-tier-featured .pricing-meta .pricing-interval {
+    color: $primary-light-color;
+}
+
+.pricing-meta {
+    margin-bottom: 1rem;
+}
+
+.pricing-perks {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 3rem;
+}
+
+.d-sign {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.pricing-interval {
+    @include small-text;
+
+    color: $neutral-0-color;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.select-pricing {
+    @include plain-link;
+
+    text-align: center;
+    display: block;
+    color: $primary-color;
+    width: 100%;
+    border: 2px solid $primary-color;
+    border-radius: 10px;
+    font: $primary-font;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pricing-perk {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.pricing-perk svg {
+    @include margin-y-auto;
+
+    color: $secondary-dark-color;
+    width: 10px;
+}
+
+.pricing-tier-featured .pricing-perks .pricing-perk svg {
+    color: $primary-light-color;
+}

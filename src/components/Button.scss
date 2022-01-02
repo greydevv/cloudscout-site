@@ -1,0 +1,23 @@
+@import 'styles/mixins';
+
+.basic-btn {
+    @include plain-button;
+
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 6px;
+    color: $primary-light-color;
+    background-color: $primary-color;
+}
+
+.gradient-btn {
+    @include plain-button;
+
+    padding: 10px 40px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    color: $primary-light-color;
+    background: linear-gradient(90deg, $primary-gradient-dark, $primary-gradient-light);
+}

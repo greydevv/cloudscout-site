@@ -1,0 +1,23 @@
+/* 
+ * Typography Styles
+ * 
+ * Naming:
+ *     block-element-modifier
+*/
+
+@import 'styles/global';
+@import 'styles/variables';
+
+h1, p {
+    margin: 0;
+}
+
+.h1-left {
+    text-align: left;
+    color: $primary-dark-color;
+    font-weight: 600;
+}
+
+.p--body-left {
+
+}

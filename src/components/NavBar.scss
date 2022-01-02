@@ -1,0 +1,68 @@
+@import 'styles/global';
+@import 'styles/mixins';
+
+@mixin nav-link {
+    @include plain-link;
+    @include margin-y-auto;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.navbar-wrapper {
+    color: $primary-dark-color;
+    padding: 1.5rem 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    @include section-1;
+
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: $primary-font;
+}
+
+.navbar-links {
+    @include margin-x-auto;
+
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.navbar svg {
+    color: $primary-dark-color;
+    object-fit: cover;
+    height: 100%;
+}
+
+.logo {
+    @include margin-y-auto;
+
+    height: 40px;
+}
+
+.navbar-auth-links {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.basic-link {
+    @include nav-link;
+
+    color: $primary-dark-color;
+}
+
+.signup-btn {
+    @include nav-link;
+    
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: $primary-light-color;
+    background-color: $primary-color;
+}
+

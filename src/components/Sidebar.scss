@@ -1,0 +1,79 @@
+@import 'styles/global';
+
+.sidebar-wrapper {
+    background-color: $primary-dark-color;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 2rem;
+}
+
+.sidebar-header {
+    margin: 2rem 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    justify-content: flex-start;
+}
+
+.sidebar-content {
+    flex-grow: 4;
+}
+
+.sidebar-footer {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    flex-grow: 3;
+    justify-content: flex-end;
+}
+
+.sidebar-logo {
+    margin-left: auto;
+    margin-right: auto;
+    width: 30px;
+}
+
+.sidebar-item {
+    text-decoration: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sidebar-item {
+    color: $primary-light-color;
+}
+
+.sidebar-item-active {
+    color: $primary-color;
+}
+
+.sidebar-item:hover {
+    color: $neutral-0-color;
+}
+
+.sidebar-item-active:hover {
+    color: $primary-color;
+}
+
+button.sidebar-item {
+    background: transparent;
+    border: none;
+}
+
+button.sidebar-item:hover {
+    cursor: pointer
+}
+
+svg {
+    color: inherit;
+}
+

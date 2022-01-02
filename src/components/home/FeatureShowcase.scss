@@ -1,0 +1,48 @@
+@import 'styles/global';
+@import 'styles/mixins';
+
+.feature {
+    width: 100%;
+    border-radius: 10px;
+    background-color: $secondary-color;
+    display: flex;
+    flex-direction: row;
+    overflow: clip;
+}
+
+.feature-meta {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+.feature-name {
+    @include sub-header;
+
+    color: $primary-color;
+    letter-spacing: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-hook {
+    @include header;
+
+    margin-bottom: 1rem;
+}
+
+.feature-descrip {
+    @include small-text;
+
+    color: $secondary-dark-color;
+}
+
+.feature-thumbnail {
+    flex: 1.2;
+}
+
+.feature-thumbnail img {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    object-fit: cover;
+}
