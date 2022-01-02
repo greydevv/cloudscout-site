@@ -1,1 +1,1 @@
-# cloudscout-app
+# cloudscout-site
