@@ -1,0 +1,42 @@
+@import 'styles/global';
+@import 'styles/mixins';
+
+.profile {
+    flex-basis: 0;
+    flex-grow: 1;
+
+    &__meta {
+        text-align: left;
+    }
+
+    &__name {
+        color: $primary-dark-color;
+        font-weight: 600;
+    }
+
+    &__title {
+        color: $primary-color;
+        text-transform: uppercase;
+    }
+
+    &__img {
+        top: 0;
+        object-fit: cover;
+        width: 100%;
+        aspect-ratio: 1/1;
+        transition: 0.3s ease;
+    }
+
+    &__thumbnail {
+        aspect-ratio: 1/1;
+        overflow: hidden;
+        border-radius: 5px;
+
+        &:hover .profile__img {
+            opacity: 70%;
+            cursor: pointer;
+            transform: scale(1.015);
+        }
+        // box-shadow: 0 6px 15px $primary-dark-shadow-color;
+    }
+}

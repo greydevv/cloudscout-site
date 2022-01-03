@@ -1,61 +1,42 @@
 @import 'styles/global';
-@import 'styles/mixins';
 
-.team-profiles {
-    width: 100%;
+.member__profiles {
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 15%;
-    margin-top: 6rem;
+    gap: 4rem;
+    overflow: visible;
 }
 
-.profile {
-    flex-basis: 0;
-    flex-grow: 1;
+.about__intro {
+    display: flex;
+    flex-direction: row;
+
+    &__text {
+        flex-grow: 2;
+        flex-basis: 0;
+
+        &__inner {
+            width: 80%;
+        }
+    }
+
+    &__thumbnail {
+        flex-grow: 1;
+        flex-basis: 0;
+        background-color: $secondary-color;
+        border-radius: 10px;
+    }
 }
 
-.profile .team-img-container {
-    aspect-ratio: 1/1;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px $primary-dark-shadow-color;
-}
+.intro {
+    &__head {
+        font-weight: 600;
+        color: $primary-dark-color;
+    }
 
-.profile .team-img {
-    object-fit: cover;
-    width: 100%;
-    aspect-ratio: 1/1;
-    transition: 0.5s ease;
-}
-
-.profile .team-img:hover {
-    opacity: 70%;
-    cursor: pointer;
-    transform: scale(1.015);
-}
-
-.profile .team-meta {
-    @include margin-x-auto;
-
-    text-align: center;
-}
-
-.profile .team-meta h1 {
-    @include margin-x-auto;
-
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-top: 1.75rem;
-    margin-bottom: 0.25rem;
-}
-
-.profile .team-meta p {
-    @include margin-x-auto;
-
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: $primary-color;
+    &__subhead {
+        color: $primary-color;
+    }
 }
