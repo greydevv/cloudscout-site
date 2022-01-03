@@ -1,8 +1,8 @@
 import NavBar from 'components/NavBar';
-import { Outlet, NavLink, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from 'pages/Loading';
-import { FooterLinkSet, Footer } from 'components/Footer';
+import { FooterLinkSet, FooterLink, Footer } from 'components/Footer';
 import './Home.scss';
 
 function Home() {
@@ -26,23 +26,6 @@ function Home() {
         }
     ];
 
-    const footerLinkSets = [
-        {
-            category: 'General',
-            links: [
-                'Login',
-                'Register',
-            ],
-        },
-        {
-            category: 'Company',
-            links: [
-                'About',
-                'Email',
-            ],
-        },
-    ];
-
     if (isLoading) {
         return <Loading />;
     }
@@ -54,30 +37,31 @@ function Home() {
                 <Outlet />
             </div>
             <Footer copyrightText='© 2021 cloudscout, Inc.'>
-                { isAuthenticated 
-                    ? (
-                        <FooterLinkSet name='General'>
-                            <Link className='footer__links__link p-body-sm' to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
+                <FooterLinkSet name='General'>
+                    { isAuthenticated
+                        ? (
+                            <FooterLink to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
                                 Logout
-                            </Link>
-                        </FooterLinkSet>
-                      )
-                    : (
-                        <FooterLinkSet name='General'>
-                            <Link className='footer__links__link p-body-sm' to='#' onClick={ () => loginWithRedirect() }>
-                                Log In
-                             </Link>
-                            <Link className='footer__links__link p-body-sm' to='#' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
-                                Sign Up
-                            </Link>
-                        </FooterLinkSet>
-                      )
-                }
+                            </FooterLink>
+                        )
+                        : (
+                            <>
+                                <FooterLink to='#' onClick={ () => loginWithRedirect() }>
+                                    Log In
+                                 </FooterLink>
+                                <FooterLink to='#' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
+                                    Sign Up
+                                </FooterLink>
+                            </>
+                        )
+
+                    }
+                </FooterLinkSet>
                 <FooterLinkSet name='Company'>
-                    <NavLink className='footer__links__link p-body-sm' to='/'>Home</NavLink>
-                    <NavLink className='footer__links__link p-body-sm' to='/about'>About</NavLink>
-                    <NavLink className='footer__links__link p-body-sm' to='/pricing'>Pricing</NavLink>
-                    <NavLink className='footer__links__link p-body-sm' to='/contact'>Contact</NavLink>
+                    <FooterLink isNavLink to='/'>Home</FooterLink>
+                    <FooterLink isNavLink to='/about'>About</FooterLink>
+                    <FooterLink isNavLink to='/pricing'>Pricing</FooterLink>
+                    <FooterLink isNavLink to='/contact'>Contact</FooterLink>
                 </FooterLinkSet>
             </Footer>
         </div>
