@@ -14,8 +14,13 @@
         @include plain-link;
 
         color: $primary-dark-color;
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 500;
+
+        &-active {
+            @extend .navbar__link;
+            color: $primary-color;
+        }
 
         &__btn {
             @extend .navbar__link;

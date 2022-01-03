@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { ReactComponent as FullLogo } from 'assets/full_logo.svg';
 import './NavBar.scss';
@@ -10,20 +10,20 @@ function AuthLinks() {
 
     if (isAuthenticated) {
         return (
-            <NavLink className='navbar__link my-auto' to='/' onClick={ () => logout({ returnTo: window.location.origin }) }>
+            <Link className='navbar__link my-auto' to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
                 Logout
-            </NavLink>
+            </Link>
         );
     }
 
     return (
         <>
-            <NavLink className='navbar__link my-auto' to='/' onClick={ () => loginWithRedirect() }>
+            <Link className='navbar__link my-auto' to='#' onClick={ () => loginWithRedirect() }>
                 Log In
-            </NavLink>
-            <NavLink className='navbar__link__btn my-auto' to='/' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
+            </Link>
+            <Link className='navbar__link__btn my-auto' to='#' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
                 Sign Up
-            </NavLink>
+            </Link>
         </>
     );
 }
@@ -39,7 +39,15 @@ function NavBar({ links }) {
             { links &&
                 <div className='navbar__links my-auto'>
                     {links.map((link, i) => {
-                        return <NavLink key={ i } className='navbar__link my-auto' to={ link.url }>{ link.text }</NavLink>;
+                        return (
+                            <NavLink 
+                                key={ i } 
+                                className={({ isActive }) => isActive ? 'navbar__link-active' : 'navbar__link'} 
+                                to={ link.url }
+                            >
+                                { link.text }
+                            </NavLink>
+                        );
                     })}
                 </div>
             }
