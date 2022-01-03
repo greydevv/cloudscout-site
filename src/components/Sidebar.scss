@@ -1,7 +1,7 @@
-@import 'styles/global';
+@import 'styles/cloudscout';
 
 .sidebar-wrapper {
-    background-color: $primary-dark-color;
+    background-color: $color-dark;
 }
 
 .sidebar {
@@ -49,19 +49,19 @@
 }
 
 .sidebar-item {
-    color: $primary-light-color;
+    color: $color-light;
 }
 
 .sidebar-item-active {
-    color: $primary-color;
+    color: $color-primary;
 }
 
 .sidebar-item:hover {
-    color: $neutral-0-color;
+    color: $neutral-light;
 }
 
 .sidebar-item-active:hover {
-    color: $primary-color;
+    color: $color-primary;
 }
 
 button.sidebar-item {
@@ -76,4 +76,3 @@ button.sidebar-item:hover {
 svg {
     color: inherit;
 }
-

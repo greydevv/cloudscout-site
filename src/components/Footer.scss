@@ -1,9 +1,8 @@
-@import 'styles/global';
-@import 'styles/mixins';
+@import 'styles/cloudscout';
 
 .footer {
-    background-color: $primary-color;
-    color: $primary-light-color;
+    background-color: $color-primary;
+    color: $color-light;
 
     &__content {
         @include section;
@@ -22,24 +21,24 @@
 
         &__category {
             margin: 0;
-            color: $primary-light-color;
+            color: $color-light;
             font-size: 14px;
         }
 
         &__link {
             @include plain-link;
 
-            color: $primary-light-color !important;
+            color: $color-light !important;
         }
     }
 
     &__copyright {
         margin-top: 2rem;
         padding: 1rem 0;
-        border-top: 1px solid $secondary-color;
+        border-top: 1px solid $color-primary-light;
 
         &__text {
-            color: $primary-light-color !important;
+            color: $color-light !important;
         }
     }
 }

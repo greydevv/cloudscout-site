@@ -1,5 +1,3 @@
-@import 'styles/global';
-
 @mixin margin-x-auto {
     margin-left: auto;
     margin-right: auto;
@@ -41,7 +39,7 @@
 }
 
 @mixin plain-button {
-    font-family: $primary-font;
+    font-family: $font-primary;
     border: none;
     background-color: transparent;
 

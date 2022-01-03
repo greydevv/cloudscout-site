@@ -1,12 +1,9 @@
-@import 'styles/global';
-@import 'styles/mixins';
-@import 'styles/variables';
-@import 'styles/text';
+@import 'styles/cloudscout';
 
 .feature {
     width: 100%;
     border-radius: 10px;
-    background-color: $secondary-color;
+    background-color: $color-primary-light;
     display: flex;
     flex-direction: row;
     overflow: clip;
@@ -35,19 +32,12 @@
     }
 
     &__name {
-        color: $primary-color;
+        color: $color-primary;
     }
 
     &__hook {
         font-weight: 600;
-        color: $primary-dark-color;
+        color: $color-dark;
     }
-    
-    &__descrip {
-        font-weight: 400;
-        font-size: 14px;
-        color: $grey;
-    }
-
 }
 

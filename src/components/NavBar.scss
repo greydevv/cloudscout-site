@@ -1,5 +1,4 @@
-@import 'styles/global';
-@import 'styles/mixins';
+@import 'styles/cloudscout';
 
 .navbar {
     @include section-1;
@@ -8,26 +7,26 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-family: $primary-font;
+    font-family: $font-primary;
 
     &__link {
         @include plain-link;
 
-        color: $primary-dark-color;
+        color: $color-dark;
         font-size: 13px;
         font-weight: 500;
 
         &-active {
             @extend .navbar__link;
-            color: $primary-color;
+            color: $color-primary;
         }
 
         &__btn {
             @extend .navbar__link;
-            color: $primary-light-color;
+            color: $color-light;
             padding: 10px 15px;
             border-radius: 6px;
-            background-color: $primary-color;
+            background-color: $color-primary;
         }
     }
 
@@ -43,7 +42,7 @@
         }
 
         &__img {
-            color: $primary-dark-color;
+            color: $color-dark;
             object-fit: cover;
             height: 100%;
         }

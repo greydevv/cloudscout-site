@@ -2,15 +2,14 @@
 
 body {
   margin: 0;
-  font-family: $primary-font;
-  background-color: $primary-background-color;
-  color: $primary-dark-color;
+  font-family: $font-primary;
+  background-color: $neutral-lighter;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 button {
-    font-family: $primary-font;
+    font-family: $font-primary;
 }
 
 code {

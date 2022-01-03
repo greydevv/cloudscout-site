@@ -1,5 +1,4 @@
-@import 'styles/global';
-@import 'styles/mixins';
+@import 'styles/cloudscout';
 
 .landing {
     &__container {
@@ -18,13 +17,13 @@
 
     &__slogan {
         font-weight: 600;
-        color: $primary-dark-color;
+        color: $color-dark;
     }
 
     &__thumbnail {
         flex-grow: 1;
         flex-basis: 0;
-        background-color: $secondary-color;
+        background-color: $color-primary-light;
         border-radius: 10px;
     }
 }
@@ -44,11 +43,11 @@
 }
 
 #schools {
-    background-color: $secondary-color;
+    background-color: $color-primary-light;
 }
 
 .school__carousel__container {
-    background-color: $secondary-color;
+    background-color: $color-primary-light;
     &__inner {
         display: flex;
         flex-direction: row;

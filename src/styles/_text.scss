@@ -1,13 +1,3 @@
-/* 
- * Typography Styles
- * 
- * Naming:
- *     block-element-modifier
-*/
-
-@import 'styles/global';
-@import 'styles/variables';
-
 h1, h2, h3, h4, h5, h6, p {
     margin: 0;
 }
@@ -45,5 +35,5 @@ h6 {
 .p-body-sm {
     font-size: 14px;
     font-weight: 400;
-    color: $secondary-dark-color;
+    color: $neutral-dark;
 }

@@ -1,6 +1,30 @@
-$blue: #177bf2;
+// Literal colors
+// DO NOT USE FOR COLOR DEFINITIONS
+$cloudscout-blue: #177bf2;
+$cloudscout-dark-blue: #1864bf;
+$light-blue: #dbe5f2;
+$white: #f4f4f4;
+$black: #1a2129;
+$lighter-grey: #edeff2;
+$light-grey: #e1e5eb;
 $grey: #7f848b;
 
+// Dynamic colors
+$color-primary: $cloudscout-blue;
+$color-primary-dark: $cloudscout-dark-blue;
+$color-primary-light: $light-blue;
+
+$color-dark: $black;
+$color-light: $white;
+
+$neutral-lighter: $lighter-grey;
+$neutral-light: $light-grey;
+$neutral-dark: $grey;
+
+// Font
+$font-primary: 'Poppins', sans-serif;
+
+// Font sizes
 $base-font-size: 1rem;
 
 $h1-font-size: $base-font-size * 1.75;
@@ -9,6 +33,9 @@ $h3-font-size: $base-font-size * 1.25;
 $h4-font-size: $base-font-size;
 $h5-font-size: $base-font-size * 0.75;
 $h6-font-size: $base-font-size * 0.5;
+
+
+// Spacing constants (margin, padding)
 
 $spacing-sizes: (
     auto: auto,
