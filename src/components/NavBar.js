@@ -10,9 +10,12 @@ function AuthLinks() {
 
     if (isAuthenticated) {
         return (
-            <Link className='navbar__link my-auto' to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
-                Logout
-            </Link>
+            <>
+                <NavLink className='navbar__link my-auto' to='/app'>Dashboard</NavLink>
+                <Link className='navbar__link my-auto' to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
+                    Logout
+                </Link>
+            </>
         );
     }
 
