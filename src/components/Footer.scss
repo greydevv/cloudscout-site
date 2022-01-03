@@ -2,7 +2,6 @@
 @import 'styles/mixins';
 
 .footer {
-    padding: 2rem 2rem 1rem 2rem;
     background-color: $primary-color;
     color: $primary-light-color;
 
@@ -24,11 +23,12 @@
         &__category {
             margin: 0;
             color: $primary-light-color;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 14px;
         }
 
         &__link {
+            @include plain-link;
+
             color: $primary-light-color !important;
         }
     }

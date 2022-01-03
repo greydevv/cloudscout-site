@@ -1,21 +1,25 @@
 import './Footer.scss';
 
-function Footer({ linkSets, copyrightText }) {
+function FooterLinkSet({ name, children }) {
+    // children.map((child) => {
+    //     console.log(child.props);
+    // })
+    console.log(children);
     return (
-        <div className='footer'>
+        <div className='footer__links__set'>
+            <h5 className='footer__links__category h5-spaced'>{ name }</h5>
+            { children }
+        </div>
+    );
+}
+
+function Footer({ copyrightText, children}) {
+    return (
+        <div className='footer px-lg pt-lg'>
             <div className='footer__content'>
-                { linkSets && 
+                { children && 
                     <div className='footer__links'>
-                        {linkSets.map((linkSet, i) => {
-                            return (
-                                <div key={ i } className='footer__links__set'>
-                                    <h4 className='footer__links__category'>{ linkSet.category }</h4>
-                                    {linkSet.links.map((link, i) => {
-                                        return <p className='footer__links__link p-body-sm' key={ 'link-' + i }>{ link }</p>;
-                                    })}
-                                </div>
-                            );
-                        })}
+                        { children }
                     </div>
                 }
                 <div className='footer__copyright'>
@@ -27,4 +31,4 @@ function Footer({ linkSets, copyrightText }) {
 }
 
 
-export default Footer;
+export { FooterLinkSet, Footer };
