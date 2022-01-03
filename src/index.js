@@ -11,6 +11,7 @@ import Landing from 'pages/Landing';
 import NotFound from 'pages/NotFound';
 import About from 'pages/About';
 import Pricing from 'pages/Pricing';
+import Contact from 'pages/Contact';
 import { Auth0Provider } from '@auth0/auth0-react';
 import './index.scss';
 
@@ -24,15 +25,16 @@ ReactDOM.render(
             <Routes>
                 <Route path='/' element={ <Home /> }>
                     <Route index element={ <Landing /> } />
+                    <Route path='contact' element={ <Contact /> } />
                     <Route path='about' element={ <About /> } />
                     <Route path='pricing' element={ <Pricing /> } />
+                    <Route path='*' element={ <NotFound /> } />
                 </Route>
                 <Route path='/app' element={ <App /> }>
                     <Route index element={ <Dashboard /> } />
                     <Route path='favorites' element={ <Favorites /> } />
                     <Route path='settings' element={ <Settings />} />
                 </Route>
-                <Route path='*' element={ <NotFound /> } />
             </Routes>
         </Auth0Provider>
     </Router>,
