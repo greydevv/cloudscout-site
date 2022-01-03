@@ -71,9 +71,9 @@ class Dashboard extends React.Component {
 
     render() {
         return (
-            <div className='main-page dashboard'>
-                <div className='page-header'>
-                    <h1>Dashboard</h1>
+            <div className='dashboard'>
+                <div className='page__header'>
+                    <h1 className='page__head'>Dashboard</h1>
                     <SearchBar handleSearch={ this.handleSearch }/>
                     <Filter handleFilterChange={ this.handleFilterChange }/>
                     {/*<p>Results returned: {this.state.json.length}</p>*/}
