@@ -6,9 +6,26 @@
 
     &__content {
         @include section;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__brand {
+        &__container {
+            flex-grow: 0.75;
+            flex-basis: 0;
+        }
+
+        &__img {
+
+        }
     }
 
     &__links {
+        flex-grow: 4;
+        flex-basis: 0;
+        justify-content: flex-end;
         display: flex;
         flex-direction: row;
         gap: 1rem;
@@ -33,7 +50,7 @@
     }
 
     &__copyright {
-        margin-top: 2rem;
+        @include section;
         padding: 1rem 0;
         border-top: 1px solid $color-primary-light;
 

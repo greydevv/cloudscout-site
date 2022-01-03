@@ -1,4 +1,5 @@
 import { NavLink, Link } from 'react-router-dom';
+import { ReactComponent as FullLogo } from 'assets/full_logo.svg';
 import './Footer.scss';
 
 function FooterLinkSet({ name, children }) {
@@ -25,14 +26,17 @@ function Footer({ copyrightText, children}) {
     return (
         <div className='footer px-lg pt-lg'>
             <div className='footer__content'>
+                <div className='footer__brand__container'>
+                    <FullLogo className='footer__brand__img' />
+                </div>
                 { children && 
                     <div className='footer__links'>
                         { children }
                     </div>
                 }
-                <div className='footer__copyright'>
-                    <p className='footer__copyright__text p-body-sm'>{ copyrightText }</p>
-                </div>
+            </div>
+            <div className='footer__copyright mt-lg py-sm'>
+                <p className='footer__copyright__text p-body-sm'>{ copyrightText }</p>
             </div>
         </div>
     );
