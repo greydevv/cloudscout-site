@@ -1,5 +1,15 @@
 @import 'styles/cloudscout';
 
+.home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+        flex-grow: 1;
+    }
+}
+
 .section {
     @include section;
     

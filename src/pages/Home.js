@@ -50,7 +50,9 @@ function Home() {
     return (
         <div className='home'>
             <NavBar links={ navLinks } />
-            <Outlet />
+            <div className='home__content'>
+                <Outlet />
+            </div>
             <Footer copyrightText='© 2021 cloudscout, Inc.'>
                 { isAuthenticated 
                     ? (
