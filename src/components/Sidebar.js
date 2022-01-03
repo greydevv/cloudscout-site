@@ -4,6 +4,7 @@ import { Dashboard,
          Cog,
          Star,
          Logout } from 'components/Icons';
+import { NavLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import './Sidebar.scss';
 
@@ -14,7 +15,9 @@ function Sidebar() {
         <div className='sidebar-wrapper'>
             <nav className='sidebar'>
                 <div className='sidebar-section sidebar-header'>
-                    <img alt='cloudscout-logo' src={ logoBlue } className='sidebar-logo' />
+                    <NavLink to='/'>
+                        <img alt='cloudscout-logo' src={ logoBlue } className='sidebar-logo' />
+                    </NavLink>
                 </div>
                 <div className='sidebar-section sidebar-content'>
                     <SidebarNavItem
