@@ -37,23 +37,22 @@ function Home() {
                 <Outlet />
             </div>
             <Footer copyrightText='© 2021 cloudscout, Inc.'>
-                <FooterLinkSet name='General'>
+                <FooterLinkSet name='Account'>
                     { isAuthenticated
-                        ? (
+                        ? (<>
                             <FooterLink to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
                                 Logout
                             </FooterLink>
-                        )
-                        : (
-                            <>
-                                <FooterLink to='#' onClick={ () => loginWithRedirect() }>
-                                    Log In
-                                 </FooterLink>
-                                <FooterLink to='#' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
-                                    Sign Up
-                                </FooterLink>
-                            </>
-                        )
+                            <FooterLink isNavLink to='/app'>Dashboard</FooterLink>
+                        </>)
+                        : (<>
+                            <FooterLink to='#' onClick={ () => loginWithRedirect() }>
+                                Log In
+                             </FooterLink>
+                            <FooterLink to='#' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
+                                Sign Up
+                            </FooterLink>
+                        </>)
 
                     }
                 </FooterLinkSet>
