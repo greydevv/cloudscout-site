@@ -1,4 +1,3 @@
-import SectionHeader from 'components/SectionHeader';
 import Profile from 'components/about/Profile';
 import alfredoImg from 'assets/team/AlfredoSuarez-gag.jpg';
 import greysonImg from 'assets/team/GreysonMurray-gag.jpg';

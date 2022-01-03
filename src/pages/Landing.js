@@ -58,15 +58,22 @@ function Landing() {
     const features = [
         {
             name: 'Monitor Transfers',
-            hook: 'Comprehensive and fluid dashboard.',
+            hook: 'Utilize a comprehensive and fluid dashboard.',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
             img: dashboardImg,
             imgAlt: 'dashboard',
         },
         {
+            name: 'Explor Deeper',
+            hook: 'Analyze detailed statistics on each player.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+            img: dashboardImg,
+            imgAlt: 'statistics'
+        },
+        {
             name: 'Get Notified',
             hook: 'Get immediate updates of transfer status.',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
             img: notificationImg,
             imgAlt: 'push-notifications',
         }

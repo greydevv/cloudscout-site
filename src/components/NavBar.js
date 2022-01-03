@@ -33,7 +33,7 @@ function NavBar({ links }) {
         <div className='navbar p-md'>
             <div className='navbar__brand__container my-auto'>
                 <NavLink to='/'>
-                    <FullLogo className='navbar__brand__img'/>
+                    <FullLogo className='navbar__brand__img' />
                 </NavLink>
             </div>
             { links &&
