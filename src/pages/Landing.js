@@ -4,13 +4,13 @@ import dashboardImg from 'assets/home/dashboard.png';
 import notificationImg from 'assets/home/notification.png';
 import { GradientButton } from 'components/Button';
 import SectionHeader from 'components/SectionHeader';
-import SchoolCarousel from 'components/SchoolCarousel';
-import Michigan from 'assets/schools/michigan.png';
-import OhioState from 'assets/schools/ohio_state.png';
-import PennState from 'assets/schools/penn_state.png';
-import TexasAM from 'assets/schools/texas_am.png';
-import Purdue from 'assets/schools/purdue.png';
-import Iowa from 'assets/schools/iowa.png';
+// import SchoolCarousel from 'components/SchoolCarousel';
+// import Michigan from 'assets/schools/michigan.png';
+// import OhioState from 'assets/schools/ohio_state.png';
+// import PennState from 'assets/schools/penn_state.png';
+// import TexasAM from 'assets/schools/texas_am.png';
+// import Purdue from 'assets/schools/purdue.png';
+// import Iowa from 'assets/schools/iowa.png';
 import './Landing.scss';
 
 function Landing() {
@@ -46,14 +46,14 @@ function Landing() {
         }
     ];
     
-    const schools = [
-        <img src={ Michigan } key={1} className='school__img' />,
-        <img src={ OhioState } key={2} className='school__img' />,
-        <img src={ PennState } key={3} className='school__img' />,
-        <img src={ TexasAM } key={4} className='school__img' />,
-        <img src={ Purdue } key={5} className='school__img' />,
-        <img src={ Iowa } key={6} className='school__img' />,
-    ];
+    // const schools = [
+    //     <img alt='' src={ Michigan } key={1} className='school__img' />,
+    //     <img alt='' src={ OhioState } key={2} className='school__img' />,
+    //     <img alt='' src={ PennState } key={3} className='school__img' />,
+    //     <img alt='' src={ TexasAM } key={4} className='school__img' />,
+    //     <img alt='' src={ Purdue } key={5} className='school__img' />,
+    //     <img alt='' src={ Iowa } key={6} className='school__img' />,
+    // ];
 
     const features = [
         {
@@ -100,19 +100,11 @@ function Landing() {
                     </div>
                 </div>
             </div>
-            <div id='schools'>
-                <div className='school__carousel__container p-md'>
-                    <div className='school__carousel__container__inner mx-auto'>
-                        {schools.map((school, i) => {
-                            return (
-                                <div key={ i } className='school__img__container'>
-                                    { school }
-                                </div>
-                            );
-                        })}
-                    </div>
+            {/*
+                <div id='schools'>
+                <SchoolCarousel schools={ schools } />
                 </div>
-            </div>
+            */}
             <div id='pricing'>
                 <div className='section'>
                     <SectionHeader

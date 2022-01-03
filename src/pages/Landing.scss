@@ -45,24 +45,3 @@
 #schools {
     background-color: $color-primary-light;
 }
-
-.school__carousel__container {
-    background-color: $color-primary-light;
-    &__inner {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 3rem;
-    }
-}
-
-.school__img {
-    width: 100%;
-    box-fit: cover;
-    filter: grayscale(100%);
-
-    &__container {
-        height: 50px;
-        width: 50px;
-    }
-}
