@@ -36,8 +36,8 @@ $h6-font-size: $base-font-size * 0.5;
 
 
 // Spacing constants (margin, padding)
-
 $spacing-sizes: (
+    0: 0,
     auto: auto,
     xxs: 0.25rem,
     xs: 0.5rem,
@@ -55,4 +55,4 @@ $spacing-sides: (
     b: 'bottom',
     x: ('right', 'left'),
     y: ('top', 'bottom'),
-)
+);

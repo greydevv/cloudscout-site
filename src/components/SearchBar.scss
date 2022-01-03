@@ -1,0 +1,40 @@
+@import 'styles/cloudscout';
+
+.search {
+    &__bar {
+        height: 32px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__btn {
+        @include plain-btn;
+
+        height: 26px;
+        width: 26px;
+
+        &__icon {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    &__input {
+        @include plain-input;
+
+        height: 100%;
+        width: 100%;
+        color: $color-dark;
+        font-size: 16px;
+        font-weight: 500;
+
+        &::placeholder {
+            color: $neutral-dark;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+

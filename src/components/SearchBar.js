@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search } from 'components/Icons';
+import './SearchBar.scss';
 
 class SearchBar extends React.Component
 {
@@ -27,16 +28,19 @@ class SearchBar extends React.Component
 
     render() {
         return (
-            <div className='search-bar'>
-                <button id='player-search-button' onClick={ this.handleSearch }><Search width={24} height={24} /></button>
+            <div className='search__bar'>
+                <button className='search__btn my-auto p-0 mr-xs' onClick={ this.handleSearch }>
+                    <Search className='search__btn__icon'/>
+                </button>
                 <input 
                     type='text' 
-                    id='player-search' 
+                    className='search__input p-0 my-auto' 
                     placeholder='Search by first, last, institution...' 
                     onKeyDown={ this.updateSearchQuery } 
                     onChange={ this.updateSearchQuery } 
                     name='s' 
-                    onSubmit={ this.search } />
+                    onSubmit={ this.search }
+                />
             </div>
         );
     }

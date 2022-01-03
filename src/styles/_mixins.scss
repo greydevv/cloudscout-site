@@ -38,13 +38,22 @@
     max-width: 1400px;
 }
 
-@mixin plain-button {
+@mixin plain-btn {
     font-family: $font-primary;
     border: none;
     background-color: transparent;
 
     &:hover {
         cursor: pointer;
+    }
+}
+
+@mixin plain-input {
+    background-color: transparent;
+    border: none;
+
+    &:focus {
+        outline: none;
     }
 }
 
