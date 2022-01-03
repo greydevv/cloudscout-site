@@ -1,15 +1,32 @@
 @import 'styles/global';
 @import 'styles/mixins';
 
-.landing__slogan {
-    font-weight: 600;
-    color: $primary-dark-color;
-}
+.landing {
+    &__container {
+        display: flex;
+        flex-direction: row;
+    }
 
-.landing__container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    &__text {
+        flex-grow: 1;
+        flex-basis: 0;
+
+        &__inner {
+            width: 80%;
+        }
+    }
+
+    &__slogan {
+        font-weight: 600;
+        color: $primary-dark-color;
+    }
+
+    &__thumbnail {
+        flex-grow: 1;
+        flex-basis: 0;
+        background-color: $secondary-color;
+        border-radius: 10px;
+    }
 }
 
 .features__container {
@@ -26,14 +43,27 @@
     gap: 1rem;
 }
 
-.landing__left {
-    flex-grow: 1;
-    flex-basis: 0;
+#schools {
+    background-color: $secondary-color;
 }
 
-.landing__thumbnail {
-    flex-grow: 1;
-    flex-basis: 0;
+.school__carousel__container {
     background-color: $secondary-color;
-    border-radius: 10px;
+    &__inner {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 3rem;
+    }
+}
+
+.school__img {
+    width: 100%;
+    box-fit: cover;
+    filter: grayscale(100%);
+
+    &__container {
+        height: 50px;
+        width: 50px;
+    }
 }

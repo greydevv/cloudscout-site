@@ -1,9 +1,16 @@
 import FeatureShowcase from 'components/home/FeatureShowcase';
-import PricingTier from 'components/home/PricingTier';
+import PricingTier from 'components/PricingTier';
 import dashboardImg from 'assets/home/dashboard.png';
 import notificationImg from 'assets/home/notification.png';
 import { GradientButton } from 'components/Button';
 import SectionHeader from 'components/SectionHeader';
+import SchoolCarousel from 'components/SchoolCarousel';
+import Michigan from 'assets/schools/michigan.png';
+import OhioState from 'assets/schools/ohio_state.png';
+import PennState from 'assets/schools/penn_state.png';
+import TexasAM from 'assets/schools/texas_am.png';
+import Purdue from 'assets/schools/purdue.png';
+import Iowa from 'assets/schools/iowa.png';
 import './Landing.scss';
 
 function Landing() {
@@ -38,6 +45,15 @@ function Landing() {
             ],
         }
     ];
+    
+    const schools = [
+        <img src={ Michigan } key={1} className='school__img' />,
+        <img src={ OhioState } key={2} className='school__img' />,
+        <img src={ PennState } key={3} className='school__img' />,
+        <img src={ TexasAM } key={4} className='school__img' />,
+        <img src={ Purdue } key={5} className='school__img' />,
+        <img src={ Iowa } key={6} className='school__img' />,
+    ];
 
     const features = [
         {
@@ -61,12 +77,14 @@ function Landing() {
             <div id='landing'>
                 <div className='section'>
                     <div className='landing__container'>
-                        <div className='landing__left pr-xxl'>
-                            <h1 className='landing__slogan mb-xs'>Lorem ipsum dolor sit amet.</h1>
-                            <p className='p-body-sm mb-xl'>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <GradientButton>
-                                Get Started
-                            </GradientButton>
+                        <div className='landing__text pr-xxl'>
+                            <div className='landing__text__inner'>
+                                <h1 className='landing__slogan mb-xs'>Lorem ipsum dolor sit amet.</h1>
+                                <p className='p-body-sm mb-xl'>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <GradientButton>
+                                    Get Started
+                                </GradientButton>
+                            </div>
                         </div>
                         <div className='landing__thumbnail'>
                         </div>
@@ -77,7 +95,20 @@ function Landing() {
                 <div className='section'>
                     <div className='features__container'>
                         {features.map((feature, i) => {
-                            return <FeatureShowcase key={ i } feature={ feature } />
+                            return <FeatureShowcase key={ i } feature={ feature } />;
+                        })}
+                    </div>
+                </div>
+            </div>
+            <div id='schools'>
+                <div className='school__carousel__container p-md'>
+                    <div className='school__carousel__container__inner mx-auto'>
+                        {schools.map((school, i) => {
+                            return (
+                                <div key={ i } className='school__img__container'>
+                                    { school }
+                                </div>
+                            );
                         })}
                     </div>
                 </div>
@@ -90,7 +121,7 @@ function Landing() {
                     />
                     <div className='pricing__container mx-auto'> 
                         {tiers.map((tier, i) => {
-                            return <PricingTier key={ i } tier={ tier } />
+                            return <PricingTier key={ i } tier={ tier } />;
                         })}
                     </div>
                 </div>
