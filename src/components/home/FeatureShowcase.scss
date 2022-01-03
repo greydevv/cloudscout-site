@@ -19,16 +19,12 @@
     }
 
     &__thumbnail {
+        display: block flow;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top;
         flex-grow: 1;
         flex-basis: 0;
-    }
-
-    &__img {
-        height: 100%;
-        width: 100%;
-        bottom: 0;
-        right: 0;
-        object-fit: cover;
     }
 
     &__name {

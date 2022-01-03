@@ -11,8 +11,10 @@ function FeatureShowcase(props) {
                     <p className='p-body-sm'>{ feature.description }</p>
                 </div>
             </div>
-            <div className='feature__thumbnail'>
-                <img className='feature__img' alt={ feature.imgAlt } src={ feature.img } />
+            <div 
+                className='feature__thumbnail'
+                style={{ backgroundImage: `url(${feature.img})`}}
+            >
             </div>
         </div>
     );
