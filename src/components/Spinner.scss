@@ -9,15 +9,15 @@
     padding: 1.25rem;
     box-sizing: border-box;
     animation: spinner 1.2s linear infinite;
-}
 
-.spinner-icon {
-    vertical-align: top;
-    color: $neutral-0-color;
-    height: 100%;
-    width: 100%;
-    // stop this icon from spinning
-    animation: spinner 1.2s linear infinite reverse;
+    &__icon {
+        vertical-align: top;
+        color: $neutral-0-color;
+        height: 100%;
+        width: 100%;
+        // stop this icon from spinning
+        animation: spinner 1.2s linear infinite reverse;
+    }
 }
 
 @keyframes spinner {

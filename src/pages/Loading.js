@@ -4,7 +4,7 @@ import './Loading.scss';
 function Loading() {
     return (
         <div className='loading'>
-            <div className='loading-icon'>
+            <div className='loading__icon'>
                 <Spinner />
             </div>
         </div>
