@@ -18,28 +18,28 @@ class PlayerTable extends Component {
     render() {
         return (
             <>
-                <div className='table-header'>
+                <div className='table__header__container'>
                     <table cellPadding={0} cellSpacing={0} border={0}>
-                        <thead>
+                        <thead className='table__header'>
                             <tr>
-                                <th key={0}>Name</th>
-                                <th key={1} className='institution'>Institution</th>
-                                <th key={2}>Division</th>
-                                <th key={3} className='date-entered'>Entered</th>
+                                <th className='p-body-sm' key={0}>Name</th>
+                                <th className='p-body-sm te-lg' key={1}>Institution</th>
+                                <th className='p-body-sm' key={2}>Division</th>
+                                <th className='p-body-sm te-right' key={3}>Entered</th>
                             </tr>
                         </thead>
                     </table>
                 </div>
-                <div className='table-content'>
-                    <table cellPadding={0} cellSpacing={0}>
+                <div className='table__content__container'>
+                    <table className='table__content' cellPadding={0} cellSpacing={0}>
                         <tbody>
                             { this.state.players.map((player, i) => {
                                 return (
                                     <tr key={ i }>
-                                        <td>{ player.getFullName() }</td>
-                                        <td className='institution'>{ player.institution }</td>
-                                        <td>{ player.division }</td>
-                                        <td className='date-entered'>{ player.getFormattedDate() }</td>
+                                        <td className='p-body-sm'>{ player.getFullName() }</td>
+                                        <td className='p-body-sm te-lg'>{ player.institution }</td>
+                                        <td className='p-body-sm'>{ player.division }</td>
+                                        <td className='p-body-sm te-right te-grey'>{ player.getFormattedDate() }</td>
                                     </tr>
                                 );
                             })}

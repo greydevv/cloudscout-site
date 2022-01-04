@@ -3,51 +3,49 @@
 table {
     width: 100%;
     table-layout: fixed;
+    text-align: left;
+
+    & th {
+        color: $color-light !important;
+        font-weight: 500 !important;
+        padding: 15px;
+    }
+
+    & td {
+        color: $color-dark !important;
+        font-weight: 500 !important;
+        padding: 20px 15px;
+        border-bottom: 2px solid $neutral-light;
+    }
 }
 
-.table-header {
-    background-color: $color-dark;
-    border-radius: 5px;
+.table__header {
+    
+    &__container {
+        background-color: $color-dark;
+        border-radius: 5px;
+    }
 }
 
-.institution {
+.table__content {
+    &__container {
+        scrollbar-width: thin;
+        overflow-x: auto;
+        margin-top: 0px;
+        flex-grow: 1;
+        flex-shrink: 1;
+        padding-bottom: 2rem;
+    }
+}
+
+.te-lg {
     width: 35%;
 }
 
-.table-content {
-    overflow-x: auto;
-    margin-top: 0px;
-    flex-grow: 1;
-    flex-shrink: 1;
-    padding-bottom: 2rem;
-}
-
-.date-entered {
+.te-right {
     text-align: right;
 }
 
-td.date-entered {
-    font-size: 14px;
-    color: $neutral-light;
-}
-
-th,
-td {
-    text-align: left;
-}
-
-th {
-    color: $color-light;
-    padding: 15px 15px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-td {
-    color: $color-dark;
-    padding: 20px 15px;
-    vertical-align:middle;
-    font-size: 16px;
-    font-weight: 500;
-    border-bottom: 2px solid $neutral-light;
+.te-grey {
+    color: $neutral-dark !important;
 }
