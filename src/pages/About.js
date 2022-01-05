@@ -16,7 +16,7 @@ function About() {
         {
             name: 'Greyson Murray',
             title: 'CSA, co-founder',
-            description: 'Greyson is a co-founder and Chief Software Architect of cloudscout. Developed an iOS app in his senior year of high school which garnered 3,000+ downloads in its time on the App Store.',
+            description: 'Greyson is a co-founder and Chief Software Architect of cloudscout. Developed an iOS app in his senior year of high school which garnered 3,000+ downloads in its time on the App Store. Greyson is pursuing a BS in Computer Science at Pennsylvania State University.',
             img: greysonImg,
             imgAlt: 'greyson-murray',
         },
