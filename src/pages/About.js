@@ -8,21 +8,21 @@ function About() {
     const teamProfiles = [
         {
             name: 'Alfredo Suarez',
-            title: 'CEO, CO-FOUNDER',
-            description: 'Alfredo is a co-founder and Chief Executive Officer of cloudscout.  Currently pursuing a BS in Management Information Systems at Pennsylvania State University, Alfredo is heavily involved with Penn State Baseball as a Data Analyst.',
+            title: 'CEO, co-founder',
+            description: 'Alfredo is a co-founder and Chief Executive Officer of cloudscout. Currently pursuing a BS in Management Information Systems at Pennsylvania State University, Alfredo is heavily involved with Penn State Baseball as a Data Analyst.',
             img: alfredoImg,
             imgAlt: 'alfredo-suarez',
         },
         {
             name: 'Greyson Murray',
-            title: 'CSA, CO-FOUNDER',
-            description: 'Greyson is a co-founder and Chief Software Architect of cloudscout.  Developed Trayful in his senior year of high school, an iOS app which garnered 3,000+ downloads in its time on the App Store. A passionate software engineer, he developed the backend API and the frontend website of cloudscout. He is currently pursuing a BS in Computer Science at Pennsylvania State University.',
+            title: 'CSA, co-founder',
+            description: 'Greyson is a co-founder and Chief Software Architect of cloudscout. Developed an iOS app in his senior year of high school which garnered 3,000+ downloads in its time on the App Store.',
             img: greysonImg,
             imgAlt: 'greyson-murray',
         },
         {
             name: 'Nicholas Chan',
-            title: 'CISO, CO-FOUNDER',
+            title: 'CISO, co-founder',
             description: 'Nick is a co-founder and Chief Information Security Officer of cloudscout. He is currently pursuing a BS in Computer Science at Pennsylvania State University.',
             img: nicholasImg,
             imgAlt: 'nicholas-chan',
