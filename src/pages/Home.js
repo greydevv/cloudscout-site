@@ -11,20 +11,28 @@ function Home() {
             loginWithRedirect,
             logout } = useAuth0();
 
-    const navLinks = [
-        {
-            url: '/contact',
-            text: 'Contact',
-        },
-        {
-            url: '/about',
-            text: 'About',
-        },
-        {
-            url: '/pricing',
-            text: 'Pricing',
-        }
+    let tempNavLinks = [
+            {
+                url: '/contact',
+                text: 'Contact',
+            },
+            {
+                url: '/about',
+                text: 'About',
+            },
     ];
+
+    if (process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT') {
+        tempNavLinks.push(
+            {
+                url: '/pricing',
+                text: 'Pricing',
+            }
+        )
+    }
+
+    const navLinks = tempNavLinks;
+
 
     if (isLoading) {
         return <Loading />;
@@ -59,7 +67,9 @@ function Home() {
                 <FooterLinkSet name='Company'>
                     <FooterLink isNavLink to='/'>Home</FooterLink>
                     <FooterLink isNavLink to='/about'>About</FooterLink>
-                    <FooterLink isNavLink to='/pricing'>Pricing</FooterLink>
+                    { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
+                        <FooterLink isNavLink to='/pricing'>Pricing</FooterLink>
+                    }
                     <FooterLink isNavLink to='/contact'>Contact</FooterLink>
                 </FooterLinkSet>
             </Footer>
