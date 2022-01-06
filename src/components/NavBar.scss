@@ -36,15 +36,16 @@
         gap: 2rem;
     }
 
-    &__brand {
-        &__container {
-            height: 40px;
-        }
+    &__branding {
+        color: $color-dark;
 
-        &__img {
-            color: $color-dark;
+        & svg, img {
             object-fit: cover;
             height: 100%;
+        }
+
+        &__container {
+            height: 40px;
         }
     }
 }

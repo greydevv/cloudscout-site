@@ -1,67 +1,56 @@
 import { NavLink, Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-import { ReactComponent as FullLogo } from 'assets/full_logo.svg';
-import './NavBar.scss';
+import './Navbar.scss';
 
-function AuthLinks() {
-    const { isAuthenticated,
-            loginWithRedirect,
-            logout } = useAuth0();
-
-    if (isAuthenticated) {
-        return (
-            <>
-                <NavLink className='navbar__link my-auto' to='/app'>Dashboard</NavLink>
-                <Link className='navbar__link my-auto' to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
-                    Logout
-                </Link>
-            </>
-        );
-    }
-
-    return (
-        <>
-            <Link className='navbar__link my-auto' to='#' onClick={ () => loginWithRedirect() }>
-                Log In
-            </Link>
-            <Link className='navbar__link__btn my-auto' to='#' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
-                Sign Up
-            </Link>
-        </>
-    );
-}
-
-function NavBar({ links }) {
+function Navbar({ children }) {
     return (
         <div className='navbar p-md'>
-            <div className='navbar__brand__container my-auto'>
-                <NavLink to='/'>
-                    <FullLogo className='navbar__brand__img' />
-                </NavLink>
-            </div>
-            { links &&
-                <div className='navbar__links my-auto'>
-                    {links.map((link, i) => {
-                        return (
-                            <NavLink 
-                                key={ i } 
-                                className={({ isActive }) => isActive ? 'navbar__link-active' : 'navbar__link'} 
-                                to={ link.url }
-                            >
-                                { link.text }
-                            </NavLink>
-                        );
-                    })}
-                </div>
-            }
-            { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' && 
-                <div className='navbar__links'>
-                    <AuthLinks />
-                </div>
-            }
+            { children }
+        </div>
+    )
+}
+
+function NavbarBrand({ to, children }) {
+    return (
+        <div className='navbar__branding__container my-auto'>
+            <NavLink to={ to } className='navbar__branding'>
+                { children }
+            </NavLink>
         </div>
     );
 }
- 
-export default NavBar;
 
+function NavbarItems({ children }) {
+    return (
+        <div className='navbar__links my-auto'>
+            { children }
+        </div>
+    );
+}
+
+function NavbarLink({ to, text, isNavLink, isButton, ...rest}) {
+    if (isNavLink) {
+        return (
+            <NavLink 
+                to={ to }
+                className={isButton ? 'navbar__link-btn my-auto' : ({ isActive }) => isActive ? 'navbar__link-active my-auto' : 'navbar__link my-auto'} 
+                { ...rest }
+            >
+                { text }
+            </NavLink>
+        );
+    }
+    return (
+        <Link
+            to={ to }
+            className={isButton ? 'navbar__link__btn my-auto' : 'navbar__link my-auto'}
+            { ...rest }
+        >
+            { text }
+        </Link>
+    );
+}
+
+export { Navbar,
+         NavbarBrand,
+         NavbarItems,
+         NavbarLink };

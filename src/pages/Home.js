@@ -1,6 +1,7 @@
-import NavBar from 'components/NavBar';
+import { Navbar, NavbarBrand, NavbarItems, NavbarLink } from 'components/Navbar';
 import { Outlet } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { ReactComponent as FullLogo } from 'assets/full_logo.svg';
 import Loading from 'pages/Loading';
 import { FooterLinkSet, FooterLink, Footer } from 'components/Footer';
 import './Home.scss';
@@ -40,7 +41,45 @@ function Home() {
 
     return (
         <div className='home'>
-            <NavBar links={ navLinks } />
+            <Navbar>
+                <NavbarBrand to='/'>
+                    <FullLogo />
+                </NavbarBrand>
+                <NavbarItems>
+                    <NavbarLink isNavLink to='/contact' text='Contact' />
+                    <NavbarLink isNavLink to='/about' text='About' />
+                    { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
+                        <NavbarLink isNavLink to='/pricing' text='Pricing' />
+                    }
+                </NavbarItems>
+                {  isAuthenticated
+                    ? (
+                        <NavbarItems>
+                            <NavbarLink isNavLink to='/app' text='Dashboard' />
+                            <NavbarLink
+                                to='/' 
+                                text='Logout' 
+                                onClick={ () => logout({ returnTo: window.location.origin }) }
+                            />
+                        </NavbarItems>
+                    ) 
+                    : (
+                        <NavbarItems>
+                            <NavbarLink
+                                to='/' 
+                                text='Log In' 
+                                onClick={ () => loginWithRedirect() }
+                            />
+                            <NavbarLink 
+                                isButton 
+                                to='/' 
+                                text='Sign Up' 
+                                onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }
+                            />
+                        </NavbarItems>
+                    )
+                }
+            </Navbar>
             <div className='home__content'>
                 <Outlet />
             </div>

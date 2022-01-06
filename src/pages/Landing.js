@@ -112,7 +112,7 @@ function Landing() {
                 <SchoolCarousel schools={ schools } />
                 </div>
             */}
-            { process.env.ENVIRONMENT === 'DEVELOPMENT' &&
+            { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
                 <div id='pricing'>
                     <div className='section'>
                         <SectionHeader
