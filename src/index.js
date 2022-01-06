@@ -29,7 +29,9 @@ ReactDOM.render(
                     <Route index element={ <Landing /> } />
                     <Route path='contact' element={ <Contact /> } />
                     <Route path='about' element={ <About /> } />
-                    <Route path='pricing' element={ <Pricing /> } />
+                    { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' && 
+                        <Route path='pricing' element={ <Pricing /> } />
+                    }
                     <Route path='*' element={ <NotFound /> } />
                 </Route>
                 <Route path='/app' element={ <App /> }>

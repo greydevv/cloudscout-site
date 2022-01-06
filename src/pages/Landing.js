@@ -112,19 +112,21 @@ function Landing() {
                 <SchoolCarousel schools={ schools } />
                 </div>
             */}
-            <div id='pricing'>
-                <div className='section'>
-                    <SectionHeader
-                        headText='Pricing Plans'
-                        subText='Choose the plan that fits your needs.'
-                    />
-                    <div className='pricing__container mx-auto'> 
-                        {tiers.map((tier, i) => {
-                            return <PricingTier key={ i } tier={ tier } />;
-                        })}
+            { process.env.ENVIRONMENT === 'DEVELOPMENT' &&
+                <div id='pricing'>
+                    <div className='section'>
+                        <SectionHeader
+                            headText='Pricing Plans'
+                            subText='Choose the plan that fits your needs.'
+                        />
+                        <div className='pricing__container mx-auto'> 
+                            {tiers.map((tier, i) => {
+                                return <PricingTier key={ i } tier={ tier } />;
+                            })}
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         </>
     );
 }

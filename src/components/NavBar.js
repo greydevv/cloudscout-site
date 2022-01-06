@@ -54,9 +54,11 @@ function NavBar({ links }) {
                     })}
                 </div>
             }
-            <div className='navbar__links'>
-                <AuthLinks />
-            </div>
+            { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' && 
+                <div className='navbar__links'>
+                    <AuthLinks />
+                </div>
+            }
         </div>
     );
 }
