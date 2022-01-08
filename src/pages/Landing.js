@@ -88,9 +88,11 @@ function Landing() {
                             <div className='landing__text__inner'>
                                 <h1 className='landing__slogan mb-xs'>Lorem ipsum dolor sit amet.</h1>
                                 <p className='p-body-sm mb-xl'>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <GradientButton>
-                                    Get Started
-                                </GradientButton>
+                                { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
+                                    <GradientButton>
+                                        Get Started
+                                    </GradientButton>
+                                }
                             </div>
                         </div>
                         <div className='landing__thumbnail'>
