@@ -104,7 +104,7 @@ function Landing() {
                 <div className='section'>
                     <div className='features__container'>
                         {features.map((feature, i) => {
-                            return <FeatureShowcase key={ i } feature={ feature } />;
+                            return <FeatureShowcase key={ i } feature={ feature } textRight={ (i % 2) !== 0 }/>;
                         })}
                     </div>
                 </div>
