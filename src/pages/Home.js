@@ -84,25 +84,27 @@ function Home() {
                 <Outlet />
             </div>
             <Footer copyrightText='© 2021 cloudscout, Inc.'>
-                <FooterLinkSet name='Account'>
-                    { isAuthenticated
-                        ? (<>
-                            <FooterLink to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
-                                Logout
-                            </FooterLink>
-                            <FooterLink isNavLink to='/app'>Dashboard</FooterLink>
-                        </>)
-                        : (<>
-                            <FooterLink to='#' onClick={ () => loginWithRedirect() }>
-                                Log In
-                             </FooterLink>
-                            <FooterLink to='#' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
-                                Sign Up
-                            </FooterLink>
-                        </>)
+                { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
+                    <FooterLinkSet name='Account'>
+                        { isAuthenticated
+                            ? (<>
+                                <FooterLink to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
+                                    Logout
+                                </FooterLink>
+                                <FooterLink isNavLink to='/app'>Dashboard</FooterLink>
+                            </>)
+                            : (<>
+                                <FooterLink to='#' onClick={ () => loginWithRedirect() }>
+                                    Log In
+                                 </FooterLink>
+                                <FooterLink to='#' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
+                                    Sign Up
+                                </FooterLink>
+                            </>)
 
-                    }
-                </FooterLinkSet>
+                        }
+                    </FooterLinkSet>
+                }
                 <FooterLinkSet name='Company'>
                     <FooterLink isNavLink to='/'>Home</FooterLink>
                     <FooterLink isNavLink to='/about'>About</FooterLink>
