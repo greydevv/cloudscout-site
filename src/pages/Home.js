@@ -1,4 +1,4 @@
-import { Navbar, NavbarBrand, NavbarItems, NavbarLink } from 'components/Navbar';
+import { Navbar, NavbarBrand, NavbarItems, NavbarLink } from 'components/NavBarHerokuTemp';
 import { Outlet } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { ReactComponent as FullLogo } from 'assets/full_logo.svg';
