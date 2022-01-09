@@ -1,5 +1,5 @@
 import { NavLink, Link } from 'react-router-dom';
-import './NavBarHerokuTemp.scss';
+import './Navbar.scss';
 
 function Navbar({ children }) {
     return (
