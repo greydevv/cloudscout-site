@@ -1,5 +1,5 @@
 import { NavLink, Link } from 'react-router-dom';
-import './Navbar.scss';
+import './NavBar.scss';
 
 function Navbar({ children }) {
     return (
