@@ -52,39 +52,43 @@ function Home() {
                         <NavbarLink isNavLink to='/pricing' text='Pricing' />
                     }
                 </NavbarItems>
-                {  isAuthenticated
-                    ? (
-                        <NavbarItems>
-                            <NavbarLink isNavLink to='/app' text='Dashboard' />
-                            <NavbarLink
-                                to='/' 
-                                text='Logout' 
-                                onClick={ () => logout({ returnTo: window.location.origin }) }
-                            />
-                        </NavbarItems>
-                    ) 
-                    : (
-                        <NavbarItems>
-                            <NavbarLink
-                                to='/' 
-                                text='Log In' 
-                                onClick={ () => loginWithRedirect() }
-                            />
-                            <NavbarLink 
-                                isButton 
-                                to='/' 
-                                text='Sign Up' 
-                                onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }
-                            />
-                        </NavbarItems>
-                    )
+                { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' && 
+                    <NavbarItems>
+                        {  isAuthenticated
+                            ? (
+                                <>
+                                    <NavbarLink isNavLink to='/app' text='Dashboard' />
+                                    <NavbarLink
+                                        to='/' 
+                                        text='Logout' 
+                                        onClick={ () => logout({ returnTo: window.location.origin }) }
+                                    />
+                                </>
+                            ) 
+                            : (
+                                <>
+                                    <NavbarLink
+                                        to='/' 
+                                        text='Log In' 
+                                        onClick={ () => loginWithRedirect() }
+                                    />
+                                    <NavbarLink 
+                                        isButton 
+                                        to='/' 
+                                        text='Sign Up' 
+                                        onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }
+                                    />
+                                </>
+                            )
+                        }
+                    </NavbarItems>
                 }
             </Navbar>
             <div className='home__content'>
                 <Outlet />
             </div>
             <Footer copyrightText='© 2021 cloudscout, Inc.'>
-                { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
+                { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMEN' &&
                     <FooterLinkSet name='Account'>
                         { isAuthenticated
                             ? (<>
