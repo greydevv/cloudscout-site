@@ -88,7 +88,7 @@ function Home() {
                 <Outlet />
             </div>
             <Footer copyrightText='© 2021 cloudscout, Inc.'>
-                { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMEN' &&
+                { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
                     <FooterLinkSet name='Account'>
                         { isAuthenticated
                             ? (<>
