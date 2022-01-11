@@ -1,1 +1,1 @@
-# cloudscout-site
+![banner](assets/banner.png)
