@@ -116,18 +116,20 @@ class Filters extends React.Component {
         this.positions = ['QB', 'WR', 'OL', 'RB', 'TE', 'C', 'OT', 'FB', 'DL', 'DT', 'DE', 'LB', 'DB', 'CB', 'S', 'P', 'K', 'LS'];
 
         this.state = {
-            selectedDivisions: null,
-            selectedClasses: null,
-            selectedPositions: null,
+            selectedDivisions: [],
+            selectedClasses: [],
+            selectedPositions: [],
         }
         this.handleFilterChange  = this.handleFilterChange.bind(this);
     }
 
     handleFilterChange() {
         this.props.handleFilterChange(
-            this.state.selectedDivisions,
-            this.state.selectedClasses,
-            this.state.selectedPositions,
+            {
+                'division': this.state.selectedDivisions.join(','),
+                'class': this.state.selectedClasses.join(','),
+                'position': this.state.selectedPositions.join(','),
+            }
         );
     }
 
