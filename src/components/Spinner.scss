@@ -3,10 +3,10 @@
 .spinner {
     height: 100%;
     width: 100%;
-    border: 5px solid $neutral-light;
+    padding: 20%;
+    border: 3px solid $neutral-light;
     border-color: $neutral-light transparent $neutral-light transparent;
     border-radius: 999px;
-    padding: 1.25rem;
     box-sizing: border-box;
     animation: spinner 1.2s linear infinite;
 
