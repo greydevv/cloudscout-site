@@ -4,6 +4,7 @@ import dashboardImg from 'assets/home/dashboard.png';
 import notificationImg from 'assets/home/notification.png';
 import { GradientButton } from 'components/Button';
 import SectionHeader from 'components/SectionHeader';
+import dashboardGraphic from 'assets/graphics/dashboard_graphic.png';
 // import SchoolCarousel from 'components/SchoolCarousel';
 // import Michigan from 'assets/schools/michigan.png';
 // import OhioState from 'assets/schools/ohio_state.png';
@@ -86,8 +87,8 @@ function Landing() {
                     <div className='landing__container'>
                         <div className='landing__text pr-xxl'>
                             <div className='landing__text__inner'>
-                                <h1 className='landing__slogan mb-xs'>Lorem ipsum dolor sit amet.</h1>
-                                <p className='p-body-sm mb-xl'>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <h1 className='landing__slogan mb-xs'>Leverage the power of cloud computing.</h1>
+                                <p className='p-body-sm mb-xl'>Efficiently and effectively recruit players in the transfer portal, utilizing the most up-to-date player statistics. Create an account to get started. </p>
                                 { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
                                     <GradientButton>
                                         Get Started
@@ -96,6 +97,7 @@ function Landing() {
                             </div>
                         </div>
                         <div className='landing__thumbnail'>
+                            <img className='landing__img' src={ dashboardGraphic } />
                         </div>
                     </div>
                 </div>

@@ -23,8 +23,12 @@
     &__thumbnail {
         flex-grow: 1;
         flex-basis: 0;
-        background-color: $color-primary-light;
         border-radius: 10px;
+    }
+
+    &__img {
+        width: 100%;
+        box-fit: cover;
     }
 }
 
