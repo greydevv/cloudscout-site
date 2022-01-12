@@ -9,4 +9,15 @@ function Spinner() {
     );
 }
 
-export default Spinner;
+function SpinnerView({ ...spinnerProps }) {
+    return (
+        <div className='spinner__container__outer'>
+            <div className='spinner__container__inner'>
+                <Spinner { ...spinnerProps } />
+            </div>
+        </div>
+    );
+}
+
+export { Spinner,
+         SpinnerView };

@@ -1,12 +1,10 @@
-import Spinner from 'components/Spinner';
+import { SpinnerView } from 'components/Spinner';
 import './Loading.scss';
 
 function Loading() {
     return (
         <div className='loading'>
-            <div className='loading__icon'>
-                <Spinner />
-            </div>
+            <SpinnerView />
         </div>
     );
 }

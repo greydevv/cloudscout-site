@@ -56,10 +56,8 @@ function Dashboard() {
                 />
                 {/*<p>Results returned: {this.state.json.length}</p>*/}
             </div>
-            { !isLoading &&
-                <PlayerTable players={ json.map(BasePlayer.fromJson).sort((a,b) => {return (a.timestamp < b.timestamp) ? 1 : -1}) } />
-            }
-            
+            {/* <PlayerTable isLoading={ isLoading } players={ json.map(BasePlayer.fromJson).sort((a,b) => {return (a.timestamp < b.timestamp) ? 1 : -1}) } /> */}
+            <PlayerTable isLoading={ isLoading } players={ json.map(BasePlayer.fromJson) } />
         </div>
     );
 }
