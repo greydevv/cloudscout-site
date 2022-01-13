@@ -3,7 +3,6 @@
 .feature {
     width: 100%;
     border-radius: 10px;
-    background-color: $color-primary-light;
     display: flex;
     flex-direction: row;
     overflow: clip;
@@ -25,6 +24,12 @@
         background-position: top;
         flex-grow: 1;
         flex-basis: 0;
+    }
+
+    &__img {
+        object-fit: cover;
+        top: 0;
+        width: 80%;
     }
 
     &__name {

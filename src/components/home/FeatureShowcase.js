@@ -14,10 +14,8 @@ function FeatureInfo({ feature }) {
 
 function FeatureThumbnail({ feature }) {
     return (
-        <div 
-            className='feature__thumbnail'
-            style={{ backgroundImage: `url(${feature.img})`}}
-        >
+        <div className='feature__thumbnail'>
+            <img className='feature__img' src={ feature.img } />
         </div>
     );
 }
