@@ -70,7 +70,7 @@ function Landing() {
         {
             name: 'Analyze Deeper',
             hook: 'In-depth statistical player analysis.',
-            description: 'Utilize cloudscout’s exhaustive analytics tools to explore how the player performs. We use statistical algorithms to accurately rank how players are performing in comparison to their peers.',
+            description: 'Utilize cloudscout’s exhaustive analytics tools to explore how each player performs. cloudscout uses statistical algorithms to accurately rank how players are performing in comparison to their peers.',
             img: statisticsGraphic,
             imgAlt: 'player transfer statistics'
         },
