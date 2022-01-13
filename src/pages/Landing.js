@@ -63,7 +63,7 @@ function Landing() {
         {
             name: 'Monitor Transfers',
             hook: 'Comprehensive recruitment dashboard.',
-            description: 'Utilize powerful and instinctive dashboard to monitor the Transfer Portal at any moment. Complete with advanced filters to refine your player search, cloudscout offers many ways to get the right players from the portal to your signing table.',
+            description: 'Use the powerful and instinctive dashboard to monitor the Transfer Portal at any moment. Complete with advanced filters to refine your player search, cloudscout offers many ways to get the right players from the portal to your signing table.',
             img: filtersGraphic,
             imgAlt: 'dashboard filters',
         },
