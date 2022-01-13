@@ -23,7 +23,7 @@ function FeatureThumbnail({ feature }) {
 function FeatureShowcase({ feature, textRight }) {
     if (textRight) {
         return (
-            <div className='feature'>
+            <div className='feature-right'>
                 <FeatureThumbnail feature={ feature } />
                 <FeatureInfo feature={ feature } />
             </div>

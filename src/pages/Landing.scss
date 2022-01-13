@@ -4,14 +4,28 @@
     &__container {
         display: flex;
         flex-direction: row;
+
+        @media (max-width: $breakpoint-sm) {
+            flex-direction: column;
+        }
     }
 
     &__text {
         flex-grow: 1;
         flex-basis: 0;
 
+        @media (max-width: $breakpoint-sm) {
+            padding: 0 !important;
+            display: flex;
+            flex-direction: column-reverse;
+            text-align: center;
+        }
+
         &__inner {
             width: 80%;
+            @media (max-width: $breakpoint-sm) {
+                @include margin-x-auto;
+            }
         }
     }
 
@@ -44,6 +58,12 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 1rem;
+}
+
+#pricing {
+    @media (max-width: $breakpoint-sm) {
+        display: none;
+    }
 }
 
 #schools {

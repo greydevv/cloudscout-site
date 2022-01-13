@@ -5,7 +5,13 @@
     border-radius: 10px;
     display: flex;
     flex-direction: row;
-    overflow: clip;
+
+    @media (max-width: $breakpoint-sm) {
+        flex-direction: column-reverse;
+        &-right {
+            flex-direction: column;
+        }
+    }
 
     &__info {
         flex-grow: 1;
@@ -30,6 +36,10 @@
         object-fit: cover;
         top: 0;
         width: 80%;
+        @media (max-width: $breakpoint-sm) {
+            @include margin-x-auto;
+            display: table;
+        }
     }
 
     &__name {
