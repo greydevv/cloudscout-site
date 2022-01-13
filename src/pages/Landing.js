@@ -4,7 +4,10 @@ import dashboardImg from 'assets/home/dashboard.png';
 import notificationImg from 'assets/home/notification.png';
 import { GradientButton } from 'components/Button';
 import SectionHeader from 'components/SectionHeader';
-import dashboardGraphic from 'assets/graphics/dashboard_graphic.png';
+import dashboardGraphic from 'assets/graphics/dashboard.png';
+import filtersGraphic from 'assets/graphics/filters.png';
+import statisticsGraphic from 'assets/graphics/statistics.png';
+import notificationGraphic from 'assets/graphics/notifications.png';
 // import SchoolCarousel from 'components/SchoolCarousel';
 // import Michigan from 'assets/schools/michigan.png';
 // import OhioState from 'assets/schools/ohio_state.png';
@@ -59,24 +62,24 @@ function Landing() {
     const features = [
         {
             name: 'Monitor Transfers',
-            hook: 'Utilize a comprehensive and fluid dashboard.',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            img: dashboardImg,
-            imgAlt: 'dashboard',
+            hook: 'Comprehensive recruitment dashboard.',
+            description: 'Utilize powerful and instinctive dashboard to monitor the Transfer Portal at any moment. Complete with advanced filters to refine your player search, cloudscout offers many ways to get the right players from the portal to your signing table.',
+            img: filtersGraphic,
+            imgAlt: 'dashboard filters',
         },
         {
-            name: 'Explor Deeper',
-            hook: 'Analyze detailed statistics on each player.',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            img: dashboardImg,
-            imgAlt: 'statistics'
+            name: 'Analyze Deeper',
+            hook: 'In-depth statistical player analysis.',
+            description: 'Utilize cloudscout’s exhaustive analytics tools to explore how the player performs. We use statistical algorithms to accurately rank how players are performing in comparison to their peers.',
+            img: statisticsGraphic,
+            imgAlt: 'player transfer statistics'
         },
         {
-            name: 'Get Notified',
-            hook: 'Get immediate updates of transfer status.',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            img: notificationImg,
-            imgAlt: 'push-notifications',
+            name: 'Act First',
+            hook: 'Get immediate transfer status updates.',
+            description: 'Receive push notifications when certain events happen in the Transfer Portal such as a player entering, withdrawing from, or transferring out of the Transfer Portal. cloudscout collects statistics about players that match your previous activity and finds players with similar characteristics.',
+            img: notificationGraphic,
+            imgAlt: 'transfer push notifications',
         }
     ];
 
@@ -87,8 +90,8 @@ function Landing() {
                     <div className='landing__container'>
                         <div className='landing__text pr-xxl'>
                             <div className='landing__text__inner'>
-                                <h1 className='landing__slogan mb-xs'>Leverage the power of cloud computing.</h1>
-                                <p className='p-body-sm mb-xl'>Efficiently and effectively recruit players in the transfer portal, utilizing the most up-to-date player statistics. Create an account to get started. </p>
+                                <h1 className='landing__slogan mb-xs'>Effective recruiting made easy.</h1>
+                                <p className='p-body-sm mb-xl'>Tools for any program at any level to leverage the power of recruiting college athlete transfers. Certain limitations and fees apply.</p>
                                 { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
                                     <GradientButton>
                                         Get Started
@@ -106,7 +109,7 @@ function Landing() {
                 <div className='section'>
                     <div className='features__container'>
                         {features.map((feature, i) => {
-                            return <FeatureShowcase key={ i } feature={ feature } textRight={ (i % 2) !== 0 }/>;
+                            return <FeatureShowcase key={ i } feature={ feature } textRight={ (i % 2) == 0 }/>;
                         })}
                     </div>
                 </div>
