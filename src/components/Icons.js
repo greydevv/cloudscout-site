@@ -6,6 +6,8 @@ import { ReactComponent as Search } from 'assets/icons/search.svg';
 import { ReactComponent as LoadingInner } from 'assets/icons/loading_inner.svg';
 import { ReactComponent as Checkmark } from 'assets/icons/checkmark.svg';
 import { ReactComponent as Crown } from 'assets/icons/crown.svg';
+import { ReactComponent as Burger } from 'assets/icons/burger.svg';
+import { ReactComponent as Close } from 'assets/icons/close.svg';
 
 export { Dashboard,
          Cog,
@@ -14,4 +16,6 @@ export { Dashboard,
          Search,
          LoadingInner,
          Checkmark,
-         Crown }
+         Crown,
+         Burger,
+         Close }
