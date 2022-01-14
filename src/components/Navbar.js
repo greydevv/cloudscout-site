@@ -1,12 +1,60 @@
+import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { Burger, Close } from 'components/Icons';
 import './Navbar.scss';
 
-function Navbar({ children }) {
+function Navbar({ children, minWidth=900}) {
+    const [toggleMenu, setToggleMenu] = useState(false);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    const toggleNavBurger = () => {
+        setToggleMenu(!toggleMenu);
+    }
+
+    useEffect(() => {
+        const changeWidth = () => {
+          setScreenWidth(window.innerWidth);
+        }
+        window.addEventListener('resize', changeWidth)
+        return () => {
+            window.removeEventListener('resize', changeWidth)
+        }
+    }, [])
+
     return (
         <div className='navbar p-md'>
-            { children }
+            { screenWidth > minWidth
+                ? children
+                : (
+                    <>
+                        {children.map((child) => {
+                            if (child.type === NavbarBrand) {
+                                return child;
+                            }
+                        })}
+                        <NavbarBurgerMenu onClick={ toggleNavBurger } isOpen={ toggleMenu } children={ children } />
+                    </>
+                )
+            }
         </div>
     )
+}
+
+function NavbarBurgerMenu({ children, isOpen, ...rest}) {
+    return (
+        <div className='my-auto navbar__burger__menu'>
+            <button className='navbar__burger__menu__btn' { ...rest }>
+                { isOpen ? <Close /> : <Burger /> }
+            </button>
+            <div className={ 'p-md navbar__burger__menu__items' + ( isOpen ? '-open' : '') }>
+                {children.map((child) => {
+                    if (child.type === NavbarItems) {
+                        return child;
+                    }
+                })}
+            </div>
+        </div>
+    );
 }
 
 function NavbarBrand({ to, children }) {

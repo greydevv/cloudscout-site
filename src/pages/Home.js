@@ -6,6 +6,8 @@ import Loading from 'pages/Loading';
 import { FooterLinkSet, FooterLink, Footer } from 'components/Footer';
 import './Home.scss';
 
+import { Burger } from 'components/Icons';
+
 function Home() {
     const { isAuthenticated, 
             isLoading,
@@ -34,14 +36,13 @@ function Home() {
 
     const navLinks = tempNavLinks;
 
-
     if (isLoading) {
         return <Loading />;
     }
 
     return (
         <div className='home'>
-            <Navbar>
+            <Navbar  minWidth={ 700 }>
                 <NavbarBrand to='/'>
                     <FullLogo />
                 </NavbarBrand>

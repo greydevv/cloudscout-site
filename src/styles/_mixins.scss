@@ -30,6 +30,10 @@
     @include margin-x-auto;
     width: 75%;
     max-width: 1200px;
+
+    @media (max-width: $breakpoint-sm) {
+        width: 90%;
+    }
 }
 
 @mixin section-1 {
