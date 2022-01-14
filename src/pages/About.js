@@ -1,6 +1,6 @@
 import Profile from 'components/about/Profile';
-import alfredoImg from 'assets/team/AlfredoSuarez-gag.jpg';
-import greysonImg from 'assets/team/GreysonMurray-gag.jpg';
+import alfredoImg from 'assets/team/AlfredoSuarez.jpg';
+import greysonImg from 'assets/team/GreysonMurray.jpg';
 import nicholasImg from 'assets/team/NicholasChan.jpg';
 import './About.scss';
 
