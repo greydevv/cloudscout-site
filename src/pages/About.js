@@ -37,7 +37,7 @@ function About() {
                         <div className='about__intro__text__inner'>
                             <h1 className='intro__head mb-xxs'>Who We Are</h1>
                             <h5 className='intro__subhead h5-spaced mb-sm'>CLOUDSCOUT</h5>
-                            <p className='p-body-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus, nisl quis pulvinar suscipit, nibh elit iaculis lorem, ut blandit nulla purus id urna. Nulla tincidunt ante ligula, venenatis luctus tortor aliquam vitae. Sed efficitur tellus non ipsum dictum mattis. Nulla libero nibh, feugiat vitae urna ut, aliquam sollicitudin lectus. Duis ac nisi nec urna consequat porta. Sed viverra convallis eros, a convallis felis ultricies nec. Pellentesque cursus urna quis ipsum egestas, a dapibus ligula faucibus. Praesent vulputate sapien a urna lobortis, et elementum felis viverra. Sed euismod, ligula nec vestibulum finibus, eros ligula ultrices quam, ac dapibus ex nisi sit amet arcu. Nunc mollis eu ex a feugiat.</p>
+                            <p className='p-body-sm'>cloudscout offers athletic programs across the country the tools necessary to recruit players in the Transfer Portal. Our mission is to provide a level playing field for all players and programs involved with transfers. Our team draws from a diverse software and engineering to push this industry forward.</p>
                         </div>
                     </div>
                 </div>
