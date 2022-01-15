@@ -7,11 +7,17 @@
     justify-content: space-between;
     gap: 4rem;
     overflow: visible;
+
+    @media (max-width: $breakpoint-sm) {
+        flex-direction: column;
+    }
+
 }
 
 .about__intro {
     display: flex;
     flex-direction: row;
+    text-align: left;
 
     &__text {
         flex-grow: 2;
@@ -19,14 +25,14 @@
 
         &__inner {
             width: 80%;
+            @media (max-width: $breakpoint-sm) {
+                width: 100%;
+            }
         }
     }
 
-    &__thumbnail {
-        flex-grow: 1;
-        flex-basis: 0;
-        background-color: $color-primary-light;
-        border-radius: 10px;
+    @media (max-width: $breakpoint-sm) {
+        text-align: center;
     }
 }
 

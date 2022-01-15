@@ -40,8 +40,6 @@ function About() {
                             <p className='p-body-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus, nisl quis pulvinar suscipit, nibh elit iaculis lorem, ut blandit nulla purus id urna. Nulla tincidunt ante ligula, venenatis luctus tortor aliquam vitae. Sed efficitur tellus non ipsum dictum mattis. Nulla libero nibh, feugiat vitae urna ut, aliquam sollicitudin lectus. Duis ac nisi nec urna consequat porta. Sed viverra convallis eros, a convallis felis ultricies nec. Pellentesque cursus urna quis ipsum egestas, a dapibus ligula faucibus. Praesent vulputate sapien a urna lobortis, et elementum felis viverra. Sed euismod, ligula nec vestibulum finibus, eros ligula ultrices quam, ac dapibus ex nisi sit amet arcu. Nunc mollis eu ex a feugiat.</p>
                         </div>
                     </div>
-                    <div className='about__intro__thumbnail'>
-                    </div>
                 </div>
             </div>
             <div className='section'>
