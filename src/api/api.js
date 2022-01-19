@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const useApi = (endpoint) => {
+export const useApi = (endpoint) => {
     const BASE_URL = 'https://cloudscout-rest.herokuapp.com/';
     const [url, setUrl] = useState(`${BASE_URL}${endpoint}`);
-    const [data, setData] = useState({json: [], isLoading: true});
+    const [data, setData] = useState({json: {}, isLoading: true});
     const { getAccessTokenSilently } = useAuth0();
 
     useEffect(() => {
@@ -33,5 +33,3 @@ const useApi = (endpoint) => {
 
     return data;
 }
-
-export { useApi };
