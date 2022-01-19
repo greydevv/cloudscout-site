@@ -4,7 +4,6 @@ import './PlayerTable.scss';
 import { NavLink } from 'react-router-dom';
 
 function PlayerTable({ players, isLoading }) {
-
     return (
         <>
             <div className='table__header__container'>

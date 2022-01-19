@@ -55,7 +55,7 @@ function Dashboard() {
                     handleFilterChange={ onFilterChange }
                 />
             </div>
-            <PlayerTable players={ json.map(BasePlayer.fromJson) } isLoading={ isLoading } />
+            <PlayerTable players={ isLoading ? [] : json.map(BasePlayer.fromJson) } isLoading={ isLoading } />
         </div>
     );
 }
