@@ -42,7 +42,7 @@ function Home() {
 
     return (
         <div className='home'>
-            <Navbar  minWidth={ 700 }>
+            <Navbar minWidth={ 700 }>
                 <NavbarBrand to='/'>
                     <FullLogo />
                 </NavbarBrand>

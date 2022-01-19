@@ -17,7 +17,7 @@ class BasePlayer {
         } else {
             this.schoolClass = ['FR', 'SO', 'JR', 'SR', 'GR'][schoolClass-1];
         }
-        this.sport = sport; //added sport meta data
+        this.sport = sport;
     }
 
     static fromJson(json) {
@@ -31,7 +31,7 @@ class BasePlayer {
             meta['date'],
             meta['position'],
             meta['class'],
-            meta['sport'] //added sport meta data
+            meta['sport']
         );
     }
 
