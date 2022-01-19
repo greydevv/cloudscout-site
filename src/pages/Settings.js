@@ -3,7 +3,7 @@ import { useApi } from 'api/api';
 import { SpinnerView } from 'components/Spinner';
 import './Pages.scss';
 
-function Settings() {
+export default function Settings() {
     const userId = useUserContext();
     const { json, isLoading } = useApi(`v1/users/${userId}`);
 
@@ -25,5 +25,3 @@ function Settings() {
         </div>
     );
 }
-
-export default Settings;

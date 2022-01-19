@@ -10,7 +10,7 @@ import { useApi }  from 'api/api.js';
 import { useAuth0 } from '@auth0/auth0-react';
 import './Pages.scss';
 
-function Dashboard() {
+export default function Dashboard() {
     const BASE_ENDPOINT = 'v1/players?limit=50'
     const [players, setPlayers] = useState([]);
     const [opts, setOpts] = useState({});
@@ -56,5 +56,3 @@ function Dashboard() {
         </div>
     );
 }
-
-export default Dashboard;

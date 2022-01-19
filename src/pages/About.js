@@ -4,7 +4,7 @@ import greysonImg from 'assets/team/GreysonMurray.jpg';
 import nicholasImg from 'assets/team/NicholasChan.jpg';
 import './About.scss';
 
-function About() {
+export default function About() {
     const teamProfiles = [
         {
             name: 'Alfredo Suarez',
@@ -54,5 +54,3 @@ function About() {
         </div>
     );
 }
-
-export default About;

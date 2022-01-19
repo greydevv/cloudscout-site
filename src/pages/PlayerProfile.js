@@ -3,7 +3,7 @@ import { useApi }  from 'api/api.js';
 import BasePlayer from '../models/Player';
 import { SpinnerView } from 'components/Spinner';
 
-function PlayerProfile() {
+export default function PlayerProfile() {
     const {pid} = useParams()
     const { json, isLoading } = useApi(`v1/players/${pid}`);
 
@@ -18,5 +18,3 @@ function PlayerProfile() {
             <div>{player.sport}</div>
     );
 }
-
-export default PlayerProfile;
