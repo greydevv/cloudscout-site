@@ -39,6 +39,7 @@ ReactDOM.render(
                     <Route index element={ <Dashboard /> } />
                     <Route path='favorites' element={ <Favorites /> } />
                     <Route path='settings' element={ <Settings />} />
+                    <Route path='player/:pid' element={ <div>player page test</div> } />
                 </Route>
             </Routes>
         </Auth0Provider>

@@ -47,9 +47,9 @@ function Dashboard() {
     return (
         <div className='dashboard'>
             <div className='page__header'>
-                <h1 className='page__head'>Dashboard</h1>
+                <h1 className='page__head'>DashBoard</h1>
                 <SearchBar
-                   handleSearch={ onSearch } 
+                   handleSearch={ onSearch }
                 />
                 <Filter
                     handleFilterChange={ onFilterChange }
@@ -57,7 +57,7 @@ function Dashboard() {
                 {/*<p>Results returned: {this.state.json.length}</p>*/}
             </div>
             {/* <PlayerTable isLoading={ isLoading } players={ json.map(BasePlayer.fromJson).sort((a,b) => {return (a.timestamp < b.timestamp) ? 1 : -1}) } /> */}
-            <PlayerTable isLoading={ isLoading } players={ json.map(BasePlayer.fromJson) } />
+            <PlayerTable players={ json.map(BasePlayer.fromJson) } isLoading={ isLoading } />
         </div>
     );
 }
