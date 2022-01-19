@@ -1,5 +1,5 @@
 class BasePlayer {
-    constructor(pid, first, last, institution, division, timestamp, position, schoolClass) {
+    constructor(pid, first, last, institution, division, timestamp, position, schoolClass, sport) {
         this.pid = pid;
         this.first = first;
         this.last = last;
@@ -17,6 +17,7 @@ class BasePlayer {
         } else {
             this.schoolClass = ['FR', 'SO', 'JR', 'SR', 'GR'][schoolClass-1];
         }
+        this.sport = sport; //added sport meta data
     }
 
     static fromJson(json) {
@@ -29,7 +30,8 @@ class BasePlayer {
             meta['division'],
             meta['date'],
             meta['position'],
-            meta['class']
+            meta['class'],
+            meta['sport'] //added sport meta data
         );
     }
 
@@ -62,10 +64,10 @@ class BasePlayer {
             ];
         }
         return [
-            // this.pid, 
-            this.capitalize(this.first), 
-            this.capitalize(this.last), 
-            this.institution, 
+            // this.pid,
+            this.capitalize(this.first),
+            this.capitalize(this.last),
+            this.institution,
             this.division,
             this.timestamp,
             this.position,

@@ -14,8 +14,8 @@ import Pricing from 'pages/Pricing';
 import Contact from 'pages/Contact';
 import { Auth0Provider } from '@auth0/auth0-react';
 import './index.scss';
+import PlayerProfile from 'pages/PlayerProfile';
 
-//dom
 ReactDOM.render(
     <Router>
         <Auth0Provider
@@ -39,7 +39,7 @@ ReactDOM.render(
                     <Route index element={ <Dashboard /> } />
                     <Route path='favorites' element={ <Favorites /> } />
                     <Route path='settings' element={ <Settings />} />
-                    <Route path='player/:pid' element={ <div>player page test</div> } />
+                    <Route path='player/:pid' element={ <PlayerProfile />} />
                 </Route>
             </Routes>
         </Auth0Provider>
