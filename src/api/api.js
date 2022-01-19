@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-export const useApi = (endpoint) => {
+export const useApi = (endpoint, enabled=true) => {
     const BASE_URL = 'https://cloudscout-rest.herokuapp.com/';
     const [url, setUrl] = useState(`${BASE_URL}${endpoint}`);
     const [data, setData] = useState({json: {}, isLoading: true});
     const { getAccessTokenSilently } = useAuth0();
 
     useEffect(() => {
+        if (!enabled) {
+            return;
+        }
         if (url === BASE_URL) {
             return;
         }
