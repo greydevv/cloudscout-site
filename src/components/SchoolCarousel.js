@@ -1,6 +1,6 @@
 import './SchoolCarousel.scss';
 
-function SchoolCarousel({ schools }) {
+export default function SchoolCarousel({ schools }) {
     return (
         <div className='school__carousel__container p-md'>
             <div className='school__carousel__container__inner mx-auto'>
@@ -15,5 +15,3 @@ function SchoolCarousel({ schools }) {
         </div>
     );
 }
-
-export default SchoolCarousel;

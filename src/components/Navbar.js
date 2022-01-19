@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { Burger, Close } from 'components/Icons';
 import './Navbar.scss';
 
-function Navbar({ children, minWidth=900}) {
+export function Navbar({ children, minWidth=900}) {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -40,7 +40,7 @@ function Navbar({ children, minWidth=900}) {
     )
 }
 
-function NavbarBurgerMenu({ children, isOpen, ...rest}) {
+export function NavbarBurgerMenu({ children, isOpen, ...rest}) {
     return (
         <div className='my-auto navbar__burger__menu'>
             <button className='navbar__burger__menu__btn' { ...rest }>
@@ -57,7 +57,7 @@ function NavbarBurgerMenu({ children, isOpen, ...rest}) {
     );
 }
 
-function NavbarBrand({ to, children }) {
+export function NavbarBrand({ to, children }) {
     return (
         <div className='navbar__branding__container my-auto'>
             <NavLink to={ to } className='navbar__branding'>
@@ -67,7 +67,7 @@ function NavbarBrand({ to, children }) {
     );
 }
 
-function NavbarItems({ children }) {
+export function NavbarItems({ children }) {
     return (
         <div className='navbar__links my-auto'>
             { children }
@@ -75,12 +75,12 @@ function NavbarItems({ children }) {
     );
 }
 
-function NavbarLink({ to, text, isNavLink, isButton, ...rest}) {
+export function NavbarLink({ to, text, isNavLink, isButton, ...rest}) {
     if (isNavLink) {
         return (
-            <NavLink 
+            <NavLink
                 to={ to }
-                className={isButton ? 'navbar__link-btn my-auto' : ({ isActive }) => isActive ? 'navbar__link-active my-auto' : 'navbar__link my-auto'} 
+                className={isButton ? 'navbar__link-btn my-auto' : ({ isActive }) => isActive ? 'navbar__link-active my-auto' : 'navbar__link my-auto'}
                 { ...rest }
             >
                 { text }
@@ -97,8 +97,3 @@ function NavbarLink({ to, text, isNavLink, isButton, ...rest}) {
         </Link>
     );
 }
-
-export { Navbar,
-         NavbarBrand,
-         NavbarItems,
-         NavbarLink };

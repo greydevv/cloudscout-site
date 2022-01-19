@@ -108,7 +108,7 @@ class Dropdown extends React.Component {
     }
 }
 
-class Filters extends React.Component {
+export default class Filters extends React.Component {
     constructor(props) {
         super(props);
         this.divisions = [1, 2, 3];
@@ -133,11 +133,11 @@ class Filters extends React.Component {
         );
     }
 
-    render() { 
+    render() {
         return (
         <div className="filters">
             <div className="filter-headers">
-                <Dropdown 
+                <Dropdown
                     placeholder='Division'
                     onChange={
                         (selectedDivisions) => {
@@ -145,12 +145,12 @@ class Filters extends React.Component {
                                 this.handleFilterChange();
                             });
                         }
-                    } 
+                    }
                     data={this.divisions}
                 />
             </div>
             <div className="filter-headers">
-                <Dropdown 
+                <Dropdown
                     placeholder='Class'
                     onChange={
                         (selectedClasses) => {
@@ -163,14 +163,14 @@ class Filters extends React.Component {
                 />
             </div>
             <div className="filter-headers">
-                <Dropdown 
+                <Dropdown
                     placeholder='Position'
                     onChange={
                         (selectedPositions) => {
                             this.setState({selectedPositions: selectedPositions}, () => {
                                 this.handleFilterChange();
                             });
-                        }    
+                        }
                     }
                     data={this.positions}
                 />
@@ -179,5 +179,3 @@ class Filters extends React.Component {
         );
     }
 }
- 
-export default Filters;

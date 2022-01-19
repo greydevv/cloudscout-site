@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import './Sidebar.scss';
 
-function Sidebar() {
+export default function Sidebar() {
     const { logout } = useAuth0();
 
     // TODO: refactor SASS names
@@ -22,20 +22,20 @@ function Sidebar() {
                 </div>
                 <div className='sidebar__section sidebar__content'>
                     <SidebarNavItem
-                        to='' 
+                        to=''
                         className='sidebar__item'
                         activeClassName='sidebar__item-active'
                         icon={<Dashboard width={24} height={24} />}
                         end
                     />
                     <SidebarNavItem
-                        to='favorites' 
+                        to='favorites'
                         className='sidebar__item'
                         activeClassName='sidebar__item-active'
                         icon={<Star width={24} height={24} />}
                     />
                     <SidebarNavItem
-                        to='settings' 
+                        to='settings'
                         className='sidebar__item'
                         activeClassName='sidebar__item-active'
                         icon={<Cog width={24} height={24} />}
@@ -52,5 +52,3 @@ function Sidebar() {
         </div>
     );
 }
-
-export default Sidebar;
