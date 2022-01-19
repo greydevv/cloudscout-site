@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import './Profile.scss';
 
-function Profile({ member }) {
+export default function Profile({ member }) {
     return (
         <div className='profile'>
             <div className='profile__thumbnail mb-md'>
@@ -20,5 +20,3 @@ function Profile({ member }) {
         </div>
     );
 }
-
-export default Profile;

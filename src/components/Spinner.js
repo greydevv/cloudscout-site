@@ -1,15 +1,15 @@
 import { LoadingInner } from 'components/Icons';
 import './Spinner.scss';
 
-function Spinner() {
+export function Spinner() {
     return (
         <div className='spinner'>
             <LoadingInner className='spinner__icon' />
-        </div> 
+        </div>
     );
 }
 
-function SpinnerView({ ...spinnerProps }) {
+export function SpinnerView({ ...spinnerProps }) {
     return (
         <div className='spinner__container__outer'>
             <div className='spinner__container__inner'>
@@ -18,6 +18,3 @@ function SpinnerView({ ...spinnerProps }) {
         </div>
     );
 }
-
-export { Spinner,
-         SpinnerView };
