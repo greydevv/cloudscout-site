@@ -32,7 +32,7 @@ export default function PlayerTable({ players, isLoading }) {
                                     return (
                                         <tr key={ i }>
                                             <td className='p-body-sm'>
-                                                <NavLink to={`player/${player.pid}`}>
+                                                <NavLink to={`/app/player/${player.pid}`}>
                                                     { player.getFullName() }
                                                 </NavLink>
                                             </td>
