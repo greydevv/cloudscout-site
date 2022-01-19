@@ -10,10 +10,12 @@ function PlayerTable({ players, isLoading }) {
                 <table cellPadding={0} cellSpacing={0} border={0}>
                     <thead className='table__header'>
                         <tr>
-                            <th className='p-body-sm' key={0}>Name</th>
-                            <th className='p-body-sm te-lg' key={1}>Institution</th>
-                            <th className='p-body-sm' key={2}>Division</th>
-                            <th className='p-body-sm te-right' key={3}>Entered</th>
+                            <th className='p-body-sm'>Name</th>
+                            <th className='p-body-sm te-lg'>Institution</th>
+                            <th className='p-body-sm te-sm'>Division</th>
+                            <th className='p-body-sm te-sm'>Position</th>
+                            <th className='p-body-sm te-sm'>Class</th>
+                            <th className='p-body-sm te-right'>Entered</th>
                         </tr>
                     </thead>
                 </table>
@@ -31,7 +33,9 @@ function PlayerTable({ players, isLoading }) {
                                         <tr key={ i }>
                                             <td className='p-body-sm'>{ player.getFullName() }</td>
                                             <td className='p-body-sm te-lg'>{ player.institution }</td>
-                                            <td className='p-body-sm'>{ player.division }</td>
+                                            <td className='p-body-sm te-sm'>{ player.division }</td>
+                                            <td className='p-body-sm te-sm'>{ player.position }</td>
+                                            <td className='p-body-sm te-sm'>{ player.schoolClass }</td>
                                             <td className='p-body-sm te-right te-grey'>{ player.getFormattedDate() }</td>
                                         </tr>
                                     );

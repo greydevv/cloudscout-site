@@ -20,7 +20,6 @@ table {
 }
 
 .table__header {
-    
     &__container {
         background-color: $color-dark;
         border-radius: 5px;
@@ -39,7 +38,11 @@ table {
 }
 
 .te-lg {
-    width: 35%;
+    width: 30%;
+}
+
+.te-sm {
+    width: 5%;
 }
 
 .te-right {
