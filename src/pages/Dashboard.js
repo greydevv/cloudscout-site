@@ -47,7 +47,7 @@ function Dashboard() {
     return (
         <div className='dashboard'>
             <div className='page__header'>
-                <h1 className='page__head'>DashBoard</h1>
+                <h1 className='page__head'>Dashboard</h1>
                 <SearchBar
                    handleSearch={ onSearch }
                 />
