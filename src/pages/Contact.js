@@ -1,8 +1,6 @@
-function Contact() {
+export default function Contact() {
     return (
         <div className='section'>
         </div>
     );
 }
-
-export default Contact;

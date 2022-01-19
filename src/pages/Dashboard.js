@@ -10,15 +10,12 @@ import { useApi }  from 'api/api.js';
 import { useAuth0 } from '@auth0/auth0-react';
 import './Pages.scss';
 
-function Dashboard() {
+export default function Dashboard() {
     const BASE_ENDPOINT = 'v1/players?limit=50'
     const [players, setPlayers] = useState([]);
     const [opts, setOpts] = useState({});
     const [url, setUrl] = useState(BASE_ENDPOINT);
     const { json, isLoading } = useApi(url);
-
-    const constructUrl = useCallback(() => {
-    }, [opts]);
 
     useEffect(() => {
         let newEndpoint = BASE_ENDPOINT;
@@ -59,5 +56,3 @@ function Dashboard() {
         </div>
     );
 }
-
-export default Dashboard;

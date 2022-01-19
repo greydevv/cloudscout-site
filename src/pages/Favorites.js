@@ -6,7 +6,7 @@ import { playerData } from 'Const.js';
 import { useUserContext } from 'UserContext';
 import './Pages.scss';
 
-function Favorites() {
+export default function Favorites() {
     const userId = useUserContext();
     const { json: coachJson, isLoading: isCoachJsonLoading } = useApi(`v1/users/${userId}`);
     const pids = isCoachJsonLoading ? [] : coachJson['account']['favorites'];
@@ -20,9 +20,7 @@ function Favorites() {
             <PlayerTable players={ isPlayerJsonLoading ? [] : playerJson.map(BasePlayer.fromJson)} isLoading={ isPlayerJsonLoading } />
             {/* <PlayerTable players={ isPlayerJsonLoading ? [] : playerJson.map(BasePlayer.fromJson) } isLoading={ isPlayerJsonLoading } /> */}
             {/* <PlayerTable players={ isLoading ? [] : json} */}
-            
+
         </div>
     );
 }
-
-export default Favorites;
