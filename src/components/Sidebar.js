@@ -31,13 +31,13 @@ function Sidebar() {
                     <SidebarNavItem
                         to='favorites' 
                         className='sidebar__item'
-                        activeClassName='sidebar__item__active'
+                        activeClassName='sidebar__item-active'
                         icon={<Star width={24} height={24} />}
                     />
                     <SidebarNavItem
                         to='settings' 
                         className='sidebar__item'
-                        activeClassName='sidebar__item__active'
+                        activeClassName='sidebar__item-active'
                         icon={<Cog width={24} height={24} />}
                     />
                 </div>

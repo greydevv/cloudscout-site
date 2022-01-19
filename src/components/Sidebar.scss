@@ -61,7 +61,12 @@
         }
 
         &-active {
+            @extend .sidebar__item;
             color: $color-primary;
+
+            &:hover {
+                color: $color-primary;
+            }
         }
     }
 }

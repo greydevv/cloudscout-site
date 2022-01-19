@@ -16,6 +16,14 @@
     flex-direction: column;
 }
 
+.favorites {
+    @include app-page;
+}
+
+.settings {
+    @include app-page;
+}
+
 .page {
     &__header {
 

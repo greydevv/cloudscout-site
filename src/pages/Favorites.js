@@ -3,9 +3,9 @@ import './Pages.scss';
 
 function Favorites() {
     return (
-        <div className='main-page favorites'>
-            <div className='page-header'>
-                <h1>Favorites</h1>
+        <div className='favorites'>
+            <div className='page__header'>
+                <h1 className='page__head'>Favorites</h1>
             </div>
         </div>
     );
