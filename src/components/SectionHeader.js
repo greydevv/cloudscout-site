@@ -1,6 +1,6 @@
 import './SectionHeader.scss'
 
-function SectionHeader({headText, subText}) {
+export default function SectionHeader({headText, subText}) {
     return (
         <div className='section__header mb-xl'>
             {headText &&
@@ -11,7 +11,5 @@ function SectionHeader({headText, subText}) {
             }
         </div>
     );
-    
-}
 
-export default SectionHeader;
+}

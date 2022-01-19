@@ -2,7 +2,7 @@ import React from 'react';
 import { Search } from 'components/Icons';
 import './SearchBar.scss';
 
-class SearchBar extends React.Component
+export default class SearchBar extends React.Component
 {
     constructor(props)
     {
@@ -32,18 +32,16 @@ class SearchBar extends React.Component
                 <button className='search__btn my-auto p-0 mr-xs' onClick={ this.handleSearch }>
                     <Search className='search__btn__icon'/>
                 </button>
-                <input 
-                    type='text' 
-                    className='search__input p-0 my-auto' 
-                    placeholder='Search by first, last, institution...' 
-                    onKeyDown={ this.updateSearchQuery } 
-                    onChange={ this.updateSearchQuery } 
-                    name='s' 
+                <input
+                    type='text'
+                    className='search__input p-0 my-auto'
+                    placeholder='Search by first, last, institution...'
+                    onKeyDown={ this.updateSearchQuery }
+                    onChange={ this.updateSearchQuery }
+                    name='s'
                     onSubmit={ this.search }
                 />
             </div>
         );
     }
 }
-
-export default SearchBar;
