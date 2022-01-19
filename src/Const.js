@@ -1,4 +1,4 @@
-const playerData = [
+export const playerData = [
     {
         "pid": "2108301909",
         "meta": {
@@ -7500,5 +7500,3 @@ const playerData = [
         }
     }
 ]
-
-export { playerData };

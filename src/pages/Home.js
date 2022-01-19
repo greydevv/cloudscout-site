@@ -8,8 +8,8 @@ import './Home.scss';
 
 import { Burger } from 'components/Icons';
 
-function Home() {
-    const { isAuthenticated, 
+export default function Home() {
+    const { isAuthenticated,
             isLoading,
             loginWithRedirect,
             logout } = useAuth0();
@@ -53,30 +53,30 @@ function Home() {
                         <NavbarLink isNavLink to='/pricing' text='Pricing' />
                     }
                 </NavbarItems>
-                { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' && 
+                { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
                     <NavbarItems>
                         {  isAuthenticated
                             ? (
                                 <>
                                     <NavbarLink isNavLink to='/app' text='Dashboard' />
                                     <NavbarLink
-                                        to='/' 
-                                        text='Logout' 
+                                        to='/'
+                                        text='Logout'
                                         onClick={ () => logout({ returnTo: window.location.origin }) }
                                     />
                                 </>
-                            ) 
+                            )
                             : (
                                 <>
                                     <NavbarLink
-                                        to='/' 
-                                        text='Log In' 
+                                        to='/'
+                                        text='Log In'
                                         onClick={ () => loginWithRedirect() }
                                     />
-                                    <NavbarLink 
-                                        isButton 
-                                        to='/' 
-                                        text='Sign Up' 
+                                    <NavbarLink
+                                        isButton
+                                        to='/'
+                                        text='Sign Up'
                                         onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }
                                     />
                                 </>
@@ -122,5 +122,3 @@ function Home() {
         </div>
     );
 }
-
-export default Home;

@@ -17,7 +17,7 @@ import notificationGraphic from 'assets/graphics/notifications.png';
 // import Iowa from 'assets/schools/iowa.png';
 import './Landing.scss';
 
-function Landing() {
+export default function Landing() {
     const tiers = [
         {
             name: 'BASIC',
@@ -49,7 +49,7 @@ function Landing() {
             ],
         }
     ];
-    
+
     // const schools = [
     //     <img alt='' src={ Michigan } key={1} className='school__img' />,
     //     <img alt='' src={ OhioState } key={2} className='school__img' />,
@@ -126,7 +126,7 @@ function Landing() {
                             headText='Pricing Plans'
                             subText='Choose the plan that fits your needs.'
                         />
-                        <div className='pricing__container mx-auto'> 
+                        <div className='pricing__container mx-auto'>
                             {tiers.map((tier, i) => {
                                 return <PricingTier key={ i } tier={ tier } />;
                             })}
@@ -137,5 +137,3 @@ function Landing() {
         </>
     );
 }
-
-export default Landing;

@@ -1,7 +1,7 @@
 import SectionHeader from 'components/SectionHeader';
 import PricingTier from 'components/PricingTier';
 
-function Pricing() {
+export default function Pricing() {
     const tiers = [
         {
             name: 'BASIC',
@@ -41,7 +41,7 @@ function Pricing() {
                     headText='Start Recruiting Smarter Today'
                     subText='No surprise fees. What you see is what you get.'
                 />
-                <div className='pricing__container mx-auto'> 
+                <div className='pricing__container mx-auto'>
                     {tiers.map((tier, i) => {
                         return <PricingTier key={ i } tier={ tier } />
                     })}
@@ -50,5 +50,3 @@ function Pricing() {
         </div>
     );
 }
-
-export default Pricing;

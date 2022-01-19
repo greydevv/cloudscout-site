@@ -1,4 +1,4 @@
-class BasePlayer {
+export default class BasePlayer {
     constructor(pid, first, last, institution, division, timestamp, position, schoolClass, sport) {
         this.pid = pid;
         this.first = first;
@@ -75,5 +75,3 @@ class BasePlayer {
         ];
     }
 }
-
-export default BasePlayer;
