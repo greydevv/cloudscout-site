@@ -11,40 +11,41 @@ import './Sidebar.scss';
 function Sidebar() {
     const { logout } = useAuth0();
 
+    // TODO: refactor SASS names
     return (
-        <div className='sidebar-wrapper'>
+        <div className='sidebar__wrapper'>
             <nav className='sidebar'>
-                <div className='sidebar-section sidebar-header'>
+                <div className='sidebar__section sidebar__header'>
                     <NavLink to='/'>
-                        <img alt='cloudscout-logo' src={ logoBlue } className='sidebar-logo' />
+                        <img alt='cloudscout__logo' src={ logoBlue } className='sidebar__logo' />
                     </NavLink>
                 </div>
-                <div className='sidebar-section sidebar-content'>
+                <div className='sidebar__section sidebar__content'>
                     <SidebarNavItem
                         to='' 
-                        className='sidebar-item'
-                        activeClassName='sidebar-item-active'
+                        className='sidebar__item'
+                        activeClassName='sidebar__item-active'
                         icon={<Dashboard width={24} height={24} />}
                         end
                     />
                     <SidebarNavItem
                         to='favorites' 
-                        className='sidebar-item'
-                        activeClassName='sidebar-item-active'
+                        className='sidebar__item'
+                        activeClassName='sidebar__item__active'
                         icon={<Star width={24} height={24} />}
                     />
                     <SidebarNavItem
                         to='settings' 
-                        className='sidebar-item'
-                        activeClassName='sidebar-item-active'
+                        className='sidebar__item'
+                        activeClassName='sidebar__item__active'
                         icon={<Cog width={24} height={24} />}
                     />
                 </div>
-                <div className='sidebar-section sidebar-footer'>
+                <div className='sidebar__section sidebar__footer'>
                     <SidebarButtonItem
                         onClick={ () => logout({ returnTo: window.location.origin }) }
                         icon={<Logout width={24} height={24} />}
-                        className='sidebar-item'
+                        className='sidebar__item__button'
                     />
                 </div>
             </nav>

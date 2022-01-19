@@ -1,11 +1,22 @@
 class BasePlayer {
-    constructor(pid, first, last, institution, division, timestamp) {
+    constructor(pid, first, last, institution, division, timestamp, position, schoolClass) {
         this.pid = pid;
         this.first = first;
         this.last = last;
         this.institution = institution;
         this.division = division;
         this.timestamp = timestamp;
+        if (position === null) {
+            this.position = '-';
+        } else {
+            this.position = position;
+        }
+        if (schoolClass === null) {
+            // need to display something else here
+            this.schoolClass = '-';
+        } else {
+            this.schoolClass = ['FR', 'SO', 'JR', 'SR', 'GR'][schoolClass-1];
+        }
     }
 
     static fromJson(json) {
@@ -16,7 +27,9 @@ class BasePlayer {
             meta['last'],
             meta['institution'],
             meta['division'],
-            meta['date']
+            meta['date'],
+            meta['position'],
+            meta['class']
         );
     }
 
@@ -43,7 +56,9 @@ class BasePlayer {
                 this.getFullName(),
                 this.institution,
                 this.division,
-                this.timestamp
+                this.timestamp,
+                this.position,
+                this.schoolClass
             ];
         }
         return [
@@ -52,7 +67,9 @@ class BasePlayer {
             this.capitalize(this.last), 
             this.institution, 
             this.division,
-            this.timestamp
+            this.timestamp,
+            this.position,
+            this.schoolClass
         ];
     }
 }

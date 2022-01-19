@@ -1,78 +1,67 @@
 @import 'styles/cloudscout';
 
-.sidebar-wrapper {
-    background-color: $color-dark;
-}
-
 .sidebar {
     display: flex;
     flex-direction: column;
     height: 100%;
-}
 
-.sidebar-section {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin: 0 2rem;
-}
+    &__wrapper {
+        background-color: $color-dark;
+    }
 
-.sidebar-header {
-    margin: 2rem 2rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    flex-grow: 1;
-    justify-content: flex-start;
-}
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin: 0 2rem;
+    }
 
-.sidebar-content {
-    flex-grow: 4;
-}
+    &__header {
+        margin: 2rem 2rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        flex-grow: 1;
+        justify-content: flex-start;
+    }
 
-.sidebar-footer {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    flex-grow: 3;
-    justify-content: flex-end;
-}
+    &__content {
+        flex-grow: 4;
+    }
 
-.sidebar-logo {
-    margin-left: auto;
-    margin-right: auto;
-    width: 30px;
-}
+    &__footer {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        flex-grow: 3;
+        justify-content: flex-end;
+    }
 
-.sidebar-item {
-    text-decoration: none;
-    margin-left: auto;
-    margin-right: auto;
-}
+    &__logo {
+        margin-left: auto;
+        margin-right: auto;
+        width: 30px;
+    }
 
-.sidebar-item {
-    color: $color-light;
-}
+    &__item {
+        text-decoration: none;
+        margin-left: auto;
+        margin-right: auto;
+        color: $color-light;
 
-.sidebar-item-active {
-    color: $color-primary;
-}
+        &:hover {
+            color: $neutral-light;
+        }
 
-.sidebar-item:hover {
-    color: $neutral-light;
-}
+        &__button {
+            @include plain-btn;
+            color: $color-light;
 
-.sidebar-item-active:hover {
-    color: $color-primary;
-}
+            &:hover {
+                color: $neutral-light;
+            }
+        }
 
-button.sidebar-item {
-    background: transparent;
-    border: none;
-}
-
-button.sidebar-item:hover {
-    cursor: pointer
-}
-
-svg {
-    color: inherit;
+        &-active {
+            color: $color-primary;
+        }
+    }
 }

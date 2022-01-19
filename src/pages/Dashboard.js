@@ -54,9 +54,7 @@ function Dashboard() {
                 <Filter
                     handleFilterChange={ onFilterChange }
                 />
-                {/*<p>Results returned: {this.state.json.length}</p>*/}
             </div>
-            {/* <PlayerTable isLoading={ isLoading } players={ json.map(BasePlayer.fromJson).sort((a,b) => {return (a.timestamp < b.timestamp) ? 1 : -1}) } /> */}
             <PlayerTable players={ json.map(BasePlayer.fromJson) } isLoading={ isLoading } />
         </div>
     );
