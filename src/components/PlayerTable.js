@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { SpinnerView } from 'components/Spinner';
 import './PlayerTable.scss';
+import { NavLink } from 'react-router-dom';
 
 function PlayerTable({ players, isLoading }) {
 
@@ -21,7 +22,7 @@ function PlayerTable({ players, isLoading }) {
                 </table>
             </div>
             <div className='table__content__container'>
-                { isLoading 
+                { isLoading
                     ? (
                         <SpinnerView />
                     )
@@ -31,7 +32,11 @@ function PlayerTable({ players, isLoading }) {
                                 { players.map((player, i) => {
                                     return (
                                         <tr key={ i }>
-                                            <td className='p-body-sm'>{ player.getFullName() }</td>
+                                            <td className='p-body-sm'>
+                                                <NavLink to={`player/${player.pid}`}>
+                                                    { player.getFullName() }
+                                                </NavLink>
+                                            </td>
                                             <td className='p-body-sm te-lg'>{ player.institution }</td>
                                             <td className='p-body-sm te-sm'>{ player.division }</td>
                                             <td className='p-body-sm te-sm'>{ player.position }</td>

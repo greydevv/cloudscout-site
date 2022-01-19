@@ -47,15 +47,15 @@ function Dashboard() {
     return (
         <div className='dashboard'>
             <div className='page__header'>
-                <h1 className='page__head'>Dashboard</h1>
+                <h1 className='page__head'>DashBoard</h1>
                 <SearchBar
-                   handleSearch={ onSearch } 
+                   handleSearch={ onSearch }
                 />
                 <Filter
                     handleFilterChange={ onFilterChange }
                 />
             </div>
-            <PlayerTable isLoading={ isLoading } players={ json.map(BasePlayer.fromJson) } />
+            <PlayerTable players={ json.map(BasePlayer.fromJson) } isLoading={ isLoading } />
         </div>
     );
 }
