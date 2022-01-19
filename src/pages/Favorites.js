@@ -13,7 +13,7 @@ function Favorites() {
     console.log(pids)
     const { json: playerJson, isLoading: isPlayerJsonLoading } = useApi(`v1/players?pids=${pids.join(',')}`, pids.length > 0);
     return (
-        <div className='dashboard'>
+        <div className='favorites'>
             <div className='page__header'>
                 <h1 className='page__head'>Favorites</h1>
             </div>
