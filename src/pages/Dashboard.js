@@ -17,9 +17,6 @@ function Dashboard() {
     const [url, setUrl] = useState(BASE_ENDPOINT);
     const { json, isLoading } = useApi(url);
 
-    const constructUrl = useCallback(() => {
-    }, [opts]);
-
     useEffect(() => {
         let newEndpoint = BASE_ENDPOINT;
         Object.entries(opts).forEach(([param,val]) => {
