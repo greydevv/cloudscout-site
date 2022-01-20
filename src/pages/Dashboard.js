@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar';
 import PlayerTable from '../components/PlayerTable';
 import Spinner from 'components/Spinner';
 import BasePlayer from '../models/Player';
-import Filter from '../components/Filters';
+import Filters from '../components/Filters';
 import { playerData } from 'Const.js';
 import { useApi }  from 'api/api.js';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -45,12 +45,8 @@ export default function Dashboard() {
         <div className='dashboard'>
             <div className='page__header'>
                 <h1 className='page__head'>Dashboard</h1>
-                <SearchBar
-                   handleSearch={ onSearch }
-                />
-                <Filter
-                    handleFilterChange={ onFilterChange }
-                />
+                <SearchBar handleSearch={ onSearch } />
+                <Filters handleFilterChange={ onFilterChange } />
             </div>
             <PlayerTable players={ isLoading ? [] : json.map(BasePlayer.fromJson) } isLoading={ isLoading } />
         </div>

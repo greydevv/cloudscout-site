@@ -112,7 +112,13 @@ export default class Filters extends React.Component {
     constructor(props) {
         super(props);
         this.divisions = [1, 2, 3];
-        this.classes = ['FR', 'SO', 'JR', 'SR', 'GR'];
+        this.classes = {
+            'FR': 1,
+            'SO': 2,
+            'JR': 3,
+            'SR': 4,
+            'GR': 5
+        };
         this.positions = ['QB', 'WR', 'OL', 'RB', 'TE', 'C', 'OT', 'FB', 'DL', 'DT', 'DE', 'LB', 'DB', 'CB', 'S', 'P', 'K', 'LS'];
 
         this.state = {
@@ -127,7 +133,7 @@ export default class Filters extends React.Component {
         this.props.handleFilterChange(
             {
                 'division': this.state.selectedDivisions.join(','),
-                'class': this.state.selectedClasses.join(','),
+                'class': this.state.selectedClasses.map((c) => {return this.classes[c]}).join(','),
                 'position': this.state.selectedPositions.join(','),
             }
         );
@@ -159,7 +165,7 @@ export default class Filters extends React.Component {
                             });
                         }
                     }
-                    data={this.classes}
+                    data={Object.keys(this.classes)}
                 />
             </div>
             <div className="filter-headers">
