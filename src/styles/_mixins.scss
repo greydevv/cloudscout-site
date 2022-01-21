@@ -1,3 +1,10 @@
+@mixin app-page {
+    @include margin-x-auto;
+    width: 100%;
+    padding: 2rem 2rem 0 2rem;
+    max-width: 1600px;
+}
+
 @mixin margin-x-auto {
     margin-left: auto;
     margin-right: auto;

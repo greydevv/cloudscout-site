@@ -9,8 +9,8 @@ export default function Favorites() {
     const userId = useUserContext();
     const { json: coachJson, isLoading: isCoachJsonLoading } = useApi(`v1/users/${userId}`);
     const pids = isCoachJsonLoading ? [] : coachJson['account']['favorites'];
-    console.log(pids)
     const { json: playerJson, isLoading: isPlayerJsonLoading } = useApi(`v1/players?pids=${pids.join(',')}`, pids.length > 0);
+
     return (
         <div className='favorites'>
             <div className='page__header'>
