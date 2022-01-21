@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { SpinnerView } from 'components/Spinner';
 import './PlayerTable.scss';
 import { NavLink } from 'react-router-dom';

@@ -20,4 +20,5 @@ export { Dashboard,
          Checkmark,
          Crown,
          Burger,
-         Close }
+         Close,
+}

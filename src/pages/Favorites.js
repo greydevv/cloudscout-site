@@ -2,7 +2,6 @@ import React from 'react';
 import PlayerTable from '../components/PlayerTable';
 import BasePlayer from '../models/Player';
 import { useApi }  from 'api/api.js';
-import { playerData } from 'Const.js';
 import { useUserContext } from 'UserContext';
 import './Pages.scss';
 
