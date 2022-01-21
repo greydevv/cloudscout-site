@@ -1,11 +1,11 @@
-import React from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import Select from 'react-select';
+import { filterOptions } from 'Const';
 import './Filters.scss';
 
 /*
  * FIND A BETTER WAY TO DO THIS STYLING SHIT USING GLOBAL SASS VARIABLES
  */
-
 const filterStyles = {
     option: (provided, state) => ({
         ...provided,
@@ -73,115 +73,65 @@ const filterStyles = {
     })
 }
 
-class Dropdown extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.placeholder = props.placeholder;
-        this.options = [];
-        if (props.data) {
-            props.data.map((lab, i) => {
-                this.options.push({value: i, label: lab});
-                return lab;
-            })
-        }
+export function Dropdown({ placeholder, name, defaults, onChange, options, ...rest }) {
+    const onChangeWrapper = (filters) => {
+        const values = filters.map(({value}) => {
+            return value;
+        });
+        onChange(name, values);
     }
 
-    handleChange(selectedOptions) {
-        this.props.onChange(selectedOptions.map(opt => opt.label));
+    const getMappedDefaults = () => {
+        return defaults.map((defValue) => {
+            return options.find(({value}) => value === defValue);
+        });
     }
 
-    createOptions() {
-        var options = [];
-        this.options.map((lab, i) => {
-            var option = {value: i, label: lab}
-            options.push(option);
-            return lab;
-        })
-        return options;
-    }
-
-    render() {
-        return (
-            <Select styles={filterStyles} placeholder={this.placeholder} onChange={this.handleChange} options={this.options} isMulti/>
-        );
-    }
+    return (
+        <Select 
+            value={ getMappedDefaults() }
+            styles={ filterStyles } 
+            onChange={ onChangeWrapper }
+            placeholder={ placeholder } 
+            options={ options }
+            isMulti
+            { ...rest }
+        />
+    );
 }
 
-export default class Filters extends React.Component {
-    constructor(props) {
-        super(props);
-        this.divisions = [1, 2, 3];
-        this.classes = {
-            'FR': 1,
-            'SO': 2,
-            'JR': 3,
-            'SR': 4,
-            'GR': 5
-        };
-        this.positions = ['QB', 'WR', 'OL', 'RB', 'TE', 'C', 'OT', 'FB', 'DL', 'DT', 'DE', 'LB', 'DB', 'CB', 'S', 'P', 'K', 'LS'];
-
-        this.state = {
-            selectedDivisions: [],
-            selectedClasses: [],
-            selectedPositions: [],
-        }
-        this.handleFilterChange  = this.handleFilterChange.bind(this);
-    }
-
-    handleFilterChange() {
-        this.props.handleFilterChange(
-            {
-                'division': this.state.selectedDivisions.join(','),
-                'class': this.state.selectedClasses.map((c) => {return this.classes[c]}).join(','),
-                'position': this.state.selectedPositions.join(','),
-            }
-        );
-    }
-
-    render() {
-        return (
-        <div className="filters">
-            <div className="filter-headers">
-                <Dropdown
-                    placeholder='Division'
-                    onChange={
-                        (selectedDivisions) => {
-                            this.setState({selectedDivisions: selectedDivisions}, () => {
-                                this.handleFilterChange();
-                            });
-                        }
-                    }
-                    data={this.divisions}
-                />
-            </div>
-            <div className="filter-headers">
-                <Dropdown
-                    placeholder='Class'
-                    onChange={
-                        (selectedClasses) => {
-                            this.setState({selectedClasses: selectedClasses}, () => {
-                                this.handleFilterChange();
-                            });
-                        }
-                    }
-                    data={Object.keys(this.classes)}
-                />
-            </div>
-            <div className="filter-headers">
-                <Dropdown
-                    placeholder='Position'
-                    onChange={
-                        (selectedPositions) => {
-                            this.setState({selectedPositions: selectedPositions}, () => {
-                                this.handleFilterChange();
-                            });
-                        }
-                    }
-                    data={this.positions}
-                />
-            </div>
+export function FilterSection({ children, onChange }) {
+    return (
+        <div className='filters'>
+            { children }
         </div>
-        );
-    }
+    );
+}
+
+export default function Filters({ onFilterChange, defaultFilters }) {
+    return (
+        <FilterSection>
+            <Dropdown 
+                onChange={ onFilterChange } 
+                defaults={ defaultFilters.division }
+                placeholder='Division' 
+                name='division' 
+                options={ filterOptions.divisions } 
+            />
+            <Dropdown 
+                onChange={ onFilterChange } 
+                defaults={ defaultFilters.class }
+                placeholder='Class' 
+                name='class' 
+                options={ filterOptions.classes } 
+            />
+            <Dropdown 
+                onChange={ onFilterChange } 
+                defaults={ defaultFilters.position }
+                placeholder='Position' 
+                name='position' 
+                options={ filterOptions.positions } 
+            />
+        </FilterSection>
+    );
 }

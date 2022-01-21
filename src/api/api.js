@@ -52,17 +52,24 @@ export const usePut = (endpoint, body, enabled=true) => {
     return response;
 }
 
-export const useApi = (endpoint, enabled=true) => {
+export const useApi = (endpoint, enabled=true, enabledOnFirstRender=true) => {
     const BASE_URL = 'https://cloudscout-rest.herokuapp.com/';
     const [url, setUrl] = useState(`${BASE_URL}${endpoint}`);
     const [data, setData] = useState({json: {}, code:200, isLoading: true});
     const { getAccessTokenSilently } = useAuth0();
+    const [firstRender, setFirstRender] = useState(true);
+
 
     useEffect(() => {
         if (!enabled) {
             return;
         }
         if (url === BASE_URL) {
+            return;
+        }
+        if (!enabledOnFirstRender && firstRender) {
+            // don't make request on first render
+            setFirstRender(false);
             return;
         }
         setData(data => ({json: data.json, code: data.code, isLoading: true}));
