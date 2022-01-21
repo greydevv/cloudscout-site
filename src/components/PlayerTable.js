@@ -4,9 +4,6 @@ import { NavLink } from 'react-router-dom';
 
 
 export default function PlayerTable({ players, isLoading, favorites, onFavorite, onUnfavorite }) {
-
-    console.log(favorites);
-
     return (
         <>
             <div className='table__header__container'>
@@ -32,11 +29,17 @@ export default function PlayerTable({ players, isLoading, favorites, onFavorite,
                     : (
                         <table className='table__content' cellPadding={0} cellSpacing={0}>
                             <tbody>
-                                { 
-                                    players.map((player, i) => {
+                                {players.map((player, i) => {
+                                        let isFavorited = favorites.includes(player.pid);
                                         return (
                                             <tr key={ i }>
-                                                <td><button onClick={() => (favorites.includes(player.pid) ? onUnfavorite(player.pid) : onFavorite(player.pid)) } >Fav</button></td>
+                                                <td>
+                                                    <button 
+                                                        onClick={() => (isFavorited ? onUnfavorite(player.pid) : onFavorite(player.pid)) } 
+                                                    >
+                                                        { isFavorited ? 'Y' : 'N'}
+                                                    </button>
+                                                </td>
                                                 <td className='p-body-sm'>
                                                     <NavLink to={`/app/player/${player.pid}`}>
                                                         { player.getFullName() }
@@ -50,7 +53,6 @@ export default function PlayerTable({ players, isLoading, favorites, onFavorite,
                                             </tr>
                                         );
                                     })
-                                
                                 }
                             </tbody>
                         </table>

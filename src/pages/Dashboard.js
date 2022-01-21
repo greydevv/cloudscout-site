@@ -6,7 +6,7 @@ import BasePlayer from '../models/Player';
 import Filters, { FilterSection, Dropdown } from 'components/Filters'
 import { SpinnerView } from 'components/Spinner';
 import { useUserContext } from 'UserContext';
-import { useApi }  from 'api/api.js';
+import { useApi, usePut }  from 'api/api.js';
 import { filterOptions } from 'Const';
 import './Pages.scss';
 
@@ -16,7 +16,10 @@ export default function Dashboard() {
     const [players, setPlayers] = useState([]);
     const [opts, setOpts] = useState({});
     const [url, setUrl] = useState(BASE_ENDPOINT);
+    const [ userData, setUserData ] = useState({favorites: []})
+    const [ jsonBody, setJsonBody ] = useState({});
     const { json: userJson, isLoading: isUserLoading } = useApi(`/v1/users/${userId}`);
+    const { json: putJson, isLoading: isPutLoading } = usePut(`/v1/users/${userId}`, jsonBody);
     const { json, isLoading } = useApi(url, true, false);
     const [filters, setFilters] = useState({division: [], class: [], position: []});
 
@@ -35,6 +38,10 @@ export default function Dashboard() {
                 ...userJson.account.default_filters
             }
             setOpts(newOpts);
+            setUserData({
+                favorites: userJson.account.favorites
+            });
+            setJsonBody(JSON.parse(JSON.stringify(userJson)));
             setFilters({
                 division: userJson.account.default_filters.division,
                 class: userJson.account.default_filters.class,
@@ -64,17 +71,31 @@ export default function Dashboard() {
         });
     }
 
+    const copyObj = (obj) => {
+        return JSON.parse(JSON.stringify(obj))
+    };
+
     const onFavorite = (pid) => {
-        console.log("onFavorite");
+        userJson.account.favorites = [...userJson.account.favorites, pid];
+        setUserData({favorites: [...userJson.account.favorites]})
+        setJsonBody(copyObj(userJson));
     }
 
     const onUnfavorite = (pid) => {
-        console.log("onUnfavorite")
+        let newFavorites = jsonBody.account.favorites;
+        for (var i = newFavorites.length - 1; i >= 0; i--) {
+            if (newFavorites[i] === pid) {
+                newFavorites.splice(i, 1);
+                break;
+            }
+        }
+        userJson.account.favorites = newFavorites;
+        setUserData({favorites: newFavorites})
+        setJsonBody(copyObj(userJson));
     }
 
     if (isUserLoading) {
         return (<SpinnerView />);
-
     }
 
     return (
@@ -86,7 +107,7 @@ export default function Dashboard() {
                     <Filters onFilterChange={ onFilterChange } defaultFilters={ filters } />
                 </div>
             </div>
-            <PlayerTable onFavorite={ onFavorite } onUnfavorite={ onUnfavorite } favorites={ userJson.account.favorites } players={ isLoading ? [] : json.map(BasePlayer.fromJson) } isLoading={ isLoading } />
+            <PlayerTable onFavorite={ onFavorite } onUnfavorite={ onUnfavorite } favorites={ userData.favorites } players={ isLoading ? [] : json.map(BasePlayer.fromJson) } isLoading={ isLoading } />
         </div>
     );
 }
