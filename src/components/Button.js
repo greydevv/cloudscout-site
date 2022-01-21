@@ -1,8 +1,6 @@
 import './Button.scss';
 
-export function Button(props, { ...rest }) {
-    const children = props.children;
-
+export function Button({ children, ...rest }) {
     return (
         <button className='basic-btn' { ...rest }>
             { children }
@@ -10,9 +8,7 @@ export function Button(props, { ...rest }) {
     );
 }
 
-export function GradientButton(props, { ...rest }) {
-    const children = props.children;
-
+export function GradientButton({ children, ...rest }) {
     return (
         <button className='gradient-btn' { ...rest }>
             { children }

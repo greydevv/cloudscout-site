@@ -1,3 +1,19 @@
+// export class FootballPlayer extends BasePlayer {
+//     constructor(
+//         pid, 
+//         first, 
+//         last, 
+//         institution, 
+//         division, 
+//         timestamp, 
+//         position, 
+//         schoolClass, 
+//         sport
+//     ) {
+//         super(pid, first, last, institution, division, timestamp, position, schoolClass, sport);
+//     }
+// }
+
 export default class BasePlayer {
     constructor(pid, first, last, institution, division, timestamp, position, schoolClass, sport) {
         this.pid = pid;
