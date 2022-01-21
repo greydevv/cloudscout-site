@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useApi }  from 'api/api.js';
 import BasePlayer from '../models/Player';
 import { SpinnerView } from 'components/Spinner';
+import prettifyText from 'util/TextHelper';
 
 export default function PlayerProfile() {
     const {pid} = useParams()
@@ -22,6 +23,7 @@ export default function PlayerProfile() {
 
     const statTabs = json.stats;
 
+    var inputJson = statTabs[currentTab];
     return (
         <>
             {Object.keys(statTabs).map((category, i) => {
@@ -34,7 +36,16 @@ export default function PlayerProfile() {
                     {category}
                 </a>
             })}
-            <div>{ JSON.stringify(statTabs[currentTab]) }</div> 
+            <div>
+                { Object.entries(inputJson).map(([key, value], i) => {
+                    return (
+                        <div key={i}>
+                            <h4>{ prettifyText(key).pretty }</h4>
+                            <h6>{ value }</h6>
+                        </div>
+                    );
+                })}
+            </div>
         </>
     );
 }
