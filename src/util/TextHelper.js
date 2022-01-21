@@ -7,20 +7,20 @@ pretty: “Games Played”
 }
 Takes 1 string as an argument.
 */
-function prettyText(text){
+export default function prettifyText(text){
     const textList = text.toLowerCase().split("_");
-    pretty = [];
-    abbr = [];
+    var pretty = [];
+    var abbr = [];
     textList.forEach(
         (word) => {
-            firstChar = word.charAt(0).toUpperCase();
+            var firstChar = word.charAt(0).toUpperCase();
             word = firstChar + word.slice(1);
             abbr.push(firstChar);
             pretty.push(word);
         }
     );
-    prettyText = pretty.join(" ");
-    abbrText = abbr.join("");
+    let prettyText = pretty.join(" ");
+    var abbrText = abbr.join("");
     return {
         original: text,
         abbrev: abbrText,
