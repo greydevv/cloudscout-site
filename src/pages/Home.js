@@ -6,8 +6,6 @@ import Loading from 'pages/Loading';
 import { FooterLinkSet, FooterLink, Footer } from 'components/Footer';
 import './Home.scss';
 
-import { Burger } from 'components/Icons';
-
 export default function Home() {
     const { isAuthenticated,
             isLoading,

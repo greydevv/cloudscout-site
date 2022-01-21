@@ -1,7 +1,5 @@
 import FeatureShowcase from 'components/home/FeatureShowcase';
 import PricingTier from 'components/PricingTier';
-import dashboardImg from 'assets/home/dashboard.png';
-import notificationImg from 'assets/home/notification.png';
 import { GradientButton } from 'components/Button';
 import SectionHeader from 'components/SectionHeader';
 import dashboardGraphic from 'assets/graphics/dashboard.png';

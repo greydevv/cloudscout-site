@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import './Profile.scss';
 
 export default function Profile({ member }) {
