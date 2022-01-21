@@ -16,7 +16,7 @@ export default function Favorites() {
             <div className='page__header'>
                 <h1 className='page__head'>Favorites</h1>
             </div>
-            <PlayerTable players={ isPlayerJsonLoading ? [] : playerJson.map(BasePlayer.fromJson)} isLoading={ isPlayerJsonLoading } />
+            <PlayerTable favorites={ pids } players={ isPlayerJsonLoading ? [] : playerJson.map(BasePlayer.fromJson)} isLoading={ isPlayerJsonLoading } />
             {/* <PlayerTable players={ isPlayerJsonLoading ? [] : playerJson.map(BasePlayer.fromJson) } isLoading={ isPlayerJsonLoading } /> */}
             {/* <PlayerTable players={ isLoading ? [] : json} */}
 

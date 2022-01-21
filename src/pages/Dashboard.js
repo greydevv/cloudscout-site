@@ -64,6 +64,14 @@ export default function Dashboard() {
         });
     }
 
+    const onFavorite = (pid) => {
+        console.log("onFavorite");
+    }
+
+    const onUnfavorite = (pid) => {
+        console.log("onUnfavorite")
+    }
+
     if (isUserLoading) {
         return (<SpinnerView />);
 
@@ -78,7 +86,7 @@ export default function Dashboard() {
                     <Filters onFilterChange={ onFilterChange } defaultFilters={ filters } />
                 </div>
             </div>
-            <PlayerTable players={ isLoading ? [] : json.map(BasePlayer.fromJson) } isLoading={ isLoading } />
+            <PlayerTable onFavorite={ onFavorite } onUnfavorite={ onUnfavorite } favorites={ userJson.account.favorites } players={ isLoading ? [] : json.map(BasePlayer.fromJson) } isLoading={ isLoading } />
         </div>
     );
 }
