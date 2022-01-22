@@ -97,7 +97,7 @@ export default function Dashboard() {
     return (
         <div className='dashboard'>
             <div className='page__header'>
-                <h1 className='page__head'>Dashboard</h1>
+                <h1 className='page__head mb-md'>Dashboard</h1>
                 <SearchBar handleSearch={ onSearch } />
                 <div className='my-md'>
                     <Filters onFilterChange={ onFilterChange } defaultFilters={ filters } />

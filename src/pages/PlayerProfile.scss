@@ -1,0 +1,65 @@
+@import 'styles/cloudscout';
+
+.profile {
+    @include app-page;
+    max-height: 100vh;
+
+    &__categories {
+        width: 100%;
+        border-bottom: 2px solid $neutral-light; 
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: row;
+
+        &__tab {
+            padding: 5px 15px;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            bottom: -2px;
+
+            &-active {
+                @extend .profile__categories__tab;
+                background-color: $neutral-light;
+                border-bottom: 2px solid $color-primary;
+            }
+        }
+
+        &__link {
+            @include plain-link;
+            cursor: pointer;
+            color: $neutral-dark;
+
+            &-active {
+                @extend .profile__categories__link;
+                color: $color-primary;
+            }
+        }
+    }
+
+    &__statistics {
+        &__container {
+            text-align: right;
+        }
+
+        &__stat {
+            display: flex;
+            flex-direction: row;
+        }
+
+        &__row {
+            border-bottom: 2px solid $neutral-light;
+        }
+    }
+}
+
+.stat {
+    &__name {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    &__value {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+}

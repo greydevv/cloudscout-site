@@ -77,7 +77,7 @@ export default function Settings() {
 
     return (
         <div className='settings'>
-            <div className='page__header'>
+            <div className='page__header mb-md'>
                 <h1 className='page__head'>Settings</h1>
             </div>
             { isUserLoading

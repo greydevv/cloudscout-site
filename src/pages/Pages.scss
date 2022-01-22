@@ -16,15 +16,3 @@
 .settings {
     @include app-page;
 }
-
-.page {
-    &__header {
-
-    }
-
-    &__head {
-        margin-bottom: 1.5rem;
-        font-size: 28px;
-        font-weight: 600;
-    }
-}
