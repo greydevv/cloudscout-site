@@ -5,6 +5,7 @@ import { SpinnerView } from 'components/Spinner';
 import Filters from 'components/Filters'
 import { Button } from 'components/Button';
 import { useAuth0 } from '@auth0/auth0-react';
+import { copyObj } from 'util/utils';
 import './Settings.scss';
 
 function SettingsField({ labelText, ...rest }) {
@@ -23,20 +24,16 @@ function SettingsField({ labelText, ...rest }) {
 export default function Settings() {
     const userId = useUserContext();
     const [ jsonBody, setJsonBody ] = useState({});
-    const [userData, setUserData] = useState({
+    const [userState, setUserState] = useState({
         first: '', last: '', institution: '', 
         defaultFilters: {division: [], class: [], position: []}
     });
     const { json: userJson, isLoading: isUserLoading } = useApi(`/v1/users/${userId}`);
     const { json: putJson, isLoading: isPutLoading } = usePut(`/v1/users/${userId}`, jsonBody);
 
-    const copyObj = (obj) => {
-        return JSON.parse(JSON.stringify(obj))
-    };
-
     useEffect(() => {
         if (!isUserLoading) {
-            setUserData({
+            setUserState({
                 first: userJson.meta.first,
                 last: userJson.meta.last,
                 institution: userJson.meta.institution,
@@ -51,10 +48,10 @@ export default function Settings() {
     }, [isUserLoading]);
 
     const saveUserSettings = (e) => {
-        userJson.meta.first = userData.first;
-        userJson.meta.last = userData.last;
-        userJson.meta.institution = userData.institution;
-        userJson.account.default_filters = userData.defaultFilters;
+        userJson.meta.first = userState.first;
+        userJson.meta.last = userState.last;
+        userJson.meta.institution = userState.institution;
+        userJson.account.default_filters = userState.defaultFilters;
         if (JSON.stringify(userJson) !== JSON.stringify(jsonBody)) {
             setJsonBody(copyObj(userJson));
         }
@@ -65,14 +62,14 @@ export default function Settings() {
         const target = e.target;
         const value = target.value;
         const name = target.name;
-        setUserData({...userData, [name]: value});
+        setUserState({...userState, [name]: value});
     };
 
     const onFilterChange = (name, values) => {
-        setUserData({
-            ...userData,
+        setUserState({
+            ...userState,
             defaultFilters: {
-                ...userData.defaultFilters,
+                ...userState.defaultFilters,
                 [name]: values
             }
         });
@@ -94,24 +91,24 @@ export default function Settings() {
                                 <SettingsField 
                                     labelText='First' 
                                     name='first'
-                                    defaultValue={ userData.first }
+                                    defaultValue={ userState.first }
                                     onChange={ handleInputChange }
                                 />
                                 <SettingsField 
                                     labelText='Last' 
                                     name='last'
-                                    defaultValue={ userData.last }
+                                    defaultValue={ userState.last }
                                     onChange={ handleInputChange }
                                 />
                                 <SettingsField 
                                     labelText='Institution' 
                                     name='institution'
-                                    defaultValue= { userData.institution }
+                                    defaultValue= { userState.institution }
                                     onChange={ handleInputChange }
                                 />
                                 <div>
                                     <h5 className='p-body-sm'>Default Filters</h5>
-                                    <Filters onFilterChange={ onFilterChange } defaultFilters={ userData.defaultFilters } />
+                                    <Filters onFilterChange={ onFilterChange } defaultFilters={ userState.defaultFilters } />
                                 </div>
                                 <div className='mt-xxl'>
                                 <Button type='submit'>Save</Button>

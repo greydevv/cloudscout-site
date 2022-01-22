@@ -1,7 +1,7 @@
 import { SpinnerView } from 'components/Spinner';
 import './PlayerTable.scss';
 import { NavLink } from 'react-router-dom';
-
+import { StarFilled } from 'components/Icons';
 
 export default function PlayerTable({ players, isLoading, favorites, onFavorite, onUnfavorite }) {
     return (
@@ -10,7 +10,7 @@ export default function PlayerTable({ players, isLoading, favorites, onFavorite,
                 <table cellPadding={0} cellSpacing={0} border={0}>
                     <thead className='table__header'>
                         <tr>
-                            <th className='p-body-sm'>Favorite</th>
+                            <th className='table__favorite__col'></th>
                             <th className='p-body-sm'>Name</th>
                             <th className='p-body-sm te-lg'>Institution</th>
                             <th className='p-body-sm te-sm'>Division</th>
@@ -30,18 +30,26 @@ export default function PlayerTable({ players, isLoading, favorites, onFavorite,
                         <table className='table__content' cellPadding={0} cellSpacing={0}>
                             <tbody>
                                 {players.map((player, i) => {
-                                        let isFavorited = favorites.includes(player.pid);
+                                        const isFavorited = favorites.includes(player.pid);
                                         return (
-                                            <tr key={ i }>
-                                                <td>
-                                                    <button 
-                                                        onClick={() => (isFavorited ? onUnfavorite(player.pid) : onFavorite(player.pid)) } 
-                                                    >
-                                                        { isFavorited ? 'Y' : 'N'}
-                                                    </button>
+                                            <tr key={ i } className={ isFavorited ? 'table__row-active' : 'table__row'}>
+                                                <td className='table__favorite__col'>
+                                                    {isFavorited
+                                                        ? (
+                                                            <button className='favorite__btn-active' onClick={ () => onUnfavorite(player.pid) }>
+                                                                <StarFilled className='favorite__btn__icon-active' />
+                                                            </button>
+                                                        )
+                                                        : (
+                                                            <button className='favorite__btn' onClick={ () => onFavorite(player.pid) }>
+                                                                <StarFilled className='favorite__btn__icon' />
+                                                            </button>
+                                                        )
+
+                                                    }
                                                 </td>
                                                 <td className='p-body-sm'>
-                                                    <NavLink to={`/app/player/${player.pid}`}>
+                                                    <NavLink className='table__link' to={`/app/player/${player.pid}`}>
                                                         { player.getFullName() }
                                                     </NavLink>
                                                 </td>
