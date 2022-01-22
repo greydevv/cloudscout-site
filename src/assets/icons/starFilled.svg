@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
   <g id="favorite_outlined_rounded" transform="translate(0 0)">
-    <rect id="Boundary" width="24" height="24" transform="translate(0 0)" fillColor="currentColor"/>
-    <path id="_Color" data-name=" Color" d="M12,17.92l4.852,2.909a1.167,1.167,0,0,0,1.743-1.258l-1.288-5.484L21.595,10.4a1.16,1.16,0,0,0-.666-2.035l-5.644-.476L13.077,2.708a1.172,1.172,0,0,0-2.153,0L8.716,7.885l-5.644.476A1.16,1.16,0,0,0,2.4,10.4l4.288,3.691L5.406,19.571a1.167,1.167,0,0,0,1.742,1.258Z"/>
+    <rect id="Boundary" width="24" height="24" transform="translate(0 0)" fill="rgba(0,0,0,0)"/>
+    <path fill="currentColor" id="_Color" data-name=" Color" d="M12,17.92l4.852,2.909a1.167,1.167,0,0,0,1.743-1.258l-1.288-5.484L21.595,10.4a1.16,1.16,0,0,0-.666-2.035l-5.644-.476L13.077,2.708a1.172,1.172,0,0,0-2.153,0L8.716,7.885l-5.644.476A1.16,1.16,0,0,0,2.4,10.4l4.288,3.691L5.406,19.571a1.167,1.167,0,0,0,1.742,1.258Z"/>
   </g>
 </svg>

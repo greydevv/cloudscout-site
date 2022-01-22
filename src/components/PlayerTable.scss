@@ -4,6 +4,7 @@ table {
     width: 100%;
     table-layout: fixed;
     text-align: left;
+    border-collapse: collapse;
 
     & th {
         color: $color-light !important;
@@ -15,25 +16,66 @@ table {
         color: $color-dark !important;
         font-weight: 500 !important;
         padding: 20px 15px;
+    }
+}
+
+.table {
+    &__favorite__col {
+        width: 24px;
+        height: 24px;
+    }
+
+    &__header {
+        color: $color-light;
+        &__container {
+            background-color: $color-dark;
+            border-radius: 5px;
+        }
+    }
+
+    &__content {
+        &__container {
+            scrollbar-width: thin;
+            overflow-x: auto;
+            margin-top: 0px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            padding-bottom: 2rem;
+        }
+    }
+
+    &__row {
         border-bottom: 2px solid $neutral-light;
+        &-active {
+            border-bottom: 2px solid $color-primary-medium;
+            background-color: $color-primary-light;
+        }
+    }
+
+    &__link {
+        @include plain-link;
+        color: $color-primary;
     }
 }
 
-.table__header {
-    &__container {
-        background-color: $color-dark;
-        border-radius: 5px;
-    }
-}
+.favorite__btn {
+    @include plain-btn;
+    width: 24px;
+    height: 24px;
+    padding: 0;
 
-.table__content {
-    &__container {
-        scrollbar-width: thin;
-        overflow-x: auto;
-        margin-top: 0px;
-        flex-grow: 1;
-        flex-shrink: 1;
-        padding-bottom: 2rem;
+    &-active {
+        @extend .favorite__btn;
+    }
+
+    &__icon {
+        vertical-align: top;
+        color: $neutral-light;
+
+        &-active {
+            @extend .favorite__btn__icon;
+            color: $color-primary;
+        }
     }
 }
 
