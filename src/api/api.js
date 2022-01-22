@@ -59,7 +59,6 @@ export const useApi = (endpoint, enabled=true, enabledOnFirstRender=true) => {
     const { getAccessTokenSilently } = useAuth0();
     const [firstRender, setFirstRender] = useState(true);
 
-
     useEffect(() => {
         if (!enabled) {
             return;
