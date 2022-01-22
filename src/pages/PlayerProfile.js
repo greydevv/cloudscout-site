@@ -30,21 +30,21 @@ export default function PlayerProfile() {
                 <div className='page__header'>
                     <h1 className='page__head'>{ `${json.meta.first.toUpperCase()} ${json.meta.last.toUpperCase()}` }</h1>
                     <p className='p-body-sm'>{ json.meta.institution.toUpperCase() }</p>
-                </div>
-                <div className='profile__categories'>
-                    {Object.keys(statTabs).map((category, i) => {
-                        const isCurrentCategory = category === currentTab;
-                        return (
-                            <div key={ i } className={ isCurrentCategory ? 'profile__categories__tab-active' : 'profile__categories__tab'}>
-                                <a
-                                    className={ 'p-body-sm profile__categories__link' + (isCurrentCategory ? '-active' : '') }
-                                    onClick={() => changeCurrentTab(category)}
-                                >
-                                    { category.toUpperCase() }
-                                </a>
-                            </div>
-                        );
-                    })}
+                    <div className='profile__categories'>
+                        {Object.keys(statTabs).map((category, i) => {
+                            const isCurrentCategory = category === currentTab;
+                            return (
+                                <div key={ i } className={ isCurrentCategory ? 'profile__categories__tab-active' : 'profile__categories__tab'}>
+                                    <a
+                                        className={ 'p-body-sm profile__categories__link' + (isCurrentCategory ? '-active' : '') }
+                                        onClick={() => changeCurrentTab(category)}
+                                    >
+                                        { category.toUpperCase() }
+                                    </a>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
                 <div className='profile__statistics__container py-lg'>
                     <table className='profile__statistics__table'>

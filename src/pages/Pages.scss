@@ -11,6 +11,8 @@
 
 .favorites {
     @include app-page;
+    max-height: 100vh;
+    overflow: scroll;
 }
 
 .settings {

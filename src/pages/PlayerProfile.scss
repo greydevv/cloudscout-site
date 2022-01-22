@@ -3,6 +3,7 @@
 .profile {
     @include app-page;
     max-height: 100vh;
+    overflow: scroll;
 
     &__categories {
         width: 100%;

@@ -7,6 +7,9 @@
 
     &__wrapper {
         background-color: $color-dark;
+        top: 0;
+        left: 0;
+        position: sticky;
     }
 
     &__section {
