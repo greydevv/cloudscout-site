@@ -19,6 +19,11 @@ table {
     }
 }
 
+.player__table {
+    display: flex;
+    flex-direction: column;
+}
+
 .table {
     &__favorite__col {
         width: 24px;
