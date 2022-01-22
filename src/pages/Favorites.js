@@ -5,7 +5,7 @@ import { useApi, usePut }  from 'api/api.js';
 import { useUserContext } from 'UserContext';
 import { copyObj } from 'util/utils';
 import { SpinnerView } from 'components/Spinner';
-import './Pages.scss';
+import './Favorites.scss';
 
 export default function Favorites() {
     const userId = useUserContext();

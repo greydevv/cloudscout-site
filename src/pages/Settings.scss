@@ -1,7 +1,7 @@
 @import 'styles/cloudscout';
 
 .settings {
-    @include app-page;
+    @include app-page-scrollable;
 
     &__form {
         &__wrapper {

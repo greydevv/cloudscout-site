@@ -8,13 +8,3 @@
     display: flex;
     flex-direction: column;
 }
-
-.favorites {
-    @include app-page;
-    max-height: 100vh;
-    overflow: scroll;
-}
-
-.settings {
-    @include app-page;
-}

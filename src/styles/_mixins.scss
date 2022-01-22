@@ -5,6 +5,12 @@
     max-width: 1600px;
 }
 
+@mixin app-page-scrollable {
+    @include app-page;
+    max-height: 100vh;
+    overflow: scroll;
+}
+
 @mixin margin-x-auto {
     margin-left: auto;
     margin-right: auto;

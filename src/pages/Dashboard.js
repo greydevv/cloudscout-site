@@ -9,7 +9,7 @@ import { useUserContext } from 'UserContext';
 import { useApi, usePut }  from 'api/api.js';
 import { filterOptions } from 'Const';
 import { copyObj } from 'util/utils';
-import './Pages.scss';
+import './Dashboard.scss';
 
 export default function Dashboard() {
     const userId = useUserContext();
