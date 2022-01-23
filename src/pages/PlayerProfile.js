@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useApi }  from 'api/api.js';
+import { useApi, usePut }  from 'api/api.js';
 import BasePlayer from 'models/Player';
 import { SpinnerView } from 'components/Spinner';
 import prettifyText from 'util/TextHelper';
 import { ArrowUp, ArrowDown } from 'components/Icons'
 import './PlayerProfile.scss';
+import { StarFilled } from 'components/Icons';
+import { useUserContext } from 'UserContext';
+import { copyObj } from 'util/utils';
 
 function StatRow({ stat, value, classAvgStat, allAvgStat }) {
     const nullify = (allAvgStat === null || allAvgStat === 0.0 || value === null);
@@ -39,6 +42,10 @@ function StatRow({ stat, value, classAvgStat, allAvgStat }) {
 export default function PlayerProfile() {
     const { pid } = useParams()
     const { json, isLoading } = useApi(`v1/players/${pid}`);
+    const userId = useUserContext();
+    const [ jsonBody, setJsonBody ] = useState({});
+    const { json: userJson, isLoading: isUserLoading } = useApi(`v1/users/${userId}`);
+    const { json: putJson, isLoading: isPutLoading } = usePut(`/v1/users/${userId}`, jsonBody)
 
     const makePosition = (position) => {
         if (position === null) {
@@ -51,23 +58,57 @@ export default function PlayerProfile() {
     const { json: averageJson, isLoading: isAverageLoading } = useApi(`v1/analysis${makePosition(position)}`, true, false);
     const [currentTab, setCurrentTab] = useState('general');
 
+    useEffect(() => {
+        if (!isUserLoading) {
+            setJsonBody(copyObj(userJson));
+        }
+    }, [isUserLoading]);
+
     const changeCurrentTab = (category) => {
         setCurrentTab(category);
     };
 
-    if (isLoading || isAverageLoading) {
+    if (isLoading || isUserLoading || isAverageLoading) {
         return <SpinnerView />
     }
 
+    const onFavorite = (pid) => {
+        userJson.account.favorites = [...userJson.account.favorites, pid];
+        // setUserState({favorites: [...userJson.account.favorites]})
+        setJsonBody(copyObj(userJson));
+    }
+
+    const onUnfavorite = (pid) => {
+        let newFavorites = jsonBody.account.favorites;
+        for (var i = newFavorites.length - 1; i >= 0; i--) {
+            if (newFavorites[i] === pid) {
+                newFavorites.splice(i, 1);
+                break;
+            }
+        }
+        userJson.account.favorites = newFavorites;
+        // setUserState({favorites: newFavorites})
+        setJsonBody(copyObj(userJson));
+    }
+    
     const statTabs = json.stats;
     const inputJson = statTabs[currentTab];
+    const isFavorited = userJson.account.favorites.includes(json.pid);
 
     return (
         <>
             <div className='profile'>
                 <div className='page__header'>
-                    <h1 className='page__head'>{ `${json.meta.first.toUpperCase()} ${json.meta.last.toUpperCase()}` }</h1>
-                    <p className='p-body-sm'>{ json.meta.institution.toUpperCase() } { json.meta.position !== null && `• ${json.meta.position}`}</p>
+                    <h1 className='page__head'>{ `${json.meta.first.toUpperCase()} ${json.meta.last.toUpperCase()}` } </h1>
+                    <p className='p-body-sm'>{ json.meta.institution.toUpperCase() } { json.meta.position !== null && `• ${json.meta.position}`} </p>
+                    {   isFavorited
+                    ? (<button className='favorite__btn-active' onClick={ () => onUnfavorite(json.pid) }>
+                           <StarFilled className='favorite__btn__icon-active' />
+                       </button>)
+                    : (<button className='favorite__btn' onClick={ () => onFavorite(json.pid) }>
+                           <StarFilled className='favorite__btn__icon' />
+                       </button>)
+                }
                     <div className='profile__categories'>
                         { Object.keys(statTabs).map((category, i) => {
                             const isCurrentCategory = category === currentTab;
