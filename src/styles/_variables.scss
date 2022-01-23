@@ -14,6 +14,8 @@ $black: #1a2129;
 $lighter-grey: #edeff2;
 $light-grey: #e1e5eb;
 $grey: #7f848b;
+$red: #f76454;
+$green: #26d93c;
 
 // Dynamic colors
 // USE FOR COLOR DEFINITIONS
@@ -28,6 +30,9 @@ $color-light: $white;
 $neutral-lighter: $lighter-grey;
 $neutral-light: $light-grey;
 $neutral-dark: $grey;
+
+$color-negative: $red;
+$color-positive: $green;
 
 // Font
 $font-primary: 'Poppins', sans-serif;
