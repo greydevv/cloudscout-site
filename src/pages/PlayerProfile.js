@@ -8,7 +8,7 @@ import { ArrowUp, ArrowDown } from 'components/Icons'
 import './PlayerProfile.scss';
 
 function StatRow({ stat, value, classAvgStat, allAvgStat }) {
-    const nullify = (allAvgStat === null || allAvgStat === 0.0 || value === null);
+    const nullify = (allAvgStat === null || allAvgStat === 0 || value === null || value === 0);
     const isPositive = value > allAvgStat;
     const pct = (nullify) ? null : parseInt((100 * (value - allAvgStat)) / allAvgStat);
     const pctText = (pct === null || (pct < 1 && pct > 0)) ? '-' : `${Math.abs(parseInt(pct))}%`;
