@@ -62,7 +62,7 @@ export default function PlayerProfile() {
             <div className='profile'>
                 <div className='page__header'>
                     <h1 className='page__head'>{ `${json.meta.first.toUpperCase()} ${json.meta.last.toUpperCase()}` }</h1>
-                    <p className='p-body-sm'>{ json.meta.institution.toUpperCase() } • { json.meta.position }</p>
+                    <p className='p-body-sm'>{ json.meta.institution.toUpperCase() } { json.meta.position !== null && `• ${json.meta.position}`}</p>
                     <div className='profile__categories'>
                         { Object.keys(statTabs).map((category, i) => {
                             const isCurrentCategory = category === currentTab;
