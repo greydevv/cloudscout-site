@@ -101,14 +101,14 @@ export default function PlayerProfile() {
                 <div className='page__header'>
                     <h1 className='page__head'>{ `${json.meta.first.toUpperCase()} ${json.meta.last.toUpperCase()}` } </h1>
                     <p className='p-body-sm'>{ json.meta.institution.toUpperCase() } { json.meta.position !== null && `• ${json.meta.position}`} </p>
-                    {   isFavorited
-                    ? (<button className='favorite__btn-active' onClick={ () => onUnfavorite(json.pid) }>
-                           <StarFilled className='favorite__btn__icon-active' />
-                       </button>)
-                    : (<button className='favorite__btn' onClick={ () => onFavorite(json.pid) }>
-                           <StarFilled className='favorite__btn__icon' />
-                       </button>)
-                }
+                    {isFavorited
+                        ? (<button className='favorite__btn-active' onClick={ () => onUnfavorite(json.pid) }>
+                               <StarFilled className='favorite__btn__icon-active' />
+                           </button>)
+                        : (<button className='favorite__btn' onClick={ () => onFavorite(json.pid) }>
+                               <StarFilled className='favorite__btn__icon' />
+                           </button>)
+                    }
                     <div className='profile__categories'>
                         { Object.keys(statTabs).map((category, i) => {
                             const isCurrentCategory = category === currentTab;
