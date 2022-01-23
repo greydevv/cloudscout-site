@@ -13,10 +13,6 @@ function StatRow({ stat, value, classAvgStat, allAvgStat }) {
     const pct = (nullify) ? null : parseInt((100 * (value - allAvgStat)) / allAvgStat);
     const pctText = (pct === null || (pct < 1 && pct > 0)) ? '-' : `${Math.abs(parseInt(pct))}%`;
 
-    if (!isPositive && stat === 'punt_return_yds') {
-        console.log(pct);
-    }
-
     const getArrow = () => {
         return (isPositive ? <ArrowUp /> : <ArrowDown />);
     }
@@ -27,10 +23,10 @@ function StatRow({ stat, value, classAvgStat, allAvgStat }) {
                 <h4 className='stat__name my-auto'>{ prettifyText(stat).pretty }</h4>
             </td>
             <td className='stat__col'>
-                <p className='stat__metric__text'>{ value || '-' }</p>
+                <p className='stat__metric__text'>{ value === null ? '-' : value }</p>
             </td>
             <td className='stat__col'>
-                <p className='stat__metric__name p-body-sm'>All</p>
+                {/*<p className='stat__metric__name p-body-sm'>All</p>*/}
                 <div className={'stat__metric' + (nullify ? '' : (isPositive ? '-positive' : '-negative'))}>
                     { !nullify && getArrow() }
                     <p className='stat__metric__text'>{ pctText }</p>
@@ -42,8 +38,17 @@ function StatRow({ stat, value, classAvgStat, allAvgStat }) {
 
 export default function PlayerProfile() {
     const { pid } = useParams()
-    const { json: averageJson, isLoading: isAverageLoading } = useApi(`v1/analysis`)
     const { json, isLoading } = useApi(`v1/players/${pid}`);
+
+    const makePosition = (position) => {
+        if (position === null) {
+            return '';
+        }
+        return `?position=${position}`;
+    }
+
+    const position = isLoading ? '' : json.meta.position;
+    const { json: averageJson, isLoading: isAverageLoading } = useApi(`v1/analysis${makePosition(position)}`, true, false);
     const [currentTab, setCurrentTab] = useState('general');
 
     const changeCurrentTab = (category) => {
@@ -88,7 +93,7 @@ export default function PlayerProfile() {
                                         key={ i } 
                                         stat={ stat } 
                                         value={ value } 
-                                        allAvgStat={ averageJson[currentTab][0][stat] } 
+                                        allAvgStat={ averageJson[currentTab][stat] } 
                                     />
                                 );
                             })}

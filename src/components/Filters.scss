@@ -1,3 +1,5 @@
+@import 'styles/cloudscout';
+
 .filters {
     display: flex;
     flex-direction: row;
@@ -6,4 +8,91 @@
 
 .filter-headers {
     display: inline-block;
+}
+
+@mixin dropdown-text {
+    font-family: $font-primary !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: $neutral-dark !important;
+}
+
+.dropdown {
+    &__control {
+        background-color: $neutral-light !important;
+        border: 2px solid $neutral-light !important;
+        outline: none !important;
+
+        &--is-focused {
+            outline: none !important;
+            border-color: $color-primary !important;
+        }
+    }
+    &__menu {
+        background-color: $color-light !important;
+        outline: none !important;
+        border: none !important;
+        box-shadow: 0 5px 8px #{$color-dark}50 !important;
+        margin-top: 1rem;
+        overflow: clip;
+
+        &-list {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    }
+
+    &__multi {
+        &-value {
+            background-color: $neutral-dark !important;
+
+            &__label {
+                @include dropdown-text;
+                color: $color-light !important;
+            }
+
+            &__remove {
+                color: $color-light !important;
+
+                &:hover {
+                    color: $color-negative !important;
+                    background-color: $neutral-dark !important;
+                }
+            }
+        }
+    }
+
+    &__option {
+        @include dropdown-text;
+        background-color: transparent !important;
+
+        &:hover {
+            background-color: $neutral-lighter !important;
+        }
+    }
+
+    &__indicator {
+        color: $neutral-dark !important;
+
+        &:hover {
+            color: $color-dark !important;
+        }
+    }
+
+    &__clear-indicator {
+        color: $neutral-dark !important;
+
+        &:hover {
+            color: $color-negative !important;
+        }
+    }
+
+
+    &__placeholder {
+        @include dropdown-text;
+    }
+
+    &__group {
+        background-color: $color-primary !important;
+    }
 }
