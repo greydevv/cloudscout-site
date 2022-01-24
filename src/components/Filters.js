@@ -38,7 +38,7 @@ export function FilterSection({ children, onChange }) {
     );
 }
 
-export default function Filters({ onFilterChange, defaultFilters }) {
+export default function Filters({ onFilterChange, onFilterClear, defaultFilters, showClear }) {
     return (
         <FilterSection>
             <Dropdown 
@@ -62,6 +62,9 @@ export default function Filters({ onFilterChange, defaultFilters }) {
                 name='position' 
                 options={ filterOptions.positions } 
             />
+            {showClear &&
+                <button className='filters__clear' onClick={ onFilterClear }>Clear</button>
+            }
         </FilterSection>
     );
 }

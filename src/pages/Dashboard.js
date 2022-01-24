@@ -90,6 +90,11 @@ export default function Dashboard() {
         setJsonBody(copyObj(userJson));
     }
 
+    const onFilterClear = () => {
+        setOpts({});
+        setFilters({division: [], class: [], position: []})
+    }
+
     if (isUserLoading) {
         return (<SpinnerView />);
     }
@@ -100,7 +105,7 @@ export default function Dashboard() {
                 <h1 className='page__head mb-md'>Dashboard</h1>
                 <SearchBar handleSearch={ onSearch } />
                 <div className='my-md'>
-                    <Filters onFilterChange={ onFilterChange } defaultFilters={ filters } />
+                    <Filters onFilterChange={ onFilterChange } onFilterClear={ onFilterClear } defaultFilters={ filters } showClear />
                 </div>
             </div>
             <PlayerTable onFavorite={ onFavorite } onUnfavorite={ onUnfavorite } favorites={ userState.favorites } players={ isPlayersLoading ? [] : playersJson.map(BasePlayer.fromJson) } isLoading={ isPlayersLoading } />

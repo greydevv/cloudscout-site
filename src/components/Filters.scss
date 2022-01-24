@@ -4,6 +4,12 @@
     display: flex;
     flex-direction: row;
     gap: 15px;
+
+    &__clear {
+        @include plain-btn;
+        color: $color-negative;
+        font-weight: 500;
+    }
 }
 
 .filter-headers {
