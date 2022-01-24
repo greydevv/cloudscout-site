@@ -6,7 +6,7 @@
     &__categories {
         width: 100%;
         border-bottom: 2px solid $neutral-light; 
-        margin-top: 2rem;
+        margin-top: 1rem;
         display: flex;
         flex-direction: row;
 
@@ -38,6 +38,14 @@
     &__statistics {
         &__container {
             text-align: right;
+
+            &-nodata {
+                margin-top: 1rem;
+
+                &__text {
+                    color: $color-negative;
+                }
+            }
         }
 
         &__stat {
@@ -83,6 +91,7 @@
 
         &__text {
             @include margin-y-auto;
+            text-align: center;
             font-size: 13px;
             font-weight: 500;
         }
