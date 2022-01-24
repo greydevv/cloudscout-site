@@ -4,6 +4,12 @@
     display: flex;
     flex-direction: row;
     gap: 15px;
+
+    &__clear {
+        @include plain-btn;
+        color: $color-negative;
+        font-weight: 500;
+    }
 }
 
 .filter-headers {
@@ -14,7 +20,7 @@
     font-family: $font-primary !important;
     font-size: 14px !important;
     font-weight: 500 !important;
-    color: $neutral-dark !important;
+    color: $color-dark !important;
 }
 
 .dropdown {
@@ -44,7 +50,7 @@
 
     &__multi {
         &-value {
-            background-color: $neutral-dark !important;
+            background-color: $color-dark !important;
 
             &__label {
                 @include dropdown-text;
@@ -56,7 +62,7 @@
 
                 &:hover {
                     color: $color-negative !important;
-                    background-color: $neutral-dark !important;
+                    background-color: $color-dark !important;
                 }
             }
         }
@@ -76,6 +82,10 @@
 
         &:hover {
             color: $color-dark !important;
+        }
+
+        &-separator {
+            display: none !important;
         }
     }
 
