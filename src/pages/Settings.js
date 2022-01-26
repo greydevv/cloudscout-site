@@ -86,43 +86,39 @@ export default function Settings() {
             </div>
             { isUserLoading
                 ? <SpinnerView />
-                : (
-                    <>
-                        <div className='settings__form__container'>
-                            <form className='settings__form' onSubmit={ saveUserSettings }>
-                                {/*<SettingsField 
-                                    labelText='First' 
-                                    name='first'
-                                    defaultValue={ userState.first }
-                                    onChange={ handleInputChange }
-                                />
-                                <SettingsField 
-                                    labelText='Last' 
-                                    name='last'
-                                    defaultValue={ userState.last }
-                                    onChange={ handleInputChange }
-                                />
-                                <SettingsField 
-                                    labelText='Institution' 
-                                    name='institution'
-                                    defaultValue= { userState.institution }
-                                    onChange={ handleInputChange }
-                                />*/}
-                                <div className='settings__form__section'>
-                                    <h5 className='p-body-sm'>Default Filters</h5>
-                                    <Filters 
-                                        onFilterChange={ onFilterChange } 
-                                        onFilterClear = { onFilterClear }
-                                        defaultFilters={ userState.defaultFilters } 
-                                    />
-                                </div>
-                                <div className='settings__form__section-submit'>
-                                    <Button type='submit'>Save</Button>
-                                </div>
-                            </form>
-                        </div>
-                    </>
-                )
+                : <div className='settings__form__container'>
+                      <form className='settings__form' onSubmit={ saveUserSettings }>
+                          {/*<SettingsField 
+                              labelText='First' 
+                              name='first'
+                              defaultValue={ userState.first }
+                              onChange={ handleInputChange }
+                          />
+                          <SettingsField 
+                              labelText='Last' 
+                              name='last'
+                              defaultValue={ userState.last }
+                              onChange={ handleInputChange }
+                          />
+                          <SettingsField 
+                              labelText='Institution' 
+                              name='institution'
+                              defaultValue= { userState.institution }
+                              onChange={ handleInputChange }
+                          />*/}
+                          <div className='settings__form__section'>
+                              <h5 className='p-body-sm'>Default Filters</h5>
+                              <Filters 
+                                  onFilterChange={ onFilterChange } 
+                                  onFilterClear = { onFilterClear }
+                                  defaultFilters={ userState.defaultFilters } 
+                              />
+                          </div>
+                          <div className='settings__form__section-submit'>
+                              <Button type='submit'>Save</Button>
+                          </div>
+                    </form>
+                </div>
             }
         </div>
     );
