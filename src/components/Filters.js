@@ -3,12 +3,16 @@ import Select from 'react-select';
 import { filterOptions } from 'Const';
 import './Filters.scss';
 
-export function Dropdown({ placeholder, name, defaults, onChange, options, ...rest }) {
+export function Dropdown({ placeholder, name, defaults, onChange, options, isMulti, ...rest }) {
     const onChangeWrapper = (filters) => {
-        const values = filters.map(({value}) => {
-            return value;
-        });
-        onChange(name, values);
+        if (isMulti) {
+            const values = filters.map(({value}) => {
+                return value;
+            });
+            onChange(name, values);
+        } else {
+            onChange(filters.value);
+        }
     }
 
     const getMappedDefaults = () => {
@@ -24,7 +28,7 @@ export function Dropdown({ placeholder, name, defaults, onChange, options, ...re
             placeholder={ placeholder } 
             options={ options }
             classNamePrefix='dropdown'
-            isMulti
+            isMulti={ isMulti }
             { ...rest }
         />
     );
@@ -69,6 +73,7 @@ export default function Filters({ onFilterChange, onFilterClear, defaultFilters,
                 placeholder='Division' 
                 name='divisions' 
                 options={ filterOptions.divisions } 
+                isMulti
             />
             <Dropdown 
                 onChange={ onFilterChangeWrapper } 
@@ -76,6 +81,7 @@ export default function Filters({ onFilterChange, onFilterClear, defaultFilters,
                 placeholder='Class' 
                 name='classes' 
                 options={ filterOptions.classes } 
+                isMulti
             />
             <Dropdown 
                 onChange={ onFilterChangeWrapper } 
@@ -83,6 +89,7 @@ export default function Filters({ onFilterChange, onFilterClear, defaultFilters,
                 placeholder='Position' 
                 name='positions' 
                 options={ filterOptions.positions } 
+                isMulti
             />
             <button 
                 type='button'
