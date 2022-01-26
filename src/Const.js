@@ -36,3 +36,8 @@ export const filterOptions = {
     ]
 };
 
+export const sportOptions = [
+    {value: "football", label: "Football"},
+    {value: "baseball", label: "Baseball"},
+    {value: "soccer", label: "Soccer"},
+]

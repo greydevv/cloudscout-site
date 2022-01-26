@@ -2,10 +2,11 @@ import { useState, useEffect, useCallback } from 'react';
 import { useUserContext } from 'UserContext';
 import { useApi, usePut } from 'api/api';
 import { SpinnerView } from 'components/Spinner';
-import Filters from 'components/Filters'
+import Filters, { Dropdown } from 'components/Filters'
 import { Button } from 'components/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 import { copyObj } from 'util/utils';
+import { sportOptions } from 'Const';
 import './Settings.scss';
 
 function SettingsField({ labelText, ...rest }) {
@@ -112,6 +113,16 @@ export default function Settings() {
                                   onFilterChange={ onFilterChange } 
                                   onFilterClear = { onFilterClear }
                                   defaultFilters={ userState.defaultFilters } 
+                              />
+                          </div>
+                          <div className='settings__form__section'>
+                              <h5 className='p-body-sm'>Sport</h5>
+                              <Dropdown
+                                  placeholder='Sport'
+                                  name='sport'
+                                  defaults={[]}
+                                  onChange={ (value) => console.log('changed sport to', value) }
+                                  options={ sportOptions }
                               />
                           </div>
                           <div className='settings__form__section-submit'>
