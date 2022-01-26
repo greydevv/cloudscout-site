@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import Select from 'react-select';
 import { filterOptions } from 'Const';
 import './Filters.scss';
@@ -39,32 +39,58 @@ export function FilterSection({ children, onChange }) {
 }
 
 export default function Filters({ onFilterChange, onFilterClear, defaultFilters, showClear }) {
+    const [filters, setFilters] = useState(defaultFilters);
+
+    const onFilterChangeWrapper = (name, newValues) => {
+        setFilters({
+            ...filters,
+            [name]: newValues,
+        });
+        onFilterChange(name, newValues);
+    }
+
+    const onFilterClearWrapper = () => {
+        let clearedFilters = Object.fromEntries(
+            Object.entries(defaultFilters).map(([key]) => [key, []])
+        );
+        setFilters(clearedFilters);
+        onFilterClear();
+    }
+
+    useEffect(() => {
+        setFilters(defaultFilters);
+    }, [defaultFilters]);
+
     return (
         <FilterSection>
             <Dropdown 
-                onChange={ onFilterChange } 
-                defaults={ defaultFilters.division }
+                onChange={ onFilterChangeWrapper } 
+                defaults={ filters.divisions }
                 placeholder='Division' 
-                name='division' 
+                name='divisions' 
                 options={ filterOptions.divisions } 
             />
             <Dropdown 
-                onChange={ onFilterChange } 
-                defaults={ defaultFilters.class }
+                onChange={ onFilterChangeWrapper } 
+                defaults={ filters.classes }
                 placeholder='Class' 
-                name='class' 
+                name='classes' 
                 options={ filterOptions.classes } 
             />
             <Dropdown 
-                onChange={ onFilterChange } 
-                defaults={ defaultFilters.position }
+                onChange={ onFilterChangeWrapper } 
+                defaults={ filters.positions }
                 placeholder='Position' 
-                name='position' 
+                name='positions' 
                 options={ filterOptions.positions } 
             />
-            {showClear &&
-                <button className='filters__clear' onClick={ onFilterClear }>Clear</button>
-            }
+            <button 
+                type='button'
+                className='filters__clear px-sm' 
+                onClick={ onFilterClearWrapper }
+            >
+                Clear
+            </button>
         </FilterSection>
     );
 }

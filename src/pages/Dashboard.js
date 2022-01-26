@@ -18,7 +18,7 @@ export default function Dashboard() {
     const [ opts, setOpts ] = useState({});
     const [ userState, setUserState ] = useState({favorites: []})
     const [ jsonBody, setJsonBody ] = useState({});
-    const [ filters, setFilters ] = useState({division: [], class: [], position: []});
+    const [ filters, setFilters ] = useState({divisions: [], classes: [], positions: []});
     const { json: userJson, isLoading: isUserLoading } = useApi(`/v1/users/${userId}`);
     const { json: putJson, isLoading: isPutLoading } = usePut(`/v1/users/${userId}`, jsonBody);
     const { json: playersJson, isLoading: isPlayersLoading } = useApi(url, true, false);
@@ -42,11 +42,7 @@ export default function Dashboard() {
                 favorites: userJson.account.favorites
             });
             setJsonBody(copyObj(userJson));
-            setFilters({
-                division: userJson.account.default_filters.division,
-                class: userJson.account.default_filters.class,
-                position: userJson.account.default_filters.position,
-            });
+            setFilters(userJson.account.default_filters);
         }
     }, [isUserLoading]);
 
@@ -59,7 +55,6 @@ export default function Dashboard() {
     }, []);
 
     const onFilterChange = (name, values) => {
-        console.log(values);
         let newOpts = {
             ...opts,
             [name]: values.join(',')
@@ -69,6 +64,11 @@ export default function Dashboard() {
             ...filters,
             [name]: values,
         });
+    }
+
+    const onFilterClear = () => {
+        setOpts({});
+        setFilters({divisions: [], classes: [], positions: []})
     }
 
     const onFavorite = (pid) => {
@@ -90,11 +90,6 @@ export default function Dashboard() {
         setJsonBody(copyObj(userJson));
     }
 
-    const onFilterClear = () => {
-        setOpts({});
-        setFilters({division: [], class: [], position: []})
-    }
-
     if (isUserLoading) {
         return (<SpinnerView />);
     }
@@ -105,10 +100,21 @@ export default function Dashboard() {
                 <h1 className='page__head mb-md'>Dashboard</h1>
                 <SearchBar handleSearch={ onSearch } />
                 <div className='my-md'>
-                    <Filters onFilterChange={ onFilterChange } onFilterClear={ onFilterClear } defaultFilters={ filters } showClear />
+                    {/*<Filters onFilterChange={ onFilterChange } onFilterClear={ onFilterClear } defaultFilters={ filters } showClear />*/}
+                    <Filters
+                        onFilterChange={ onFilterChange }
+                        onFilterClear={ onFilterClear }
+                        defaultFilters={ userJson.account.default_filters }
+                    />
                 </div>
             </div>
-            <PlayerTable onFavorite={ onFavorite } onUnfavorite={ onUnfavorite } favorites={ userState.favorites } players={ isPlayersLoading ? [] : playersJson.map(BasePlayer.fromJson) } isLoading={ isPlayersLoading } />
+            <PlayerTable 
+                onFavorite={ onFavorite } 
+                onUnfavorite={ onUnfavorite } 
+                favorites={ userState.favorites } 
+                players={ isPlayersLoading ? [] : playersJson.map(BasePlayer.fromJson) } 
+                isLoading={ isPlayersLoading } 
+            />
         </div>
     );
 }

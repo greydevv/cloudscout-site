@@ -26,7 +26,7 @@ export default function Settings() {
     const [ jsonBody, setJsonBody ] = useState({});
     const [userState, setUserState] = useState({
         first: '', last: '', institution: '', 
-        defaultFilters: {division: [], class: [], position: []}
+        defaultFilters: {divisions: [], classes: [], positions: []}
     });
     const { json: userJson, isLoading: isUserLoading } = useApi(`/v1/users/${userId}`);
     const { json: putJson, isLoading: isPutLoading } = usePut(`/v1/users/${userId}`, jsonBody);
@@ -37,17 +37,14 @@ export default function Settings() {
                 first: userJson.meta.first,
                 last: userJson.meta.last,
                 institution: userJson.meta.institution,
-                defaultFilters: {
-                    division: userJson.account.default_filters.division,
-                    class: userJson.account.default_filters.class,
-                    position: userJson.account.default_filters.position
-                }
+                defaultFilters: userJson.account.default_filters
             });
             setJsonBody(copyObj(userJson));
         }
     }, [isUserLoading]);
 
     const saveUserSettings = (e) => {
+        console.log('saving settings');
         userJson.meta.first = userState.first;
         userJson.meta.last = userState.last;
         userJson.meta.institution = userState.institution;
@@ -75,20 +72,25 @@ export default function Settings() {
         });
     };
 
+    const onFilterClear = () => {
+        setUserState({
+            ...userState,
+            defaultFilters: {divisions: [], classes: [], positions: []}
+        })
+    }
+
     return (
         <div className='settings'>
             <div className='page__header mb-md'>
                 <h1 className='page__head'>Settings</h1>
             </div>
             { isUserLoading
-                ? (
-                    <SpinnerView />
-                )
+                ? <SpinnerView />
                 : (
                     <>
                         <div className='settings__form__container'>
                             <form className='settings__form' onSubmit={ saveUserSettings }>
-                                <SettingsField 
+                                {/*<SettingsField 
                                     labelText='First' 
                                     name='first'
                                     defaultValue={ userState.first }
@@ -105,13 +107,17 @@ export default function Settings() {
                                     name='institution'
                                     defaultValue= { userState.institution }
                                     onChange={ handleInputChange }
-                                />
-                                <div>
+                                />*/}
+                                <div className='settings__form__section'>
                                     <h5 className='p-body-sm'>Default Filters</h5>
-                                    <Filters onFilterChange={ onFilterChange } defaultFilters={ userState.defaultFilters } />
+                                    <Filters 
+                                        onFilterChange={ onFilterChange } 
+                                        onFilterClear = { onFilterClear }
+                                        defaultFilters={ userState.defaultFilters } 
+                                    />
                                 </div>
-                                <div className='mt-xxl'>
-                                <Button type='submit'>Save</Button>
+                                <div className='settings__form__section-submit'>
+                                    <Button type='submit'>Save</Button>
                                 </div>
                             </form>
                         </div>
