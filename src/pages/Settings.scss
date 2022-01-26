@@ -4,6 +4,14 @@
     @include app-page-scrollable;
 
     &__form {
+        &__section {
+            margin-top: 2rem;
+
+            &-submit {
+                margin-top: 4rem;
+            }
+        }
+
         &__wrapper {
             width: 100%;
         }
