@@ -7,59 +7,53 @@ import Filters, { FilterSection, Dropdown } from 'components/Filters'
 import { SpinnerView } from 'components/Spinner';
 import { useUserContext } from 'UserContext';
 import { useApi, usePut }  from 'api/api.js';
+import { useRest } from 'api/useRest';
 import { filterOptions } from 'Const';
 import { copyObj } from 'util/utils';
 import './Dashboard.scss';
 
 export default function Dashboard() {
     const userId = useUserContext();
-    const BASE_ENDPOINT = 'v1/players?limit=50';
-    const [ url, setUrl ] = useState(BASE_ENDPOINT);
-    const [ opts, setOpts ] = useState({});
     const [ userState, setUserState ] = useState({favorites: []})
     const [ jsonBody, setJsonBody ] = useState({});
     const [ filters, setFilters ] = useState({divisions: [], classes: [], positions: []});
+    const [ params, setParams ] = useState({limit: 50, ...filters});
     const { json: userJson, isLoading: isUserLoading } = useApi(`/v1/users/${userId}`);
     const { json: putJson, isLoading: isPutLoading } = usePut(`/v1/users/${userId}`, jsonBody);
-    const { json: playersJson, isLoading: isPlayersLoading } = useApi(url, true, false);
-
-    useEffect(() => {
-        let newEndpoint = BASE_ENDPOINT;
-        Object.entries(opts).forEach(([param,val]) => {
-            newEndpoint += `&${param}=${val}`;
-        });
-        setUrl(newEndpoint);
-    }, [opts]);
+    const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, {}, false);
 
     useEffect(() => {
         if (!isUserLoading) {
-            let newOpts = {
-                ...opts,
-                ...userJson.account.default_filters
-            }
-            setOpts(newOpts);
+            let defaultFilters = userJson.account.default_filters;
+            let newParams = Object.fromEntries(Object.entries(defaultFilters).map(([key, val]) => {
+                return [key, val.join(',')];
+            }))
+            setParams({
+                ...params,
+                ...newParams,
+            });
             setUserState({
                 favorites: userJson.account.favorites
             });
+
             setJsonBody(copyObj(userJson));
             setFilters(userJson.account.default_filters);
         }
     }, [isUserLoading]);
 
     const onSearch = useCallback((query) => {
-        let newOpts = {
-            'q': query,
-            ...opts
-        }
-        setOpts(newOpts);
+        setParams({
+            ...params,
+            q: query
+        });
     }, []);
 
     const onFilterChange = (name, values) => {
-        let newOpts = {
-            ...opts,
+        setParams({
+            ...params,
             [name]: values.join(',')
-        }
-        setOpts(newOpts);
+        });
+
         setFilters({
             ...filters,
             [name]: values,
@@ -67,8 +61,11 @@ export default function Dashboard() {
     }
 
     const onFilterClear = () => {
-        setOpts({});
-        setFilters({divisions: [], classes: [], positions: []})
+        setFilters({
+            divisions: [],
+            classes: [],
+            positions: []
+        });
     }
 
     const onFavorite = (pid) => {
