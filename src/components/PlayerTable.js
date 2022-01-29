@@ -28,7 +28,7 @@ function TableBody({ players, favorites, isLoading, onFavorite, onUnfavorite }) 
         return <SpinnerView />
     }
 
-    if (players.length === 0) {
+    if (players.length === 0 && !isLoading) {
         return (
             <div className='table__content-nodata'>
                 <p className='table__content-nodata__text'>No data to display.</p>
@@ -89,8 +89,8 @@ export default function PlayerTable({ players, isLoading, favorites, onFavorite,
             <TableHeader />
             <div className={'table__content__container' + (isLoading || players.length === 0 ? '-nodata' : '')}>
                 <TableBody 
-                    players={ players } 
                     isLoading={ isLoading }
+                    players={ players } 
                     favorites={ favorites }
                     onFavorite={ onFavorite }
                     onUnfavorite={ onUnfavorite }
