@@ -16,7 +16,7 @@ export default function Dashboard() {
     const userId = useUserContext();
     const [ favoritePids, setFavoritePids ] = useState([]);
     const [ params, setParams ] = useState({limit: 50});
-    const { json: userJson, isLoading: isUserLoading } = useApi(`/v1/users/${userId}`);
+    const { json: userJson, isLoading: isUserLoading } = useRest({url: `/v1/users/${userId}`});
     const { refresh: refreshPut } = usePut(`/v1/users/${userId}`);
     const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, {}, false);
     const putOk = useRef(false);
