@@ -77,18 +77,18 @@ export default function Filters({ onFilterChange, onFilterClear, defaultFilters,
             />
             <Dropdown 
                 onChange={ onFilterChangeWrapper } 
-                defaults={ filters.classes }
-                placeholder='Class' 
-                name='classes' 
-                options={ filterOptions.classes } 
-                isMulti
-            />
-            <Dropdown 
-                onChange={ onFilterChangeWrapper } 
                 defaults={ filters.positions }
                 placeholder='Position' 
                 name='positions' 
                 options={ filterOptions.positions } 
+                isMulti
+            />
+            <Dropdown 
+                onChange={ onFilterChangeWrapper } 
+                defaults={ filters.classes }
+                placeholder='Class' 
+                name='classes' 
+                options={ filterOptions.classes } 
                 isMulti
             />
             <button 
