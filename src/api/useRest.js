@@ -1,31 +1,68 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const restApi = axios.create({baseURL: 'https://cloudscout-rest.herokuapp.com/'});
 
-export const usePut = (url, body, enabled=true) => {
-    const config = {
-        method: 'PUT',
-        url: url,
-        data: body,
-        headers: {'Content-Type': 'Application/JSON'}
-    };
-    return useRest(config, enabled);
-}
-
-export const useGet = (url, enabled=true) => {
-    const config = {
-        method: 'GET',
-        url: url,
-    }
-    return useRest(config, enabled);
-}
-
-export const useRest = (config, enabled=true, defaultJson={}, enabledOnFirstRender=true) => {
+export const usePut = (url) => {
     const { getAccessTokenSilently } = useAuth0();
-    const [response, setResponse] = useState({json: defaultJson, code: 200, isLoading: enabled});
+    const [refreshIndex, setRefreshIndex] = useState(0);
     const [firstRender, setFirstRender] = useState(true);
+    const [json, setJson] = useState({});
+    const [code, setCode] = useState(200);
+    const [isLoading, setIsLoading] = useState(false);
+    const [body, setBody] = useState({});
+
+    const refresh = (body) => {
+        setBody(body);
+        setRefreshIndex(refreshIndex + 1);
+    }
+
+    useEffect(() => {
+        if (firstRender) {
+            setFirstRender(false);
+            return;
+        }
+
+        setIsLoading(true);
+        const makePutReq = async () => {
+            const accessToken = await getAccessTokenSilently({
+                audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+                scope: 'read:players'
+            });
+
+            const apiResponse = await restApi.request({
+                url: url,
+                method: 'PUT',
+                data: body,
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'Application/JSON'
+                }
+            });
+            setJson(await apiResponse.data);
+            setCode(apiResponse.status);
+            setIsLoading(false);
+        }
+        makePutReq();
+    }, [refreshIndex]);
+
+    return { json: json, code: code, isLoading: isLoading, refresh: refresh }
+}
+
+export const useRest = (config, isEnabled=true, defaultJson={}, enabledOnFirstRender=true) => {
+    const { getAccessTokenSilently } = useAuth0();
+    const [enabled, setEnabled] = useState(isEnabled);
+    const [refreshIndex, setRefreshIndex] = useState(0);
+    const [json, setJson] = useState(defaultJson);
+    const [code, setCode] = useState(200);
+    const [isLoading, setIsLoading] = useState(enabled); // not loading when not enabled
+    const [firstRender, setFirstRender] = useState(true);
+
+    const refresh = () => {
+        setEnabled(true);
+        setRefreshIndex(refreshIndex + 1);
+    }
 
     useEffect(() => {
         if (firstRender && !enabledOnFirstRender) {
@@ -35,6 +72,7 @@ export const useRest = (config, enabled=true, defaultJson={}, enabledOnFirstRend
         if (!enabled) {
             return;
         }
+        setIsLoading(true);
         const makeHttpReq = async () => {
             const accessToken = await getAccessTokenSilently({
                 audience: process.env.REACT_APP_AUTH0_AUDIENCE,
@@ -44,19 +82,23 @@ export const useRest = (config, enabled=true, defaultJson={}, enabledOnFirstRend
                 ...config, 
                 headers: {
                     ...config.headers, 
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'Application/JSON'
                 }
             });
-            setResponse({ 
-                json: await apiResponse.data,
-                code: apiResponse.status,
-                isLoading: false
-            });
+            setJson(await apiResponse.data);
+            setCode(apiResponse.status);
+            setIsLoading(false);
         }
         makeHttpReq();
-    }, [config.url, config.params, enabled]);
+    }, [config.url, config.params, enabled, refreshIndex]);
 
-    return response;
+    return {
+        json: json,
+        code: code,
+        isLoading: isLoading,
+        refreshCall: refresh,
+    };
 }
 
 export const useHttpReq = () => {

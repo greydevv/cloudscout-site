@@ -39,7 +39,7 @@ export default class SearchBar extends React.Component
                     onKeyDown={ this.updateSearchQuery }
                     onChange={ this.updateSearchQuery }
                     name='s'
-                    onSubmit={ this.search }
+                    onSubmit={ this.handleSearch }
                 />
             </div>
         );
