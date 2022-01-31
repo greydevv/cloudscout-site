@@ -5,6 +5,14 @@
     max-width: 1600px;
 }
 
+@mixin app-page-non-scrollable {
+    @include app-page;
+    max-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
 @mixin app-page-scrollable {
     @include app-page;
     max-height: 100vh;

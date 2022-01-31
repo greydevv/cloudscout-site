@@ -1,5 +1,5 @@
 @import 'styles/cloudscout';
 
 .favorites {
-    @include app-page-scrollable;
+    @include app-page-non-scrollable;
 }
