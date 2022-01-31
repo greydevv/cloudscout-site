@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PlayerTable from '../components/PlayerTable';
-import BasePlayer from '../models/Player';
-import { useApi, usePut }  from 'api/api';
+import { useRest, usePut } from 'api/useRest';
 import { useUserContext } from 'UserContext';
 import { copyObj } from 'util/utils';
 import { SpinnerView } from 'components/Spinner';
@@ -9,40 +8,48 @@ import './Favorites.scss';
 
 export default function Favorites() {
     const userId = useUserContext();
-    const [ userState, setUserState ] = useState({favorites: []})
-    const [ initialPids, setInitialPids ] = useState([])
-    const [ jsonBody, setJsonBody ] = useState({});
-    const { json: userJson, isLoading: isUserLoading } = useApi(`v1/users/${userId}`);
-    const { json: playersJson, isLoading: isPlayersLoading } = useApi(`v1/players?pids=${initialPids.join(',') || 'none'}`, true, false);
-    const { json: putJson, isLoading: isPutLoading } = usePut(`/v1/users/${userId}`, jsonBody)
+    const [ favoritePids, setFavoritePids ] = useState([]);
+    const [ params, setParams ] = useState({limit: 50});
+    const { json: userJson, isLoading: isUserLoading } = useRest({url: `v1/users/${userId}`});
+    const { refresh: refreshPut } = usePut(`/v1/users/${userId}`);
+    const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, [], false);
+    const putOk = useRef(false);
 
     useEffect(() => {
-        if (!isUserLoading) {
-            setUserState({
-                favorites: userJson.account.favorites
-            });
-            setInitialPids(userJson.account.favorites);
-            setJsonBody(copyObj(userJson));
+        if (!putOk.current) {
+            return;
         }
+        refreshPut({
+            ...userJson,
+            account: {
+                ...userJson.account,
+                favorites: favoritePids
+            }
+        });
+    }, [favoritePids]);
+
+    useEffect(() => {
+        if (isUserLoading) {
+            return;
+        }
+        console.log(userJson.account.favorites);
+        if (userJson.account.favorites.length > 0) {
+            setParams({
+                ...params,
+                pids: userJson.account.favorites.join(',')
+            });
+        }
+        setFavoritePids(userJson.account.favorites);
     }, [isUserLoading]);
 
     const onFavorite = (pid) => {
-        userJson.account.favorites = [...userJson.account.favorites, pid];
-        setUserState({favorites: [...userJson.account.favorites]})
-        setJsonBody(copyObj(userJson));
+        putOk.current = true;
+        setFavoritePids([...favoritePids, pid]);
     }
 
     const onUnfavorite = (pid) => {
-        let newFavorites = jsonBody.account.favorites;
-        for (var i = newFavorites.length - 1; i >= 0; i--) {
-            if (newFavorites[i] === pid) {
-                newFavorites.splice(i, 1);
-                break;
-            }
-        }
-        userJson.account.favorites = newFavorites;
-        setUserState({favorites: newFavorites})
-        setJsonBody(copyObj(userJson));
+        putOk.current = true;
+        setFavoritePids(favoritePids.filter(fav => fav != pid));
     }
 
     if (isUserLoading) {
@@ -57,9 +64,9 @@ export default function Favorites() {
             <PlayerTable 
                 onFavorite={ onFavorite }
                 onUnfavorite={ onUnfavorite } 
-                favorites={ userState.favorites } 
-                players={ initialPids.length === 0 ? [] : (isPlayersLoading ? [] : playersJson.map(BasePlayer.fromJson)) } 
-                isLoading={ initialPids.length !== 0 && isPlayersLoading } 
+                favorites={ favoritePids } 
+                players={ playersJson } 
+                isLoading={ favoritePids.length !== 0 && isPlayersLoading } 
             />
         </div>
     );

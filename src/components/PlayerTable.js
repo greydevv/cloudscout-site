@@ -2,6 +2,8 @@ import { SpinnerView } from 'components/Spinner';
 import './PlayerTable.scss';
 import { NavLink } from 'react-router-dom';
 import { StarFilled } from 'components/Icons';
+import { formatDate, getFullName, classNumToString } from 'util/text';
+import { useRest, usePut } from 'api/useRest';
 
 function TableHeader() {
     return (
@@ -71,14 +73,14 @@ function TableRow({ player, isFavorited, onUnfavorite, onFavorite }) {
             </td>
             <td className='p-body-sm'>
                 <NavLink className='table__link' to={`/app/player/${player.pid}`}>
-                    { player.getFullName() }
+                    { getFullName(player.meta.first, player.meta.last) }
                 </NavLink>
             </td>
-            <td className='p-body-sm te-lg'>{ player.institution }</td>
-            <td className='p-body-sm te-sm'>{ player.division }</td>
-            <td className='p-body-sm te-sm'>{ player.position }</td>
-            <td className='p-body-sm te-sm'>{ player.schoolClass }</td>
-            <td className='p-body-sm te-right te-grey'>{ player.getFormattedDate() }</td>
+            <td className='p-body-sm te-lg'>{ player.meta.institution }</td>
+            <td className='p-body-sm te-sm'>{ player.meta.division }</td>
+            <td className='p-body-sm te-sm'>{ player.meta.position || '-' }</td>
+            <td className='p-body-sm te-sm'>{ classNumToString(player.meta.class) || '-' }</td>
+            <td className='p-body-sm te-right te-grey'>{ formatDate(player.meta.date) }</td>
         </tr>
     );
 }

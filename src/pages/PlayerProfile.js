@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useApi, usePut }  from 'api/api.js';
-import BasePlayer from 'models/Player';
 import { SpinnerView } from 'components/Spinner';
-import prettifyText from 'util/TextHelper';
+import { prettifyText } from 'util/text';
 import { ArrowUp, ArrowDown } from 'components/Icons'
 import './PlayerProfile.scss';
 import { StarFilled } from 'components/Icons';

@@ -1,8 +1,6 @@
-import React from 'react';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import SearchBar from '../components/SearchBar';
 import PlayerTable from '../components/PlayerTable';
-import BasePlayer from '../models/Player';
 import Filters, { FilterSection, Dropdown } from 'components/Filters'
 import { SpinnerView } from 'components/Spinner';
 import { useUserContext } from 'UserContext';
@@ -18,7 +16,7 @@ export default function Dashboard() {
     const [ params, setParams ] = useState({limit: 50});
     const { json: userJson, isLoading: isUserLoading } = useRest({url: `/v1/users/${userId}`});
     const { refresh: refreshPut } = usePut(`/v1/users/${userId}`);
-    const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, {}, false);
+    const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, [], false);
     const putOk = useRef(false);
 
     useEffect(() => {
@@ -108,7 +106,7 @@ export default function Dashboard() {
                 onFavorite={ onFavorite } 
                 onUnfavorite={ onUnfavorite } 
                 favorites={ favoritePids } 
-                players={ isPlayersLoading ? [] : playersJson.map(BasePlayer.fromJson) } 
+                players={ playersJson } 
                 isLoading={ isPlayersLoading } 
             />
         </div>
