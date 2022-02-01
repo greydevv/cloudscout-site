@@ -35,9 +35,13 @@ export function getFullName(first, last) {
 export function formatDate(timestamp) {
     const dtFormat = new Intl.DateTimeFormat('en-US', {
         dateStyle: 'short',
-        timeZone: 'EST'
+        timeZone: 'UTC'
     });
     let dateObj = dtFormat.format(new Date(timestamp * 1000))
 
     return dateObj;
+}
+
+export function isInteger(string) {
+    return /^-?[0-9]+$/.test(string);
 }
