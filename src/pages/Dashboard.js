@@ -120,15 +120,17 @@ export default function Dashboard() {
                         onFilterClear={ onFilterClear }
                         defaultFilters={ userJson.account.default_filters }
                     />
-                    <div className='filters__apply-advanced__container'>
-                        <p className='my-auto p-body-sm'>Advanced: </p>
-                        <input
-                            className='my-auto filters__apply-advanced'
-                            name='showAdvanced'
-                            type='checkbox'
-                            onChange={ toggleAdvancedFilters }
-                        />
-                    </div>
+                    {userJson.account.advanced_filters.length > 0 &&
+                        <div className='filters__apply-advanced__container'>
+                            <p className='my-auto p-body-sm'>Advanced: </p>
+                            <input
+                                className='my-auto filters__apply-advanced'
+                                name='showAdvanced'
+                                type='checkbox'
+                                onChange={ toggleAdvancedFilters }
+                            />
+                        </div>
+                    }
                 </div>
             </div>
             <PlayerTable 
