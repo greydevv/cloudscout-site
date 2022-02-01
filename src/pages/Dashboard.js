@@ -75,6 +75,26 @@ export default function Dashboard() {
         setParams(clearedParams)
     }
 
+    const toggleAdvancedFilters = (e) => {
+        if (!e.target.checked) {
+            setParams({
+                ...params,
+                advanced: null,
+            });
+            return;
+        }
+        let defaultAdvancedFilters = userJson.account.advanced_filters;
+        let advancedFilterParams = defaultAdvancedFilters.map((filter) => {
+            return Object.values(filter).join(';');
+        });
+        if (advancedFilterParams.length > 0) {
+            setParams({
+                ...params,
+                advanced: advancedFilterParams.join(',')
+            });
+        }
+    }
+
     const onFavorite = (pid) => {
         putOk.current = true;
         setFavoritePids([...favoritePids, pid]);
@@ -94,12 +114,21 @@ export default function Dashboard() {
             <div className='page__header'>
                 <h1 className='page__head mb-md'>Dashboard</h1>
                 <SearchBar handleSearch={ onSearch } />
-                <div className='my-md'>
+                <div className='my-md filters__section'>
                     <Filters
                         onFilterChange={ onFilterChange }
                         onFilterClear={ onFilterClear }
                         defaultFilters={ userJson.account.default_filters }
                     />
+                    <div className='filters__apply-advanced__container'>
+                        <p className='my-auto p-body-sm'>Advanced: </p>
+                        <input
+                            className='my-auto filters__apply-advanced'
+                            name='showAdvanced'
+                            type='checkbox'
+                            onChange={ toggleAdvancedFilters }
+                        />
+                    </div>
                 </div>
             </div>
             <PlayerTable 

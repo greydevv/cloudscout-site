@@ -1,6 +1,8 @@
-import { createContext, useState, useContext, useEffect } from 'react';
 import Select from 'react-select';
-import { filterOptions } from 'Const';
+import { prettifyText, isInteger } from 'util/text';
+import { copyObj } from 'util/utils';
+import { createContext, useState, useContext, useEffect } from 'react';
+import { filterOptions, advancedFilterOperators, sportStatOptions } from 'Const';
 import './Filters.scss';
 
 export function Dropdown({ placeholder, name, defaults, onChange, options, isMulti, ...rest }) {
@@ -11,7 +13,7 @@ export function Dropdown({ placeholder, name, defaults, onChange, options, isMul
             });
             onChange(name, values);
         } else {
-            onChange(filters.value);
+            onChange(name, filters.value);
         }
     }
 
@@ -21,9 +23,13 @@ export function Dropdown({ placeholder, name, defaults, onChange, options, isMul
         });
     }
 
+    const getDefault = () => {
+        return options.find(({value}) => value === defaults);
+    }
+
     return (
         <Select 
-            value={ getMappedDefaults() }
+            value={ isMulti ? getMappedDefaults() : getDefault() }
             onChange={ onChangeWrapper }
             placeholder={ placeholder } 
             options={ options }
