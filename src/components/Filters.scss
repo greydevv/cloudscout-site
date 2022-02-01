@@ -15,6 +15,64 @@ $filters-bg-color: $neutral-light;
         border: 2px solid $filters-bg-color !important;
         border-radius: 5px !important;
     }
+
+    &-advanced {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        &__new {
+            &__errors {
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                font-family: $font-primary;
+                font-size: 14px;
+                color: $color-negative;
+            }
+        }
+
+        &__row {
+            display: flex;
+            flex-direction: column;
+
+            &__items {
+                display: flex;
+                flex-direction: row;
+                gap: 15px;
+            }
+        }
+
+        &__btn {
+            @include plain-btn;
+            width: 24px;
+            height: 24px;
+            border-radius: 999px;
+            background-color: $neutral-light;
+            color: $color-dark;
+            font-weight: 600;
+
+            &-remove {
+                @extend .filters-advanced__btn;
+                color: $color-negative;
+            }
+        }
+
+        &__input {
+            font-family: $font-primary; 
+            font-weight: 500;
+            border: none;
+            border-radius: 5px;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            background-color: $neutral-light;
+            width: 50px;
+
+            &:focus {
+                border: none;
+                outline: 2px solid $color-primary;
+            }
+        }
+    }
 }
 
 .filter-headers {
@@ -71,6 +129,13 @@ $filters-bg-color: $neutral-light;
                     background-color: $color-dark !important;
                 }
             }
+        }
+    }
+
+    &__single {
+        &-value {
+            @include dropdown-text;
+            color: $color-primary !important;
         }
     }
 

@@ -85,3 +85,9 @@
 @mixin plain-link {
     text-decoration: none;
 }
+
+@mixin plain-checkbox {
+    background-color: $color-primary;
+    accent-color: $color-primary;
+    border-color: $color-negative;
+}

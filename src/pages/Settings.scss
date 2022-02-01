@@ -4,6 +4,8 @@
     @include app-page-scrollable;
 
     &__form {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
         &__section {
             margin-top: 2rem;
 
@@ -41,13 +43,10 @@
             }
         }
     }
-}
 
-.field {
-    &__container {
-
-    }
-
-    &__input {
+    &__advanced__filters {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
     }
 }

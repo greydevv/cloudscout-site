@@ -3,3 +3,21 @@
 .dashboard {
     @include app-page-non-scrollable;
 }
+
+.filters {
+    &__section {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__apply-advanced {
+        @include plain-checkbox;
+
+        &__container {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+    } 
+}
