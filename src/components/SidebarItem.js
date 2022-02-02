@@ -1,9 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
 export function SidebarNavItem({icon, activeIcon, className, activeClassName, ...rest}) {
-    // if (className !== null && activeClassName !== null) {
-    //     activeClassName = className + ' ' + activeClassName;
-    // }
     return (
         <NavLink
             className={({ isActive }) => isActive ? activeClassName : className}

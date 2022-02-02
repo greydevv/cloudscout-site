@@ -2,13 +2,13 @@ export const NUM_RESULTS = 50;
 
 export const filterOptions = {
     divisions: [
-        {value: [1, 2, 3], label: 'All'},
+        // {value: [1, 2, 3], label: 'All'},
         {value: 1, label: '1'},
         {value: 2, label: '2'},
         {value: 3, label: '3'},
     ],
     classes: [
-        {value: [1, 2, 3, 4, 5], label: 'All'},
+        // {value: [1, 2, 3, 4, 5], label: 'All'},
         {value: 1, label: 'FR'},
         {value: 2, label: 'SO'},
         {value: 3, label: 'JR'},
@@ -16,7 +16,7 @@ export const filterOptions = {
         {value: 5, label: 'GR'},
     ],
     positions: [
-        {value: ['QB', 'WR', 'OL', 'RB', 'TE', 'C', 'OT', 'FB', 'DL', 'DT', 'DE', 'LB', 'DB', 'CB', 'S', 'P', 'K', 'LS'], label: 'All'},
+        // {value: ['QB', 'WR', 'OL', 'RB', 'TE', 'C', 'OT', 'FB', 'DL', 'DT', 'DE', 'LB', 'DB', 'CB', 'S', 'P', 'K', 'LS'], label: 'All'},
         {value: 'QB', label: 'QB'}, 
         {value: 'WR', label: 'WR'}, 
         {value: 'OL', label: 'OL'}, 

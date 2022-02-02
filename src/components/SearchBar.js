@@ -7,7 +7,6 @@ export default class SearchBar extends React.Component
     constructor(props)
     {
         super(props);
-        // this.handleClick = props.handleClick;
         this.handleSearch = this.handleSearch.bind(this);
         this.updateSearchQuery = this.updateSearchQuery.bind(this);
         this.state = {

@@ -97,15 +97,12 @@ table {
 
     &__btn {
         @include plain-btn;
-        // background-color: $color-primary;
-        // color: $color-light;
         color: $color-primary;
         padding: 5px;
         border-radius: 6px;
 
         &-disabled {
             @extend .pagination__btn;
-            // background-color: $neutral-light;
             color: $neutral-light;
             pointer-events: none;
         }

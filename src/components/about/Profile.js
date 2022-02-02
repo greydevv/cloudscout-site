@@ -4,11 +4,6 @@ export default function Profile({ member }) {
     return (
         <div className='profile'>
             <div className='profile__thumbnail mb-md'>
-                {/*
-                    <NavLink to='/member'>
-                        <img className='profile__img' alt={ member.imgAlt } src={ member.img } />
-                    </NavLink>
-                */}
                 <img className='profile__img' alt={ member.imgAlt } src={ member.img } />
             </div>
             <div className='profile__meta'>
