@@ -4,7 +4,7 @@ import { Button } from 'components/Button';
 import './PlayerTable.scss';
 import { NavLink } from 'react-router-dom';
 import { StarFilled, ChevronRight, ChevronLeft } from 'components/Icons';
-import { formatDate, getFullName, classNumToString } from 'util/text';
+import { isInteger, formatDate, getFullName, classNumToString } from 'util/text';
 import { useRest, usePut } from 'api/useRest';
 
 function TableHeader() {
@@ -87,7 +87,46 @@ function TableRow({ player, isFavorited, onUnfavorite, onFavorite }) {
     );
 }
 
-export default function PlayerTable({ players, isLoading, favorites, onFavorite, onUnfavorite, onNext, currentPage, hasNextPage }) {
+function PaginationButton({ children, isDisabled, icon, ...rest }) {
+    return (
+        <button 
+            className={ 'pagination__btn' + (isDisabled ? '-disabled' : '')} 
+            { ...rest }
+        >
+            { children }
+        </button>
+    );
+}
+
+function Pagination({ numPages, currentPage, onChange }) {
+    return (
+        <div className='pagination__container'>
+            <div className='mx-auto pagination__inner'>
+                <PaginationButton
+                    isDisabled={ currentPage === 1 }
+                    onClick={ () => onChange(currentPage - 1) }
+                >
+                    <ChevronLeft className='pagination__btn-icon'/>
+                </PaginationButton>
+                <p className='pagination__page'>{ currentPage }</p>
+                <PaginationButton
+                    isDisabled={ currentPage ===  numPages }
+                    onClick={ () => onChange(currentPage + 1) }
+                >
+                    <ChevronRight className='pagination__btn-icon' />
+                </PaginationButton>
+            </div>
+        </div>
+    );
+}
+
+export default function PlayerTable({ players, isLoading, favorites, onFavorite, onUnfavorite, total, perPage, onChange, currentPage }) {
+    const hasNextPage = currentPage*perPage < total;
+    const hasPrevPage = currentPage > 1;
+    let numPages = Math.floor(total / perPage);
+    if (total % perPage > 0) {
+        numPages++;
+    }
     return (
         <>
             <TableHeader />
@@ -99,18 +138,9 @@ export default function PlayerTable({ players, isLoading, favorites, onFavorite,
                     onFavorite={ onFavorite }
                     onUnfavorite={ onUnfavorite }
                 />
-                <div className='my-xl table__content__nav__container'>
-                    {currentPage > 1 && 
-                        <Button onClick={ () => onNext(currentPage - 1) }>
-                            <ChevronLeft className='my-auto'/>
-                        </Button>
-                    }
-                    {(players.length > 0 && hasNextPage) &&
-                        <Button onClick={ () => onNext(currentPage + 1) }>
-                            <ChevronRight className='my-auto'/>
-                        </Button>
-                    }
-                </div>
+                {numPages > 1 &&
+                    <Pagination numPages={ numPages } currentPage={ currentPage } onChange={ onChange } />
+                }
             </div>
         </>
     );

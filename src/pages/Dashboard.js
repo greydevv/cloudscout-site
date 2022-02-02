@@ -6,7 +6,7 @@ import { SpinnerView } from 'components/Spinner';
 import { useUserContext } from 'UserContext';
 import { useApi }  from 'api/api.js';
 import { useRest, usePut } from 'api/useRest';
-import { filterOptions } from 'Const';
+import { NUM_RESULTS, filterOptions } from 'Const';
 import { copyObj } from 'util/utils';
 import { Checkbox } from 'components/Button';
 import './Dashboard.scss';
@@ -73,7 +73,7 @@ export default function Dashboard() {
     }
 
     const onFilterClear = () => {
-        let clearedParams = {limit: 50};
+        let clearedParams = {limit: NUM_RESULTS};
         if (params.q) {
             clearedParams.q = params.q;
         }
@@ -111,7 +111,7 @@ export default function Dashboard() {
         setFavoritePids(favoritePids.filter(fav => fav != pid));
     }
 
-    const onNext = (newPage) => {
+    const onChange = (newPage) => {
         setParams({...params, page: newPage});
         setPageNo(newPage);
     }
@@ -140,14 +140,15 @@ export default function Dashboard() {
                 </div>
             </div>
             <PlayerTable 
-                onFavorite={ onFavorite } 
-                onUnfavorite={ onUnfavorite } 
-                favorites={ favoritePids } 
                 players={ playersJson.data } 
                 isLoading={ isPlayersLoading } 
-                hasNextPage={ pageNo*50 < playersJson.total }
+                favorites={ favoritePids } 
+                onFavorite={ onFavorite } 
+                onUnfavorite={ onUnfavorite } 
+                total={ playersJson.total }
+                perPage={ NUM_RESULTS }
                 currentPage={ pageNo }
-                onNext={ onNext }
+                onChange={ onChange }
             />
         </div>
     );

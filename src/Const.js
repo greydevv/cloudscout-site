@@ -1,3 +1,5 @@
+export const NUM_RESULTS = 50;
+
 export const filterOptions = {
     divisions: [
         {value: [1, 2, 3], label: 'All'},

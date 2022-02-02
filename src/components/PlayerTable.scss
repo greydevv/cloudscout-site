@@ -65,15 +65,6 @@ table {
                 color: $color-negative;
             }
         }
-
-        &__nav {
-            &__container {
-                display: flex;
-                flex-direction: row;
-                gap: 15px;
-                justify-content: center;
-            }
-        }
     }
 
     &__row {
@@ -87,6 +78,50 @@ table {
     &__link {
         @include plain-link;
         color: $color-primary;
+    }
+}
+
+.pagination {
+    &__container {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    &__btn {
+        @include plain-btn;
+        // background-color: $color-primary;
+        // color: $color-light;
+        color: $color-primary;
+        padding: 5px;
+        border-radius: 6px;
+
+        &-disabled {
+            @extend .pagination__btn;
+            // background-color: $neutral-light;
+            color: $neutral-light;
+            pointer-events: none;
+        }
+
+        &-icon {
+            vertical-align: top;
+        }
+    }
+
+    &__page {
+        @include margin-y-auto;
+        font-family: $font-primary;
+        color: $color-dark;
+        width: 15px;
+        text-align: center;
+        font-weight: 500;
     }
 }
 
