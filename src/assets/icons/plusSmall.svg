@@ -1,0 +1,9 @@
+<svg id="Group_148" data-name="Group 148" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_145" data-name="Group 145">
+    <path id="Path_165" data-name="Path 165" d="M0,0H24V24H0Z" fill="none"/>
+  </g>
+  <g id="Group_147" data-name="Group 147" transform="translate(12 0.215) rotate(45)">
+    <path fill="currentColor" id="Line_1" data-name="Line 1" d="M0,7.667a1,1,0,0,1-.707-.293,1,1,0,0,1,0-1.414L5.96-.707a1,1,0,0,1,1.414,0,1,1,0,0,1,0,1.414L.707,7.374A1,1,0,0,1,0,7.667Z" transform="translate(5 5)"/>
+    <path fill="currentColor" id="Line_2" data-name="Line 2" d="M6.667,7.667a1,1,0,0,1-.707-.293L-.707.707a1,1,0,0,1,0-1.414,1,1,0,0,1,1.414,0L7.374,5.959a1,1,0,0,1-.707,1.707Z" transform="translate(5 5)"/>
+  </g>
+</svg>
