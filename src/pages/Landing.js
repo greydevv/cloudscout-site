@@ -72,13 +72,13 @@ export default function Landing() {
             img: statisticsGraphic,
             imgAlt: 'player transfer statistics'
         },
-        {
-            name: 'Act First',
-            hook: 'Get immediate transfer status updates.',
-            description: 'Receive push notifications when certain events happen in the Transfer Portal such as a player entering, withdrawing from, or transferring out of the Transfer Portal. cloudscout collects statistics about players that match your previous activity and finds players with similar characteristics.',
-            img: notificationGraphic,
-            imgAlt: 'transfer push notifications',
-        }
+        // {
+        //     name: 'Act First',
+        //     hook: 'Get immediate transfer status updates.',
+        //     description: 'Receive push notifications when certain events happen in the Transfer Portal such as a player entering, withdrawing from, or transferring out of the Transfer Portal. cloudscout collects statistics about players that match your previous activity and finds players with similar characteristics.',
+        //     img: notificationGraphic,
+        //     imgAlt: 'transfer push notifications',
+        // }
     ];
 
     return (

@@ -86,7 +86,7 @@ export default function Home() {
             <div className='home__content'>
                 <Outlet />
             </div>
-            <Footer copyrightText='© 2021 cloudscout, Inc.'>
+            <Footer copyrightText=''>
                 { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
                     <FooterLinkSet name='Account'>
                         { isAuthenticated

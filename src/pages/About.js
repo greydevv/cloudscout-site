@@ -1,7 +1,6 @@
 import Profile from 'components/about/Profile';
 import alfredoImg from '../assets/team/AlfredoSuarez.jpg';
 import greysonImg from '../assets/team/GreysonMurray.jpg';
-import nicholasImg from '../assets/team/NicholasChan.jpg';
 import './About.scss';
 
 export default function About() {
@@ -19,13 +18,6 @@ export default function About() {
             description: 'Greyson is a co-founder and Chief Software Architect of cloudscout. Developed an iOS app in his senior year of high school which garnered 3,000+ downloads in its time on the App Store. Greyson is pursuing a BS in Computer Science at The Pennsylvania State University.',
             img: greysonImg,
             imgAlt: 'greyson-murray',
-        },
-        {
-            name: 'Nicholas Chan',
-            title: 'CISO, co-founder',
-            description: 'Nick is a co-founder and Chief Information Security Officer of cloudscout. He is currently pursuing a BS in Computer Science at The Pennsylvania State University.',
-            img: nicholasImg,
-            imgAlt: 'nicholas-chan',
         }
     ];
 
