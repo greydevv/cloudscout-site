@@ -16,7 +16,6 @@ export default function Dashboard() {
     const [ favoritePids, setFavoritePids ] = useState([]);
     const [ params, setParams ] = useState({});
     const [ pageNo, setPageNo ] = useState(1);
-    // const [ lastSeenId, setLastSeenId ] = useState();
     const { json: userJson, isLoading: isUserLoading } = useRest({url: `/v1/users/${userId}`});
     const { refresh: refreshPut } = usePut(`/v1/users/${userId}`);
     const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, {data:[], total:0}, false);
@@ -51,7 +50,6 @@ export default function Dashboard() {
             ...newParams,
         });
         setFavoritePids(userJson.account.favorites);
-        // setLastSeenId(playerJson.at(-1)._id);
     }, [isUserLoading]);
 
     const onSearch = (query) => {
@@ -66,6 +64,7 @@ export default function Dashboard() {
     }
 
     const onFilterChange = (name, values) => {
+        setPageNo(1);
         setParams({
             ...params,
             [name]: values.join(',')
@@ -101,6 +100,20 @@ export default function Dashboard() {
         }
     }
 
+    const toggleFavorites = (checked) => {
+        if (!checked) {
+            setParams({
+                ...params,
+                pids: null,
+            });
+        } else {
+            setParams({
+                ...params,
+                pids: favoritePids.join(','),
+            });
+        }
+    }
+
     const onFavorite = (pid) => {
         putOk.current = true;
         setFavoritePids([...favoritePids, pid]);
@@ -131,12 +144,20 @@ export default function Dashboard() {
                         onFilterClear={ onFilterClear }
                         defaultFilters={ userJson.account.default_filters }
                     />
-                    {userJson.account.advanced_filters.length > 0 &&
-                        <div className='filters__apply-advanced__container'>
-                            <p className='my-auto p-body-sm'>Advanced: </p>
-                            <Checkbox onChange={ toggleAdvancedFilters } />
-                        </div>
-                    }
+                    <div className='filters-advanced__container'>
+                        {favoritePids.length > 0 &&
+                            <div className='filters__apply-advanced__container'>
+                                <p className='my-auto p-body-sm'>Favorites: </p>
+                                <Checkbox onChange={ toggleFavorites } />
+                            </div>
+                        }
+                        {userJson.account.advanced_filters.length > 0 &&
+                            <div className='filters__apply-advanced__container'>
+                                <p className='my-auto p-body-sm'>Advanced: </p>
+                                <Checkbox onChange={ toggleAdvancedFilters } />
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
             <PlayerTable 

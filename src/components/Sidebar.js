@@ -11,7 +11,6 @@ import './Sidebar.scss';
 export default function Sidebar() {
     const { logout } = useAuth0();
 
-    // TODO: refactor SASS names
     return (
         <div className='sidebar__wrapper'>
             <nav className='sidebar'>
@@ -28,12 +27,14 @@ export default function Sidebar() {
                         icon={<Dashboard width={24} height={24} />}
                         end
                     />
-                    <SidebarNavItem
-                        to='favorites'
-                        className='sidebar__item'
-                        activeClassName='sidebar__item-active'
-                        icon={<Star width={24} height={24} />}
-                    />
+                    {/*
+                        <SidebarNavItem
+                            to='favorites'
+                            className='sidebar__item'
+                            activeClassName='sidebar__item-active'
+                            icon={<Star width={24} height={24} />}
+                        />
+                    */}
                     <SidebarNavItem
                         to='settings'
                         className='sidebar__item'
