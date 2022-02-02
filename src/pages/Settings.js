@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useUserContext } from 'UserContext';
-import { useApi, usePut } from 'api/api';
+import { useApi } from 'api/api';
+import { usePut } from 'api/useRest';
 import { SpinnerView } from 'components/Spinner';
 import Filters, { Dropdown } from 'components/Filters'
 import { AdvancedFilters, getFilterObj } from 'components/AdvancedFilters';
@@ -26,93 +27,94 @@ function SettingsField({ labelText, ...rest }) {
 
 export default function Settings() {
     const userId = useUserContext();
-    const [ jsonBody, setJsonBody ] = useState({});
-    const [userState, setUserState] = useState({
-        first: '', last: '', institution: '', 
-        defaultFilters: {divisions: [], classes: [], positions: []},
-        advancedFilters: [],
-    });
-    const { json: userJson, isLoading: isUserLoading } = useApi(`/v1/users/${userId}`);
-    const { json: putJson, isLoading: isPutLoading } = usePut(`/v1/users/${userId}`, jsonBody);
-
+    const [ filters, setFilters ] = useState({divisions: [], classes: [], positions: []});
     const [ advancedFilters, setAdvancedFilters ] = useState([]);
     const [ advancedFilterErrors, setAdvancedFilterErrors ] = useState('');
-    const [ filterIndex, setFilterIndex ] = useState(0);
+    const [ advancedFilterIndex, setAdvancedFilterIndex ] = useState(0);
+    const [ hasUnsaved, setHasUnsaved ] = useState(false);
+    const { json: userJson, isLoading: isUserLoading } = useApi(`/v1/users/${userId}`);
+    const { isLoading: isPutLoading, refresh: refreshPut } = usePut(`/v1/users/${userId}`);
 
     useEffect(() => {
         if (!isUserLoading) {
-            setUserState({
-                first: userJson.meta.first,
-                last: userJson.meta.last,
-                institution: userJson.meta.institution,
-                defaultFilters: userJson.account.default_filters,
-                // advancedFilters: userJson.account.advanced_filters
-            });
-            setJsonBody(copyObj(userJson));
+            setFilters(userJson.account.default_filters);
             setAdvancedFilters(userJson.account.advanced_filters.map((filter, i) => {
                 return {index: i, data: filter}
             }));
-            setFilterIndex(userJson.account.advanced_filters.length);
+            setAdvancedFilterIndex(userJson.account.advanced_filters.length);
         }
     }, [isUserLoading]);
 
     const saveUserSettings = () => {
-        userJson.meta.first = userState.first;
-        userJson.meta.last = userState.last;
-        userJson.meta.institution = userState.institution;
-        userJson.account.default_filters = userState.defaultFilters;
-        userJson.account.advanced_filters = advancedFilters.map((f) => {
-            return {stat: f.data.stat, op: f.data.op, value: f.data.value};
-        });
-        // userJson.account.advanced_filterss = userState.advancedFilters;
-        if (JSON.stringify(userJson) !== JSON.stringify(jsonBody)) {
-            setJsonBody(copyObj(userJson));
+        if (isPutLoading || !hasUnsaved) {
+            return;
         }
-    };
-
-    const handleInputChange = (e) => {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-        setUserState({...userState, [name]: value});
+        refreshPut({
+            ...userJson,
+            account: {
+                ...userJson.account,
+                default_filters: filters,
+                advanced_filters: advancedFilters.map((f) => {
+                    return {stat: f.data.stat, op: f.data.op, value: f.data.value}
+                }),
+            }
+        });
+        setHasUnsaved(false);
     };
 
     const onFilterChange = (name, values) => {
-        setUserState({
-            ...userState,
-            defaultFilters: {
-                ...userState.defaultFilters,
-                [name]: values
-            }
-        });
+        setFilters({...filters, [name]: values});
+        setHasUnsaved(true);
     };
 
     const onFilterClear = () => {
-        setUserState({
-            ...userState,
-            defaultFilters: {divisions: [], classes: [], positions: []}
-        })
+        setFilters({divisions: [], classes: [], positions: []});
+        setHasUnsaved(true);
     }
 
     const onRemoveAdvancedFilter = (removeIndex) => {
         setAdvancedFilters(advancedFilters.filter(f => f.index !== removeIndex));
-        setUserState({
-            ...userState,
-            advancedFilters: copyObj(advancedFilters),
-        });
+        setHasUnsaved(true);
+    }
+
+    const validateAdvancedFilterData = (data, value) => {
+        if (!data.stat || !data.op || !value) {
+            setAdvancedFilterErrors('All fields are required');
+            return false;
+        } else if (!isInteger(value)) {
+            setAdvancedFilterErrors(`'${value}' is not an integer`);
+            return false;
+        } else {
+            setAdvancedFilterErrors('');
+            return true;
+        }
+    }
+
+    const onChangeAdvancedFilter = (changeIndex, data, value) => {
+        let isValid = validateAdvancedFilterData(data, value);
+        if (isValid) {
+            let filtersCopy = copyObj(advancedFilters);
+            filtersCopy[changeIndex] = {
+                index: changeIndex,
+                data: {
+                    stat: data.stat.value,
+                    op: data.op.value,
+                    value: parseInt(value),
+                }
+            };
+            console.log('&&', filtersCopy);
+            setAdvancedFilters(filtersCopy);
+            setHasUnsaved(true);
+        }
     }
 
     const onAddAdvancedFilter = (data, value) => {
-        if (!data.stat || !data.op || !value) {
-            setAdvancedFilterErrors('All fields are required');
-        } else if (!isInteger(value)) {
-            setAdvancedFilterErrors(`'${value}' is not an integer`);
-        } else {
-            setAdvancedFilterErrors('');
+        let isValid = validateAdvancedFilterData(data, value);
+        if (isValid) {
             setAdvancedFilters([
                 ...advancedFilters,
                 {
-                    index: filterIndex,
+                    index: advancedFilterIndex,
                     data: {
                         stat: data.stat.value,
                         op: data.op.value,
@@ -120,10 +122,10 @@ export default function Settings() {
                     },
                 }
             ]);
-            setFilterIndex(filterIndex + 1);
-            // OK, return true for AdvancedFilters component
-            return true;
+            setAdvancedFilterIndex(advancedFilterIndex + 1);
+            setHasUnsaved(true);
         }
+        return isValid;
     }
 
     return (
@@ -140,7 +142,7 @@ export default function Settings() {
                               <Filters 
                                   onFilterChange={ onFilterChange } 
                                   onFilterClear = { onFilterClear }
-                                  defaultFilters={ userState.defaultFilters } 
+                                  defaultFilters={ filters } 
                               />
                           </div>
                       </div>
@@ -153,9 +155,10 @@ export default function Settings() {
                                   const statDisplay = filter.data.stat.split('.')[1];
                                   const filterStat = {value: filter.data.stat, label: prettifyText(statDisplay).pretty}
                                   return <AdvancedFilters 
-                                      key={ i }
-                                      index={ filter.index || i }
+                                      key={ filter.index }
+                                      index={ filter.index }
                                       filter={ {...filter.data, stat: filterStat} } 
+                                      onChange={ onChangeAdvancedFilter }
                                       onRemove={ onRemoveAdvancedFilter }
                                   />
                               })}
@@ -169,38 +172,10 @@ export default function Settings() {
                           </div>
                       </div>
                       <div className='settings__form__section-submit'>
-                          <Button onClick={ saveUserSettings }>Save</Button>
+                          <Button onClick={ saveUserSettings } isDisabled={ isPutLoading || !hasUnsaved }>Save</Button>
                       </div>
                 </div>
             }
         </div>
     );
 }
-
-// export default function Settings() {
-//     const [ filters, setFilters ] = useState([]);
-//     const [ filterIndex, setFilterIndex ] = useState(0);
-
-//     const onRemoveAdvancedFilter = (removeIndex) => {
-//         setFilters(filters.filter(f => f.index !== removeIndex));
-//     }
-
-//     const onAddAdvancedFilter = (data) => {
-//         setFilters([
-//             ...filters,
-//             {
-//                 index: filterIndex,
-//                 data: copyObj(data),
-//             }
-//         ]);
-//         setFilterIndex(filterIndex + 1);
-//     }
-
-//     return (
-//         <div className='settings'>
-//             <div className='page__header mb-md'>
-//                 <h1 className='page__head'>Settings</h1>
-//             </div>
-//         </div>
-//     )
-// }

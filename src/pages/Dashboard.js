@@ -8,12 +8,13 @@ import { useApi }  from 'api/api.js';
 import { useRest, usePut } from 'api/useRest';
 import { filterOptions } from 'Const';
 import { copyObj } from 'util/utils';
+import { Checkbox } from 'components/Button';
 import './Dashboard.scss';
 
 export default function Dashboard() {
     const userId = useUserContext();
     const [ favoritePids, setFavoritePids ] = useState([]);
-    const [ params, setParams ] = useState({limit: 50});
+    const [ params, setParams ] = useState({limit: 51});
     const { json: userJson, isLoading: isUserLoading } = useRest({url: `/v1/users/${userId}`});
     const { refresh: refreshPut } = usePut(`/v1/users/${userId}`);
     const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, [], false);
@@ -75,23 +76,23 @@ export default function Dashboard() {
         setParams(clearedParams)
     }
 
-    const toggleAdvancedFilters = (e) => {
-        if (!e.target.checked) {
+    const toggleAdvancedFilters = (checked) => {
+        if (!checked) {
             setParams({
                 ...params,
                 advanced: null,
             });
-            return;
-        }
-        let defaultAdvancedFilters = userJson.account.advanced_filters;
-        let advancedFilterParams = defaultAdvancedFilters.map((filter) => {
-            return Object.values(filter).join(';');
-        });
-        if (advancedFilterParams.length > 0) {
-            setParams({
-                ...params,
-                advanced: advancedFilterParams.join(',')
+        } else {
+            let defaultAdvancedFilters = userJson.account.advanced_filters;
+            let advancedFilterParams = defaultAdvancedFilters.map((filter) => {
+                return Object.values(filter).join(';');
             });
+            if (advancedFilterParams.length > 0) {
+                setParams({
+                    ...params,
+                    advanced: advancedFilterParams.join(',')
+                });
+            }
         }
     }
 
@@ -123,12 +124,15 @@ export default function Dashboard() {
                     {userJson.account.advanced_filters.length > 0 &&
                         <div className='filters__apply-advanced__container'>
                             <p className='my-auto p-body-sm'>Advanced: </p>
+                            <Checkbox onChange={ toggleAdvancedFilters } />
+                        {/*
                             <input
-                                className='my-auto filters__apply-advanced'
-                                name='showAdvanced'
-                                type='checkbox'
-                                onChange={ toggleAdvancedFilters }
+                            className='my-auto filters__apply-advanced'
+                            name='showAdvanced'
+                            type='checkbox'
+                            onChange={ toggleAdvancedFilters }
                             />
+                        */}
                         </div>
                     }
                 </div>
