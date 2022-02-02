@@ -14,6 +14,8 @@ import { ReactComponent as CloseSmall } from 'assets/icons/closeSmall.svg';
 import { ReactComponent as PlusSmall } from 'assets/icons/plusSmall.svg';
 import { ReactComponent as ArrowDown } from 'assets/icons/arrowDown.svg';
 import { ReactComponent as ArrowUp } from 'assets/icons/arrowUp.svg';
+import { ReactComponent as ChevronRight } from 'assets/icons/chevronRight.svg';
+import { ReactComponent as ChevronLeft } from 'assets/icons/chevronLeft.svg';
 
 export { Dashboard,
          Cog,
@@ -30,4 +32,6 @@ export { Dashboard,
          CloseSmall,
          PlusSmall,
          ArrowDown,
-         ArrowUp }
+         ArrowUp,
+         ChevronRight,
+         ChevronLeft }

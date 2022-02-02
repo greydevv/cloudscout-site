@@ -9,10 +9,11 @@ import './Favorites.scss';
 export default function Favorites() {
     const userId = useUserContext();
     const [ favoritePids, setFavoritePids ] = useState([]);
-    const [ params, setParams ] = useState({limit: 50});
+    const [ params, setParams ] = useState({});
+    const [ pageNo, setPageNo ] = useState(1);
     const { json: userJson, isLoading: isUserLoading } = useRest({url: `v1/users/${userId}`});
     const { refresh: refreshPut } = usePut(`/v1/users/${userId}`);
-    const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, [], false);
+    const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, {data: [], total: 0}, false);
     const putOk = useRef(false);
 
     useEffect(() => {
@@ -32,7 +33,6 @@ export default function Favorites() {
         if (isUserLoading) {
             return;
         }
-        console.log(userJson.account.favorites);
         if (userJson.account.favorites.length > 0) {
             setParams({
                 ...params,
@@ -52,6 +52,11 @@ export default function Favorites() {
         setFavoritePids(favoritePids.filter(fav => fav != pid));
     }
 
+    const onNext = (newPage) => {
+        setParams({...params, page: newPage});
+        setPageNo(newPage);
+    }
+
     if (isUserLoading) {
         return (<SpinnerView />);
     }
@@ -65,8 +70,11 @@ export default function Favorites() {
                 onFavorite={ onFavorite }
                 onUnfavorite={ onUnfavorite } 
                 favorites={ favoritePids } 
-                players={ playersJson } 
+                players={ playersJson.data } 
                 isLoading={ favoritePids.length !== 0 && isPlayersLoading } 
+                hasNextPage={ pageNo*50 < playersJson.total }
+                currentPage={ pageNo }
+                onNext={ onNext }
             />
         </div>
     );

@@ -102,7 +102,6 @@ export default function Settings() {
                     value: parseInt(value),
                 }
             };
-            console.log('&&', filtersCopy);
             setAdvancedFilters(filtersCopy);
             setHasUnsaved(true);
         }

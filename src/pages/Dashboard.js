@@ -14,10 +14,12 @@ import './Dashboard.scss';
 export default function Dashboard() {
     const userId = useUserContext();
     const [ favoritePids, setFavoritePids ] = useState([]);
-    const [ params, setParams ] = useState({limit: 51});
+    const [ params, setParams ] = useState({});
+    const [ pageNo, setPageNo ] = useState(1);
+    // const [ lastSeenId, setLastSeenId ] = useState();
     const { json: userJson, isLoading: isUserLoading } = useRest({url: `/v1/users/${userId}`});
     const { refresh: refreshPut } = usePut(`/v1/users/${userId}`);
-    const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, [], false);
+    const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, {data:[], total:0}, false);
     const putOk = useRef(false);
 
     useEffect(() => {
@@ -42,15 +44,17 @@ export default function Dashboard() {
         let newParams = Object.fromEntries(Object.entries(defaultFilters).map(([key, val]) => {
             return [key, val.join(',')];
         }));
+        // TODO: clean up request by filtering out keys that are empty arrays
+        // in filter params
         setParams({
             ...params,
             ...newParams,
         });
         setFavoritePids(userJson.account.favorites);
+        // setLastSeenId(playerJson.at(-1)._id);
     }, [isUserLoading]);
 
     const onSearch = (query) => {
-        console.log(query);
         if (query.length === 0) {
             setParams({...params, q:''});
         } else {
@@ -77,6 +81,7 @@ export default function Dashboard() {
     }
 
     const toggleAdvancedFilters = (checked) => {
+        setPageNo(1);
         if (!checked) {
             setParams({
                 ...params,
@@ -106,6 +111,11 @@ export default function Dashboard() {
         setFavoritePids(favoritePids.filter(fav => fav != pid));
     }
 
+    const onNext = (newPage) => {
+        setParams({...params, page: newPage});
+        setPageNo(newPage);
+    }
+
     if (isUserLoading) {
         return (<SpinnerView />);
     }
@@ -125,14 +135,6 @@ export default function Dashboard() {
                         <div className='filters__apply-advanced__container'>
                             <p className='my-auto p-body-sm'>Advanced: </p>
                             <Checkbox onChange={ toggleAdvancedFilters } />
-                        {/*
-                            <input
-                            className='my-auto filters__apply-advanced'
-                            name='showAdvanced'
-                            type='checkbox'
-                            onChange={ toggleAdvancedFilters }
-                            />
-                        */}
                         </div>
                     }
                 </div>
@@ -141,8 +143,11 @@ export default function Dashboard() {
                 onFavorite={ onFavorite } 
                 onUnfavorite={ onUnfavorite } 
                 favorites={ favoritePids } 
-                players={ playersJson } 
+                players={ playersJson.data } 
                 isLoading={ isPlayersLoading } 
+                hasNextPage={ pageNo*50 < playersJson.total }
+                currentPage={ pageNo }
+                onNext={ onNext }
             />
         </div>
     );

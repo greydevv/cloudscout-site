@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { SpinnerView } from 'components/Spinner';
+import { Button } from 'components/Button';
 import './PlayerTable.scss';
 import { NavLink } from 'react-router-dom';
-import { StarFilled } from 'components/Icons';
+import { StarFilled, ChevronRight, ChevronLeft } from 'components/Icons';
 import { formatDate, getFullName, classNumToString } from 'util/text';
 import { useRest, usePut } from 'api/useRest';
 
@@ -85,7 +87,7 @@ function TableRow({ player, isFavorited, onUnfavorite, onFavorite }) {
     );
 }
 
-export default function PlayerTable({ players, isLoading, favorites, onFavorite, onUnfavorite }) {
+export default function PlayerTable({ players, isLoading, favorites, onFavorite, onUnfavorite, onNext, currentPage, hasNextPage }) {
     return (
         <>
             <TableHeader />
@@ -97,6 +99,18 @@ export default function PlayerTable({ players, isLoading, favorites, onFavorite,
                     onFavorite={ onFavorite }
                     onUnfavorite={ onUnfavorite }
                 />
+                <div className='my-xl table__content__nav__container'>
+                    {currentPage > 1 && 
+                        <Button onClick={ () => onNext(currentPage - 1) }>
+                            <ChevronLeft className='my-auto'/>
+                        </Button>
+                    }
+                    {(players.length > 0 && hasNextPage) &&
+                        <Button onClick={ () => onNext(currentPage + 1) }>
+                            <ChevronRight className='my-auto'/>
+                        </Button>
+                    }
+                </div>
             </div>
         </>
     );

@@ -65,6 +65,15 @@ table {
                 color: $color-negative;
             }
         }
+
+        &__nav {
+            &__container {
+                display: flex;
+                flex-direction: row;
+                gap: 15px;
+                justify-content: center;
+            }
+        }
     }
 
     &__row {
