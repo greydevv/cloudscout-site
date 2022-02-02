@@ -71,6 +71,14 @@ export default function Filters({ onFilterChange, onFilterClear, defaultFilters,
         setFilters(defaultFilters);
     }, [defaultFilters]);
 
+    let isClearDisabled = true;
+    const filterValues = Object.values(filters).flat(1);
+    for (const v of Object.values(filters)) {
+        if (v.length > 0) {
+            isClearDisabled = false;
+        }
+    }
+
     return (
         <FilterSection>
             <Dropdown 
@@ -99,8 +107,9 @@ export default function Filters({ onFilterChange, onFilterClear, defaultFilters,
             />
             <button 
                 type='button'
-                className='filters__clear px-sm' 
+                className={ 'px-sm filters__btn-clear' + (isClearDisabled ? '-disabled' : '')} 
                 onClick={ onFilterClearWrapper }
+                disabled={ isClearDisabled }
             >
                 Clear
             </button>
