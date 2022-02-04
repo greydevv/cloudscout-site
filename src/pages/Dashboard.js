@@ -16,6 +16,7 @@ export default function Dashboard() {
     const [ favoritePids, setFavoritePids ] = useState([]);
     const [ params, setParams ] = useState({});
     const [ pageNo, setPageNo ] = useState(1);
+    const [ isViewingFavorites, setIsViewingFavorites ] = useState(false);
     const { json: userJson, isLoading: isUserLoading } = useRest({url: `/v1/users/${userId}`});
     const { refresh: refreshPut } = usePut(`/v1/users/${userId}`);
     const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, {data:[], total:0}, false);
@@ -43,6 +44,7 @@ export default function Dashboard() {
         let newParams = Object.fromEntries(Object.entries(defaultFilters).map(([key, val]) => {
             return [key, val.join(',')];
         }));
+        newParams.sport = userJson.meta.sport;
         // TODO: clean up request by filtering out keys that are empty arrays
         // in filter params
         setParams({
@@ -102,11 +104,13 @@ export default function Dashboard() {
 
     const toggleFavorites = (checked) => {
         if (!checked) {
+            setIsViewingFavorites(false);
             setParams({
                 ...params,
                 pids: null,
             });
         } else {
+            setIsViewingFavorites(true);
             setParams({
                 ...params,
                 pids: favoritePids.join(','),
@@ -143,9 +147,10 @@ export default function Dashboard() {
                         onFilterChange={ onFilterChange }
                         onFilterClear={ onFilterClear }
                         defaultFilters={ userJson.account.default_filters }
+                        sport= { userJson.meta.sport }
                     />
                     <div className='filters-advanced__container'>
-                        {favoritePids.length > 0 &&
+                        {(favoritePids.length > 0 || isViewingFavorites) &&
                             <div className='filters__apply-advanced__container'>
                                 <p className='my-auto p-body-sm'>Favorites: </p>
                                 <Checkbox onChange={ toggleFavorites } />
