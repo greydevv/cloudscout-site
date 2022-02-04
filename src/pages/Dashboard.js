@@ -16,6 +16,7 @@ export default function Dashboard() {
     const [ favoritePids, setFavoritePids ] = useState([]);
     const [ params, setParams ] = useState({});
     const [ pageNo, setPageNo ] = useState(1);
+    const [ favoritesPageNo, setFavoritesPageNo ] = useState(1);
     const [ isViewingFavorites, setIsViewingFavorites ] = useState(false);
     const { json: userJson, isLoading: isUserLoading } = useRest({url: `/v1/users/${userId}`});
     const { refresh: refreshPut } = usePut(`/v1/users/${userId}`);
@@ -65,8 +66,17 @@ export default function Dashboard() {
         }
     }
 
+    const setCurrentPageNo = (newPage) => {
+        if (isViewingFavorites) {
+            setFavoritesPageNo(newPage);
+        }
+        else {
+            setPageNo(newPage);
+        }
+    }
+
     const onFilterChange = (name, values) => {
-        setPageNo(1);
+        setCurrentPageNo(1);
         setParams({
             ...params,
             [name]: values.join(',')
@@ -82,7 +92,7 @@ export default function Dashboard() {
     }
 
     const toggleAdvancedFilters = (checked) => {
-        setPageNo(1);
+        setCurrentPageNo(1);
         if (!checked) {
             setParams({
                 ...params,
@@ -107,12 +117,14 @@ export default function Dashboard() {
             setIsViewingFavorites(false);
             setParams({
                 ...params,
+                page: pageNo,
                 pids: null,
             });
         } else {
             setIsViewingFavorites(true);
             setParams({
                 ...params,
+                page: favoritesPageNo,
                 pids: favoritePids.join(','),
             });
         }
@@ -128,9 +140,9 @@ export default function Dashboard() {
         setFavoritePids(favoritePids.filter(fav => fav != pid));
     }
 
-    const onChange = (newPage) => {
+    const onChangePage = (newPage) => {
         setParams({...params, page: newPage});
-        setPageNo(newPage);
+        setCurrentPageNo(newPage);
     }
 
     if (isUserLoading) {
@@ -173,8 +185,8 @@ export default function Dashboard() {
                 onUnfavorite={ onUnfavorite } 
                 total={ playersJson.total }
                 perPage={ NUM_RESULTS }
-                currentPage={ pageNo }
-                onChange={ onChange }
+                currentPage={ isViewingFavorites ? favoritesPageNo : pageNo }
+                onChangePage={ onChangePage }
             />
         </div>
     );

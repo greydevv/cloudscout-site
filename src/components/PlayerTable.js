@@ -120,7 +120,7 @@ function Pagination({ numPages, currentPage, onChange }) {
     );
 }
 
-export default function PlayerTable({ players, isLoading, favorites, onFavorite, onUnfavorite, total, perPage, onChange, currentPage }) {
+export default function PlayerTable({ players, isLoading, favorites, onFavorite, onUnfavorite, total, perPage, onChangePage, currentPage }) {
     const hasNextPage = currentPage*perPage < total;
     const hasPrevPage = currentPage > 1;
     let numPages = Math.floor(total / perPage);
@@ -139,7 +139,7 @@ export default function PlayerTable({ players, isLoading, favorites, onFavorite,
                     onUnfavorite={ onUnfavorite }
                 />
                 {numPages > 1 &&
-                    <Pagination numPages={ numPages } currentPage={ currentPage } onChange={ onChange } />
+                    <Pagination numPages={ numPages } currentPage={ currentPage } onChange={ onChangePage } />
                 }
             </div>
         </>
