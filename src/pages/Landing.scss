@@ -22,8 +22,10 @@
         }
 
         &__inner {
+            margin-top: 3rem;
             width: 80%;
             @media (max-width: $breakpoint-sm) {
+                margin-top: 0;
                 @include margin-x-auto;
             }
         }

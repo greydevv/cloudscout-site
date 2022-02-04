@@ -6,13 +6,6 @@ import dashboardGraphic from 'assets/graphics/dashboard.png';
 import filtersGraphic from 'assets/graphics/filters.png';
 import statisticsGraphic from 'assets/graphics/statistics.png';
 import notificationGraphic from 'assets/graphics/notifications.png';
-// import SchoolCarousel from 'components/SchoolCarousel';
-// import Michigan from 'assets/schools/michigan.png';
-// import OhioState from 'assets/schools/ohio_state.png';
-// import PennState from 'assets/schools/penn_state.png';
-// import TexasAM from 'assets/schools/texas_am.png';
-// import Purdue from 'assets/schools/purdue.png';
-// import Iowa from 'assets/schools/iowa.png';
 import './Landing.scss';
 
 export default function Landing() {
@@ -48,15 +41,6 @@ export default function Landing() {
         }
     ];
 
-    // const schools = [
-    //     <img alt='' src={ Michigan } key={1} className='school__img' />,
-    //     <img alt='' src={ OhioState } key={2} className='school__img' />,
-    //     <img alt='' src={ PennState } key={3} className='school__img' />,
-    //     <img alt='' src={ TexasAM } key={4} className='school__img' />,
-    //     <img alt='' src={ Purdue } key={5} className='school__img' />,
-    //     <img alt='' src={ Iowa } key={6} className='school__img' />,
-    // ];
-
     const features = [
         {
             name: 'Monitor Transfers',
@@ -89,7 +73,7 @@ export default function Landing() {
                         <div className='landing__text pr-xxl'>
                             <div className='landing__text__inner'>
                                 <h1 className='landing__slogan mb-xs'>Effective recruiting made easy.</h1>
-                                <p className='p-body-sm mb-xl'>Tools for any program at any level to leverage the power of recruiting college athlete transfers. Certain limitations and fees apply.</p>
+                                <p className='p-body-sm mb-xl'>Tools for athletics to leverage the power of recruiting college athlete transfers.</p>
                                 { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
                                     <GradientButton>
                                         Get Started

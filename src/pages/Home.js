@@ -45,43 +45,37 @@ export default function Home() {
                     <FullLogo />
                 </NavbarBrand>
                 <NavbarItems>
-                    <NavbarLink isNavLink to='/contact' text='Contact' />
-                    <NavbarLink isNavLink to='/about' text='About' />
-                    { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
+                    {/*<NavbarLink isNavLink to='/contact' text='Contact' />*/}
+                    {/*<NavbarLink isNavLink to='/about' text='About' />*/}
+                    {/* process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
                         <NavbarLink isNavLink to='/pricing' text='Pricing' />
+                    */}
+                </NavbarItems>
+                <NavbarItems>
+                    {  isAuthenticated
+                        ? (<>
+                            <NavbarLink isNavLink to='/app' text='Dashboard' />
+                            <NavbarLink
+                                to='/'
+                                text='Logout'
+                                onClick={ () => logout({ returnTo: window.location.origin }) }
+                            />
+                        </>)
+                        : (<>
+                            <NavbarLink
+                                to='/'
+                                text='Log In'
+                                onClick={ () => loginWithRedirect() }
+                            />
+                            <NavbarLink
+                                isButton
+                                to='/'
+                                text='Sign Up'
+                                onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }
+                            />
+                        </>)
                     }
                 </NavbarItems>
-                { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
-                    <NavbarItems>
-                        {  isAuthenticated
-                            ? (
-                                <>
-                                    <NavbarLink isNavLink to='/app' text='Dashboard' />
-                                    <NavbarLink
-                                        to='/'
-                                        text='Logout'
-                                        onClick={ () => logout({ returnTo: window.location.origin }) }
-                                    />
-                                </>
-                            )
-                            : (
-                                <>
-                                    <NavbarLink
-                                        to='/'
-                                        text='Log In'
-                                        onClick={ () => loginWithRedirect() }
-                                    />
-                                    <NavbarLink
-                                        isButton
-                                        to='/'
-                                        text='Sign Up'
-                                        onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }
-                                    />
-                                </>
-                            )
-                        }
-                    </NavbarItems>
-                }
             </Navbar>
             <div className='home__content'>
                 <Outlet />
