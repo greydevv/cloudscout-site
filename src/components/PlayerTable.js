@@ -138,7 +138,7 @@ export default function PlayerTable({ players, isLoading, favorites, onFavorite,
                     onFavorite={ onFavorite }
                     onUnfavorite={ onUnfavorite }
                 />
-                {numPages > 1 &&
+                {!isLoading && numPages > 1 &&
                     <Pagination numPages={ numPages } currentPage={ currentPage } onChange={ onChangePage } />
                 }
             </div>
