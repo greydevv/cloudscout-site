@@ -2,7 +2,7 @@ import Select from 'react-select';
 import { prettifyText, isInteger } from 'util/text';
 import { copyObj } from 'util/utils';
 import { createContext, useState, useContext, useEffect } from 'react';
-import { filterOptions, advancedFilterOperators, sportStatOptions } from 'Const';
+import { filterOptions, advancedFilterOperators, sportStatOptions, sportPositionOptions } from 'Const';
 import './Filters.scss';
 
 export function Dropdown({ placeholder, name, defaults, onChange, options, isMulti, ...rest }) {
@@ -48,7 +48,7 @@ export function FilterSection({ children, onChange }) {
     );
 }
 
-export default function Filters({ onFilterChange, onFilterClear, defaultFilters, showClear }) {
+export default function Filters({ onFilterChange, onFilterClear, defaultFilters, showClear, sport }) {
     const [filters, setFilters] = useState(defaultFilters);
 
     const onFilterChangeWrapper = (name, newValues) => {
@@ -94,7 +94,7 @@ export default function Filters({ onFilterChange, onFilterClear, defaultFilters,
                 defaults={ filters.positions }
                 placeholder='Position' 
                 name='positions' 
-                options={ filterOptions.positions } 
+                options={ sportPositionOptions[sport] } 
                 isMulti
             />
             <Dropdown 

@@ -5,7 +5,7 @@ import { prettifyText } from 'util/text';
 import { CloseSmall, PlusSmall } from 'components/Icons';
 import './Filters.scss';
 
-export function AdvancedFilters({ index, filter, onChange, onRemove, onAdd}) {
+export function AdvancedFilters({ index, filter, onChange, onRemove, onAdd, sport }) {
     const [data, setData] = useState({
         stat: filter.stat,
         op: advancedFilterOperators[filter.op]
@@ -64,7 +64,7 @@ export function AdvancedFilters({ index, filter, onChange, onRemove, onAdd}) {
                 classNamePrefix='dropdown-advanced'
                 value={ data.stat }
                 onChange={ (filter) => onChangeFilter('stat', filter) } 
-                options={ makeStatOptions(sportStatOptions.football) } 
+                options={ makeStatOptions(sportStatOptions[sport]) } 
             />
             <Select 
                 classNamePrefix='dropdown-advanced'
