@@ -42,6 +42,6 @@ export function formatDate(timestamp) {
     return dateObj;
 }
 
-export function isInteger(string) {
-    return /^-?[0-9]+$/.test(string);
+export function isNumber(string) {
+    return /^-?[0-9]+(?:\.[0-9]+)?$/.test(string);
 }

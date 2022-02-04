@@ -7,7 +7,7 @@ import Filters, { Dropdown } from 'components/Filters'
 import { AdvancedFilters, getFilterObj } from 'components/AdvancedFilters';
 import { Button } from 'components/Button';
 import { useAuth0 } from '@auth0/auth0-react';
-import { prettifyText, isInteger } from 'util/text';
+import { prettifyText, isNumber } from 'util/text';
 import { copyObj } from 'util/utils';
 import { sportOptions } from 'Const';
 import './Settings.scss';
@@ -81,7 +81,7 @@ export default function Settings() {
         if (!data.stat || !data.op || !value) {
             setAdvancedFilterErrors('All fields are required');
             return false;
-        } else if (!isInteger(value)) {
+        } else if (!isNumber(value)) {
             setAdvancedFilterErrors(`'${value}' is not an integer`);
             return false;
         } else {
@@ -99,7 +99,7 @@ export default function Settings() {
                 data: {
                     stat: data.stat.value,
                     op: data.op.value,
-                    value: parseInt(value),
+                    value: parseFloat(value),
                 }
             };
             setAdvancedFilters(filtersCopy);
@@ -117,7 +117,7 @@ export default function Settings() {
                     data: {
                         stat: data.stat.value,
                         op: data.op.value,
-                        value: parseInt(value),
+                        value: parseFloat(value),
                     },
                 }
             ]);
@@ -142,6 +142,7 @@ export default function Settings() {
                                   onFilterChange={ onFilterChange } 
                                   onFilterClear = { onFilterClear }
                                   defaultFilters={ filters } 
+                                  sport={ userJson.meta.sport }
                               />
                           </div>
                       </div>
@@ -159,11 +160,13 @@ export default function Settings() {
                                       filter={ {...filter.data, stat: filterStat} } 
                                       onChange={ onChangeAdvancedFilter }
                                       onRemove={ onRemoveAdvancedFilter }
+                                      sport={ userJson.meta.sport } 
                                   />
                               })}
                               <AdvancedFilters 
                                   filter={ {stat: null, op: null, value: ''} }
                                   onAdd={ onAddAdvancedFilter }
+                                  sport={ userJson.meta.sport }
                               />
                               {advancedFilterErrors && 
                                   <p className='filters-advanced__new__errors'>{ advancedFilterErrors }</p>
