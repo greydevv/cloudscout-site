@@ -61,8 +61,9 @@ export default function PlayerProfile() {
         return `?position=${position}`;
     }
 
+    const sport = isLoading ? '' : json.meta.sport;
     const position = isLoading ? '' : json.meta.position;
-    const { json: averageJson, isLoading: isAverageLoading } = useApi(`v1/analysis${makePosition(position)}`, position !== null, false);
+    const { json: averageJson, isLoading: isAverageLoading } = useApi(`v1/analysis${makePosition(position)}&sport=${sport}`, position !== null, false);
     const [currentTab, setCurrentTab] = useState('general');
 
     useEffect(() => {
