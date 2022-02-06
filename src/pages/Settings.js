@@ -28,6 +28,7 @@ function SettingsField({ labelText, ...rest }) {
 export default function Settings() {
     const userId = useUserContext();
     const [ filters, setFilters ] = useState({divisions: [], classes: [], positions: []});
+    const [ sport, setSport ] = useState();
     const [ advancedFilters, setAdvancedFilters ] = useState([]);
     const [ advancedFilterErrors, setAdvancedFilterErrors ] = useState('');
     const [ advancedFilterIndex, setAdvancedFilterIndex ] = useState(0);
@@ -38,6 +39,8 @@ export default function Settings() {
     useEffect(() => {
         if (!isUserLoading) {
             setFilters(userJson.account.default_filters);
+            setSport(userJson.account.sport);
+            
             setAdvancedFilters(userJson.account.advanced_filters.map((filter, i) => {
                 return {index: i, data: filter}
             }));
@@ -49,14 +52,17 @@ export default function Settings() {
         if (isPutLoading || !hasUnsaved) {
             return;
         }
+        console.log(sport);
+        let mappedAdvancedFilters = advancedFilters.map((f) => {
+            return {sport: f.data.sport, stat: f.data.stat, op: f.data.op, value: f.data.value};
+        });
         refreshPut({
             ...userJson,
             account: {
                 ...userJson.account,
                 default_filters: filters,
-                advanced_filters: advancedFilters.map((f) => {
-                    return {stat: f.data.stat, op: f.data.op, value: f.data.value}
-                }),
+                advanced_filters: mappedAdvancedFilters,
+                sport: sport,
             }
         });
         setHasUnsaved(false);
@@ -66,6 +72,12 @@ export default function Settings() {
         setFilters({...filters, [name]: values});
         setHasUnsaved(true);
     };
+
+    const onSportChange = (newSport) => {
+        setSport(newSport);
+        setFilters({...filters, positions: []});
+        setHasUnsaved(true);
+    }
 
     const onFilterClear = () => {
         setFilters({divisions: [], classes: [], positions: []});
@@ -100,6 +112,7 @@ export default function Settings() {
                     stat: data.stat.value,
                     op: data.op.value,
                     value: parseFloat(value),
+                    sport: sport,
                 }
             };
             setAdvancedFilters(filtersCopy);
@@ -118,6 +131,7 @@ export default function Settings() {
                         stat: data.stat.value,
                         op: data.op.value,
                         value: parseFloat(value),
+                        sport: sport,
                     },
                 }
             ]);
@@ -132,7 +146,7 @@ export default function Settings() {
             <div className='page__header mb-md'>
                 <h1 className='page__head'>Settings</h1>
             </div>
-            { isUserLoading
+            { (isUserLoading || !sport)
                 ? <SpinnerView />
                 : <div className='settings__form__container'>
                       <div className='settings__form__section'>
@@ -142,14 +156,26 @@ export default function Settings() {
                                   onFilterChange={ onFilterChange } 
                                   onFilterClear = { onFilterClear }
                                   defaultFilters={ filters } 
-                                  sport={ userJson.meta.sport }
+                                  sport={ sport }
                               />
                           </div>
                       </div>
-                      <div className='settings__form__container'>
+                      <div className='settings_form__section'>
+                          <h5 className='p-body-sm'>Sport</h5>
+                          <div className='settings__form settings__sport'>
+                              <Dropdown
+                                  onChange={ (name, value) => onSportChange(value) }
+                                  defaults={ sport }
+                                  placeholder='Sport'
+                                  name='sport'
+                                  options={ sportOptions }
+                              />
+                          </div>
+                      </div>
+                      <div className='settings__form__section'>
                           <h5 className='p-body-sm'>Advanced Filters</h5>
                           <div className='settings__form settings__advanced__filters'>
-                              {advancedFilters.map((filter, i) => {
+                              {advancedFilters.filter(f => f.data.sport === sport).map((filter, i) => {
                                   // turn 'general.games_played' into {value:
                                   // 'games_played', label: 'Games Played'}
                                   const statDisplay = filter.data.stat.split('.')[1];
@@ -160,13 +186,13 @@ export default function Settings() {
                                       filter={ {...filter.data, stat: filterStat} } 
                                       onChange={ onChangeAdvancedFilter }
                                       onRemove={ onRemoveAdvancedFilter }
-                                      sport={ userJson.meta.sport } 
+                                      sport={ sport } 
                                   />
                               })}
                               <AdvancedFilters 
                                   filter={ {stat: null, op: null, value: ''} }
                                   onAdd={ onAddAdvancedFilter }
-                                  sport={ userJson.meta.sport }
+                                  sport={ sport }
                               />
                               {advancedFilterErrors && 
                                   <p className='filters-advanced__new__errors'>{ advancedFilterErrors }</p>

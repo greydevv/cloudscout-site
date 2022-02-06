@@ -45,7 +45,7 @@ export default function Dashboard() {
         let newParams = Object.fromEntries(Object.entries(defaultFilters).map(([key, val]) => {
             return [key, val.join(',')];
         }));
-        newParams.sport = userJson.meta.sport;
+        newParams.sport = userJson.account.sport;
         // TODO: clean up request by filtering out keys that are empty arrays
         // in filter params
         setParams({
@@ -99,9 +99,9 @@ export default function Dashboard() {
                 advanced: null,
             });
         } else {
-            let defaultAdvancedFilters = userJson.account.advanced_filters;
+            let defaultAdvancedFilters = userJson.account.advanced_filters.filter(f => f.sport === userJson.account.sport);
             let advancedFilterParams = defaultAdvancedFilters.map((filter) => {
-                return Object.values(filter).join(';');
+                return `${filter.stat};${filter.op};${filter.value}`;
             });
             if (advancedFilterParams.length > 0) {
                 setParams({
@@ -149,6 +149,8 @@ export default function Dashboard() {
         return (<SpinnerView />);
     }
 
+    const advancedFilters = userJson.account.advanced_filters.filter(f => f.sport === userJson.account.sport);
+
     return (
         <div className='dashboard'>
             <div className='page__header'>
@@ -159,7 +161,7 @@ export default function Dashboard() {
                         onFilterChange={ onFilterChange }
                         onFilterClear={ onFilterClear }
                         defaultFilters={ userJson.account.default_filters }
-                        sport= { userJson.meta.sport }
+                        sport= { userJson.account.sport }
                     />
                     <div className='filters-advanced__container'>
                         {(favoritePids.length > 0 || isViewingFavorites) &&
@@ -168,7 +170,7 @@ export default function Dashboard() {
                                 <Checkbox onChange={ toggleFavorites } />
                             </div>
                         }
-                        {userJson.account.advanced_filters.length > 0 &&
+                        {advancedFilters.length > 0 &&
                             <div className='filters__apply-advanced__container'>
                                 <p className='my-auto p-body-sm'>Advanced: </p>
                                 <Checkbox onChange={ toggleAdvancedFilters } />

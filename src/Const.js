@@ -129,21 +129,6 @@ export const advancedFilterOperators = {
     eq: {value: 'eq', label: 'Equal'},
 };
 
-export const sportOptions = [
-    {value: 'FOOTBALL', label: 'Football'},
-    {value: 'BASEBALL', label: 'Baseball'},
-    {value: 'MENS_BASKETBALL', label: "Men's Basketball"},
-    {value: 'WOMENS_BASKETBALL', label: "Women's Basketball"},
-    {value: 'MENS_ICE_HOCKEY', label: "Men's Ice Hockey"},
-    {value: 'WOMENS_ICE_HOCKEY', label: "Women's Ice Hockey"},
-    {value: 'MENS_SOCCER', label: "Men's Soccer"},
-    {value: 'WOMENS_SOCCER', label: "Women's Soccer"},
-    {value: 'MENS_VOLLEYBALL', label: "Men's Volleyball"},
-    {value: 'WOMENS_VOLLEYBALL', label: "Women's Volleyball"},
-    {value: 'FIELD_HOCKEY', label: 'Field Hockey'},
-    {value: 'SOFTBALL', label: 'Softball'}
-];
-
 const baseSportStatOptions = {
     FOOTBALL: {
         'general': [
@@ -657,6 +642,23 @@ const baseSportStatOptions = {
     }
 }
 
+export const sportOptions = [
+    {value: 'FOOTBALL', label: 'Football'},
+    {value: 'BASEBALL', label: 'Baseball'},
+    {value: 'MENS_BASKETBALL', label: "Men's Basketball"},
+    {value: 'WOMENS_BASKETBALL', label: "Women's Basketball"},
+    {value: 'MENS_ICE_HOCKEY', label: "Men's Ice Hockey"},
+    {value: 'WOMENS_ICE_HOCKEY', label: "Women's Ice Hockey"},
+    {value: 'MENS_SOCCER', label: "Men's Soccer"},
+    {value: 'WOMENS_SOCCER', label: "Women's Soccer"},
+    {value: 'MENS_VOLLEYBALL', label: "Men's Volleyball"},
+    {value: 'WOMENS_VOLLEYBALL', label: "Women's Volleyball"},
+    {value: 'MENS_LACROSSE', label: "Men's Lacrosse"},
+    {value: 'WOMENS_LACROSSE', label: "Women's Lacrosse"},
+    {value: 'FIELD_HOCKEY', label: 'Field Hockey'},
+    {value: 'SOFTBALL', label: 'Softball'},
+];
+
 export const sportPositionOptions = {
     FOOTBALL: baseSportPositionOptions.FOOTBALL,
     BASEBALL: baseSportPositionOptions.BASEBALL,
@@ -671,7 +673,7 @@ export const sportPositionOptions = {
     MENS_VOLLEYBALL: baseSportPositionOptions.VOLLEYBALL,
     WOMENS_VOLLEYBALL: baseSportPositionOptions.VOLLEYBALL,
     FIELD_HOCKEY: baseSportPositionOptions.FIELD_HOCKEY,
-    SOFTBALL: baseSportPositionOptions.SOFTBALL
+    SOFTBALL: baseSportPositionOptions.SOFTBALL,
 }
 
 export const sportStatOptions = {
