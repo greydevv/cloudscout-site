@@ -52,7 +52,6 @@ export default function Settings() {
         if (isPutLoading || !hasUnsaved) {
             return;
         }
-        console.log(sport);
         let mappedAdvancedFilters = advancedFilters.map((f) => {
             return {sport: f.data.sport, stat: f.data.stat, op: f.data.op, value: f.data.value};
         });

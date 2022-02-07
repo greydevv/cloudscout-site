@@ -82,34 +82,34 @@ export default function Home() {
             </div>
             <Footer copyrightText=''>
                 { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
-                    <FooterLinkSet name='Account'>
-                        { isAuthenticated
-                            ? (<>
-                                <FooterLink to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
-                                    Logout
-                                </FooterLink>
-                                <FooterLink isNavLink to='/app'>Dashboard</FooterLink>
-                            </>)
-                            : (<>
-                                <FooterLink to='#' onClick={ () => loginWithRedirect() }>
-                                    Log In
-                                 </FooterLink>
-                                <FooterLink to='#' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
-                                    Sign Up
-                                </FooterLink>
-                            </>)
+                    <>
+                        <FooterLinkSet name='Account'>
+                            { isAuthenticated
+                                ? (<>
+                                    <FooterLink to='#' onClick={ () => logout({ returnTo: window.location.origin }) }>
+                                        Logout
+                                    </FooterLink>
+                                    <FooterLink isNavLink to='/app'>Dashboard</FooterLink>
+                                </>)
+                                : (<>
+                                    <FooterLink to='#' onClick={ () => loginWithRedirect() }>
+                                        Log In
+                                     </FooterLink>
+                                    <FooterLink to='#' onClick={ () => loginWithRedirect({screen_hint: 'signup'}) }>
+                                        Sign Up
+                                    </FooterLink>
+                                </>)
 
-                        }
-                    </FooterLinkSet>
+                            }
+                        </FooterLinkSet>
+                        <FooterLinkSet name='Company'>
+                            <FooterLink isNavLink to='/'>Home</FooterLink>
+                            <FooterLink isNavLink to='/about'>About</FooterLink>
+                            <FooterLink isNavLink to='/pricing'>Pricing</FooterLink>
+                            <FooterLink isNavLink to='/contact'>Contact</FooterLink>
+                        </FooterLinkSet>
+                    </>
                 }
-                <FooterLinkSet name='Company'>
-                    <FooterLink isNavLink to='/'>Home</FooterLink>
-                    <FooterLink isNavLink to='/about'>About</FooterLink>
-                    { process.env.REACT_APP_ENVIRONMENT === 'DEVELOPMENT' &&
-                        <FooterLink isNavLink to='/pricing'>Pricing</FooterLink>
-                    }
-                    <FooterLink isNavLink to='/contact'>Contact</FooterLink>
-                </FooterLinkSet>
             </Footer>
         </div>
     );
