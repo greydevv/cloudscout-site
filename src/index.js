@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useNavigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Dashboard from 'pages/Dashboard';
 import Favorites from 'pages/Favorites';
@@ -23,7 +23,7 @@ ReactDOM.render(
             domain={ process.env.REACT_APP_AUTH0_DOMAIN }
             audience={ process.env.REACT_APP_AUTH0_AUDIENCE }
             scope='read:players'
-            redirectUri={ window.location.origin }
+            redirectUri={ `${window.location.origin}/app` }
         >
             <Routes>
                 <Route path='/' element={ <Home /> }>
