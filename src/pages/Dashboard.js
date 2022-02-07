@@ -155,7 +155,7 @@ export default function Dashboard() {
         <div className='dashboard'>
             <div className='page__header'>
                 <h1 className='page__head mb-md'>Dashboard</h1>
-                <SearchBar handleSearch={ onSearch } />
+                <SearchBar onSearch={ onSearch } />
                 <div className='my-md filters__section'>
                     <Filters
                         onFilterChange={ onFilterChange }

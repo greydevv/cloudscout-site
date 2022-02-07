@@ -1,46 +1,31 @@
-import React from 'react';
+import { useState } from 'react';
 import { Search } from 'components/Icons';
 import './SearchBar.scss';
 
-export default class SearchBar extends React.Component
-{
-    constructor(props)
-    {
-        super(props);
-        this.handleSearch = this.handleSearch.bind(this);
-        this.updateSearchQuery = this.updateSearchQuery.bind(this);
-        this.state = {
-            query: ''
-        }
-    }
+export default function SearchBar({ onSearch }) {
+    const [ query, setQuery ] = useState('');
 
-    updateSearchQuery(e) {
-        this.setState({query:e.target.value});
+    const updateSearchQuery = (e) => {
+        setQuery(e.target.value);
         if (e.key === 'Enter') {
-            this.handleSearch();
+            onSearch(query);
         }
     }
 
-    handleSearch() {
-        this.props.handleSearch(this.state.query);
-    }
-
-    render() {
-        return (
-            <div className='search__bar'>
-                <button className='search__btn my-auto p-0 mr-xs' onClick={ this.handleSearch }>
-                    <Search className='search__btn__icon'/>
-                </button>
-                <input
-                    type='text'
-                    className='search__input p-0 my-auto'
-                    placeholder='Search by first, last, institution...'
-                    onKeyDown={ this.updateSearchQuery }
-                    onChange={ this.updateSearchQuery }
-                    name='s'
-                    onSubmit={ this.handleSearch }
-                />
-            </div>
-        );
-    }
+    return (
+        <div className='search__bar'>
+            <button className='search__btn my-auto p-0 mr-xs' onClick={ () => onSearch(query) }>
+                <Search className='search__btn__icon'/>
+            </button>
+            <input
+                type='text'
+                className='search__input p-0 my-auto'
+                placeholder='Search by first, last, institution...'
+                onKeyDown={ updateSearchQuery }
+                onChange={ updateSearchQuery }
+                name='s'
+                onSubmit={ () => onSearch(query) }
+            />
+        </div>
+    );
 }
