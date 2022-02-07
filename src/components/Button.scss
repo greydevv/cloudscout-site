@@ -67,3 +67,29 @@
         vertical-align: top;
     }
 }
+
+.btn-toggle {
+    @include plain-btn;
+    padding: 8px;
+    display: flex;
+    gap: 10px;
+    background-color: $neutral-light;
+    border-radius: 5px;
+    color: $neutral-dark;
+    font-family: $font-primary;
+    font-size: 14px;
+    font-weight: 500;
+    align-items: center;
+
+    &-active {
+        @extend .btn-toggle;
+        background-color: $color-primary;
+        color: $neutral-light;
+    }
+
+    & svg {
+        vertical-align: top;
+        width: 20px;
+        height: 20px;
+    }
+}
