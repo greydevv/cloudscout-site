@@ -16,6 +16,7 @@ import { ReactComponent as ArrowDown } from 'assets/icons/arrowDown.svg';
 import { ReactComponent as ArrowUp } from 'assets/icons/arrowUp.svg';
 import { ReactComponent as ChevronRight } from 'assets/icons/chevronRight.svg';
 import { ReactComponent as ChevronLeft } from 'assets/icons/chevronLeft.svg';
+import { ReactComponent as BackArrow } from 'assets/icons/backArrow.svg';
 
 export { Dashboard,
          Cog,
@@ -34,4 +35,5 @@ export { Dashboard,
          ArrowDown,
          ArrowUp,
          ChevronRight,
-         ChevronLeft }
+         ChevronLeft,
+         BackArrow }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { CheckmarkSmall } from 'components/Icons';
+import { CheckmarkSmall, BackArrow } from 'components/Icons';
+import { useNavigate } from 'react-router-dom';
 import './Button.scss';
 
 export function Button({ children, isDisabled, ...rest }) {
@@ -17,6 +18,16 @@ export function GradientButton({ children, ...rest }) {
     return (
         <button className='btn-gradient' { ...rest }>
             { children }
+        </button>
+    );
+}
+
+export function BackButton() {
+    const navigate = useNavigate();
+
+    return (
+        <button className='btn-back' onClick={() => navigate(-1)}>
+            <BackArrow className='btn-back__icon' />
         </button>
     );
 }

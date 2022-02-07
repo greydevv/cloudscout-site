@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useApi, usePut }  from 'api/api.js';
+import { ArrowUp, ArrowDown, StarFilled } from 'components/Icons'
 import { SpinnerView } from 'components/Spinner';
-import { prettifyText } from 'util/text';
-import { ArrowUp, ArrowDown } from 'components/Icons'
-import './PlayerProfile.scss';
-import { StarFilled } from 'components/Icons';
+import { BackButton } from 'components/Button';
 import { useUserContext } from 'UserContext';
 import { copyObj } from 'util/utils';
+import { prettifyText } from 'util/text';
+import { useApi, usePut }  from 'api/api';
+import './PlayerProfile.scss';
 
 function StatRow({ stat, value, classAvgStat, allAvgStat }) {
     const nullify = (allAvgStat === null || allAvgStat === 0 || value === null || value === 0);
@@ -106,6 +106,7 @@ export default function PlayerProfile() {
     return (
         <>
             <div className='profile'>
+                <BackButton />
                 <div className='page__header'>
                     <h1 className='page__head'>{ `${json.meta.first.toUpperCase()} ${json.meta.last.toUpperCase()}` } </h1>
                     <p className='p-body-sm'>{ json.meta.institution.toUpperCase() } { json.meta.position !== null && `• ${json.meta.position}`} </p>

@@ -32,6 +32,17 @@
     background: linear-gradient(90deg, $color-primary-dark, $color-primary);
 }
 
+.btn-back {
+    @include plain-btn;
+
+    padding: 0;
+    margin-bottom: 2rem;
+
+    &__icon {
+        vertical-align: top;
+    }
+}
+
 .btn-checkbox {
     @include plain-btn;
     padding: 0 !important;
