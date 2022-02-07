@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ArrowUp, ArrowDown, StarFilled } from 'components/Icons'
 import { SpinnerView } from 'components/Spinner';
-import { BackButton } from 'components/Button';
+import { BackButton, ToggleButton } from 'components/Button';
 import { useUserContext } from 'UserContext';
 import { copyObj } from 'util/utils';
 import { prettifyText } from 'util/text';
@@ -110,14 +110,9 @@ export default function PlayerProfile() {
                 <div className='page__header'>
                     <h1 className='page__head'>{ `${json.meta.first.toUpperCase()} ${json.meta.last.toUpperCase()}` } </h1>
                     <p className='p-body-sm'>{ json.meta.institution.toUpperCase() } { json.meta.position !== null && `• ${json.meta.position}`} </p>
-                    {isFavorited
-                        ? (<button className='favorite__btn-active' onClick={ () => onUnfavorite(json.pid) }>
-                               <StarFilled className='favorite__btn__icon-active' />
-                           </button>)
-                        : (<button className='favorite__btn' onClick={ () => onFavorite(json.pid) }>
-                               <StarFilled className='favorite__btn__icon' />
-                           </button>)
-                    }
+                    <div className='my-lg'>
+                        <ToggleButton icon={ <StarFilled /> } text='Favorite' onChange={ () => (isFavorited ? onFavorite(json.pid) : onUnfavorite(json.pid)) } />
+                    </div>
                 </div>
                 {hasNoStats
                     ? <NoStats />
