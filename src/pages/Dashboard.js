@@ -41,16 +41,18 @@ export default function Dashboard() {
             return;
         }
 
-        let defaultFilters = userJson.account.default_filters;
-        let newParams = Object.fromEntries(Object.entries(defaultFilters).map(([key, val]) => {
-            return [key, val.join(',')];
-        }));
-        newParams.sport = userJson.account.sport;
-        // TODO: clean up request by filtering out keys that are empty arrays
-        // in filter params
+        let defaultFilters = Object.entries(userJson.account.default_filters);
+        let filterParams = {};
+        for (const [key, value] of defaultFilters) {
+            console.log(value);
+            if (value.length > 0) {
+                filterParams.key = value.join(',');
+            }
+        }
         setParams({
             ...params,
-            ...newParams,
+            ...filterParams,
+            sport: userJson.account.sport,
         });
         setFavoritePids(userJson.account.favorites);
     }, [isUserLoading]);
