@@ -6,7 +6,8 @@ import { BackButton, ToggleButton } from 'components/Button';
 import { useUserContext } from 'UserContext';
 import { copyObj } from 'util/utils';
 import { prettifyText } from 'util/text';
-import { useApi, usePut }  from 'api/api';
+// import { useApi, usePut }  from 'api/api';
+import { useRest, usePut } from 'api/useRest';
 import './PlayerProfile.scss';
 
 function StatRow({ stat, value, classAvgStat, allAvgStat }) {
@@ -47,59 +48,69 @@ function NoStats() {
 }
 
 export default function PlayerProfile() {
-    const { pid } = useParams()
-    const { json, isLoading } = useApi(`v1/players/${pid}`);
     const userId = useUserContext();
-    const [ jsonBody, setJsonBody ] = useState({});
-    const { json: userJson, isLoading: isUserLoading } = useApi(`v1/users/${userId}`);
-    const { json: putJson, isLoading: isPutLoading } = usePut(`/v1/users/${userId}`, jsonBody)
-
-    const makePosition = (position) => {
-        if (position === null) {
-            return '';
-        }
-        return `?position=${position}`;
-    }
-
-    const sport = isLoading ? '' : json.meta.sport;
-    const position = isLoading ? '' : json.meta.position;
-    const { json: averageJson, isLoading: isAverageLoading } = useApi(`v1/analysis${makePosition(position)}&sport=${sport}`, position !== null, false);
+    const { pid } = useParams()
     const [currentTab, setCurrentTab] = useState('general');
+    const [ isFavorited, setIsFavorited ] = useState(false);
+    const { json: userJson, isLoading: isUserLoading } = useRest({url: `v1/users/${userId}`});
+    const { json: playerJson, isLoading: isPlayerLoading } = useRest({url: `v1/players/${pid}`});
+    const { json: averageJson, isLoading: isAverageLoading, refresh: refreshAverage } = useRest({url: 'v1/analysis'}, false);
+    const { refresh: refreshPut } = usePut(`v1/users/${userId}`);
 
     useEffect(() => {
-        if (!isUserLoading) {
-            setJsonBody(copyObj(userJson));
+        if (!isUserLoading && userJson.account.favorites.includes(pid)) {
+            setIsFavorited(true);
         }
     }, [isUserLoading]);
+
+    useEffect(() => {
+        if (!isPlayerLoading) {
+            refreshAverage({
+                position: playerJson.meta.position,
+                sport: playerJson.meta.sport
+            });
+        }
+    }, [isPlayerLoading])
 
     const changeCurrentTab = (category) => {
         setCurrentTab(category);
     };
 
-    const onFavorite = (pid) => {
-        userJson.account.favorites = [...userJson.account.favorites, pid];
-        setJsonBody(copyObj(userJson));
+    const onFavorite = () => {
+        const newFavorites = [...userJson.account.favorites, pid];
+        refreshPut({
+            ...userJson,
+            account: {
+                ...userJson.account,
+                favorites: newFavorites
+            }
+        });
+        setIsFavorited(true);
     }
 
-    const onUnfavorite = (pid) => {
-        let newFavorites = jsonBody.account.favorites;
+    const onUnfavorite = () => {
+        let newFavorites = userJson.account.favorites;
         for (var i = newFavorites.length - 1; i >= 0; i--) {
             if (newFavorites[i] === pid) {
                 newFavorites.splice(i, 1);
                 break;
             }
         }
-        userJson.account.favorites = newFavorites;
-        setJsonBody(copyObj(userJson));
+        refreshPut({
+            ...userJson,
+            account: {
+                ...userJson.account,
+                favorites: newFavorites
+            }
+        });
+        setIsFavorited(false);
     }
 
-    if (isLoading || isUserLoading || (isAverageLoading && position !== null)) {
+    if (isPlayerLoading || isUserLoading || isAverageLoading) {
         return <SpinnerView />
     }
-    
-    const isFavorited = userJson.account.favorites.includes(json.pid);
-    const statTabs = json.stats;
 
+    const statTabs = playerJson.stats;
     const hasNoStats = Object.keys(averageJson).length === 0;
     const inputJson = hasNoStats ? null : statTabs[currentTab];
 
@@ -108,10 +119,15 @@ export default function PlayerProfile() {
             <div className='profile'>
                 <BackButton />
                 <div className='page__header'>
-                    <h1 className='page__head'>{ `${json.meta.first.toUpperCase()} ${json.meta.last.toUpperCase()}` } </h1>
-                    <p className='p-body-sm'>{ json.meta.institution.toUpperCase() } { json.meta.position !== null && `• ${json.meta.position}`} </p>
-                    <div className='my-lg'>
-                        <ToggleButton icon={ <StarFilled /> } text='Favorite' onChange={ () => (isFavorited ? onFavorite(json.pid) : onUnfavorite(json.pid)) } />
+                    <h1 className='page__head'>{ `${playerJson.meta.first.toUpperCase()} ${playerJson.meta.last.toUpperCase()}` } </h1>
+                    <p className='p-body-sm'>{ playerJson.meta.institution.toUpperCase() } { playerJson.meta.position !== null && `• ${playerJson.meta.position}`} </p>
+                    <div className='my-sm'>
+                        <ToggleButton 
+                            icon={ <StarFilled /> } 
+                            text='Favorite' 
+                            onChange={ isFavorited ? onUnfavorite : onFavorite } 
+                            isActive={ isFavorited }
+                        />
                     </div>
                 </div>
                 {hasNoStats
@@ -136,7 +152,7 @@ export default function PlayerProfile() {
                             <div className='profile__statistics__container py-lg'>
                                 <table className='profile__statistics__table'>
                                     <tbody>
-                                        { Object.entries(inputJson).map(([stat, value], i) => {
+                                        {Object.entries(inputJson).map(([stat, value], i) => {
                                             return (
                                                 <StatRow 
                                                     key={ i } 

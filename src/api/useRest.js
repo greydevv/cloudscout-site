@@ -53,13 +53,15 @@ export const usePut = (url) => {
 export const useRest = (config, isEnabled=true, defaultJson={}, enabledOnFirstRender=true) => {
     const { getAccessTokenSilently } = useAuth0();
     const [enabled, setEnabled] = useState(isEnabled);
+    const [params, setParams] = useState({});
     const [refreshIndex, setRefreshIndex] = useState(0);
     const [json, setJson] = useState(defaultJson);
     const [code, setCode] = useState(200);
     const [isLoading, setIsLoading] = useState(enabled); // not loading when not enabled
     const [firstRender, setFirstRender] = useState(true);
 
-    const refresh = () => {
+    const refresh = (newParams) => {
+        setParams(newParams);
         setEnabled(true);
         setRefreshIndex(refreshIndex + 1);
     }
@@ -80,6 +82,10 @@ export const useRest = (config, isEnabled=true, defaultJson={}, enabledOnFirstRe
             });
             const apiResponse = await restApi.request({
                 ...config, 
+                params: {
+                    ...config.params,
+                    ...params
+                },
                 headers: {
                     ...config.headers, 
                     'Authorization': `Bearer ${accessToken}`,
@@ -97,7 +103,7 @@ export const useRest = (config, isEnabled=true, defaultJson={}, enabledOnFirstRe
         json: json,
         code: code,
         isLoading: isLoading,
-        refreshCall: refresh,
+        refresh: refresh,
     };
 }
 
