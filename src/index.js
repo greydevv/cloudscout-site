@@ -4,7 +4,6 @@ import reportWebVitals from './reportWebVitals';
 import { useNavigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Dashboard from 'pages/Dashboard';
-import Favorites from 'pages/Favorites';
 import Settings from 'pages/Settings';
 import Home from 'pages/Home';
 import Landing from 'pages/Landing';
@@ -37,7 +36,6 @@ ReactDOM.render(
                 </Route>
                 <Route path='/app' element={ <App /> }>
                     <Route index element={ <Dashboard /> } />
-                    <Route path='favorites' element={ <Favorites /> } />
                     <Route path='settings' element={ <Settings />} />
                     <Route path='player/:pid' element={ <PlayerProfile />} />
                 </Route>
