@@ -35,6 +35,7 @@
 .btn-back {
     @include plain-btn;
 
+    width: 27px;
     padding: 0;
     margin-bottom: 2rem;
 
