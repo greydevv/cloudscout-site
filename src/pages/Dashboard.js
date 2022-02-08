@@ -44,7 +44,6 @@ export default function Dashboard() {
         let defaultFilters = Object.entries(userJson.account.default_filters);
         let filterParams = {};
         for (const [key, value] of defaultFilters) {
-            console.log(value);
             if (value.length > 0) {
                 filterParams.key = value.join(',');
             }

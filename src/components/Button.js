@@ -50,16 +50,13 @@ export function Checkbox({ onChange }) {
     );
 }
 
-export function ToggleButton({ text, icon, onChange }) {
-    const [ isToggled, setIsToggled ] = useState(false);
-
-    const onChangeWrapper = () => {
-        onChange(!isToggled);
-        setIsToggled(!isToggled);
-    }
+export function ToggleButton({ text, icon, onChange, isActive=false }) {
 
     return (
-        <button className={ 'btn-toggle' + (isToggled ? '-active' : '')} onClick={ onChangeWrapper } >
+        <button 
+            className={ 'btn-toggle' + (isActive ? '-active' : '')} 
+            onClick={ () => onChange(isActive) } 
+        >
             { icon }
             { text }
         </button>
