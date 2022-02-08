@@ -64,7 +64,7 @@ export default function PlayerProfile() {
     }, [isUserLoading]);
 
     useEffect(() => {
-        if (!isPlayerLoading) {
+        if (!isPlayerLoading && playerJson.meta.position) {
             refreshAverage({
                 position: playerJson.meta.position,
                 sport: playerJson.meta.sport
