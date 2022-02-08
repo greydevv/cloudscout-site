@@ -140,69 +140,70 @@ export default function Settings() {
         return isValid;
     }
 
+    if (isUserLoading || !sport) {
+        return <SpinnerView />
+    }
+
     return (
         <div className='settings'>
             <div className='page__header mb-md'>
                 <h1 className='page__head'>Settings</h1>
             </div>
-            { (isUserLoading || !sport)
-                ? <SpinnerView />
-                : <div className='settings__form__container'>
-                      <div className='settings__form__section'>
-                          <h5 className='p-body-sm'>Default Filters</h5>
-                          <div className='settings__form'>
-                              <Filters 
-                                  onFilterChange={ onFilterChange } 
-                                  onFilterClear = { onFilterClear }
-                                  defaultFilters={ filters } 
-                                  sport={ sport }
-                              />
-                          </div>
-                      </div>
-                      <div className='settings_form__section'>
-                          <h5 className='p-body-sm'>Sport</h5>
-                          <div className='settings__form settings__sport'>
-                              <Dropdown
-                                  onChange={ (name, value) => onSportChange(value) }
-                                  defaults={ sport }
-                                  placeholder='Sport'
-                                  name='sport'
-                                  options={ sportOptions }
-                              />
-                          </div>
-                      </div>
-                      <div className='settings__form__section'>
-                          <h5 className='p-body-sm'>Advanced Filters</h5>
-                          <div className='settings__form settings__advanced__filters'>
-                              {advancedFilters.filter(f => f.data.sport === sport).map((filter, i) => {
-                                  // turn 'general.games_played' into {value:
-                                  // 'games_played', label: 'Games Played'}
-                                  const statDisplay = filter.data.stat.split('.')[1];
-                                  const filterStat = {value: filter.data.stat, label: prettifyText(statDisplay).pretty}
-                                  return <AdvancedFilters 
-                                      key={ filter.index }
-                                      index={ filter.index }
-                                      filter={ {...filter.data, stat: filterStat} } 
-                                      onChange={ onChangeAdvancedFilter }
-                                      onRemove={ onRemoveAdvancedFilter }
-                                      sport={ sport } 
-                                  />
-                              })}
-                              <AdvancedFilters 
-                                  filter={ {stat: null, op: null, value: ''} }
-                                  onAdd={ onAddAdvancedFilter }
-                                  sport={ sport }
-                              />
-                              {advancedFilterErrors && 
-                                  <p className='filters-advanced__new__errors'>{ advancedFilterErrors }</p>
-                              }
-                          </div>
-                      </div>
-                      <div className='settings__form__section-submit'>
-                          <Button onClick={ saveUserSettings } isDisabled={ isPutLoading || !hasUnsaved }>Save</Button>
-                      </div>
-                </div>
-            }
+            <div className='settings__form__container'>
+                <div className='settings__form__section'>
+                    <h5 className='p-body-sm'>Default Filters</h5>
+                    <div className='settings__form'>
+                         <Filters 
+                             onFilterChange={ onFilterChange } 
+                             onFilterClear = { onFilterClear }
+                             defaultFilters={ filters } 
+                             sport={ sport }
+                         />
+                     </div>
+                 </div>
+                 <div className='settings_form__section'>
+                     <h5 className='p-body-sm'>Sport</h5>
+                     <div className='settings__form settings__sport'>
+                         <Dropdown
+                             onChange={ (name, value) => onSportChange(value) }
+                             defaults={ sport }
+                             placeholder='Sport'
+                             name='sport'
+                             options={ sportOptions }
+                         />
+                     </div>
+                 </div>
+                 <div className='settings__form__section'>
+                     <h5 className='p-body-sm'>Advanced Filters</h5>
+                     <div className='settings__form settings__advanced__filters'>
+                         {advancedFilters.filter(f => f.data.sport === sport).map((filter, i) => {
+                             // turn 'general.games_played' into {value:
+                             // 'games_played', label: 'Games Played'}
+                             const statDisplay = filter.data.stat.split('.')[1];
+                             const filterStat = {value: filter.data.stat, label: prettifyText(statDisplay).pretty}
+                             return <AdvancedFilters 
+                                 key={ filter.index }
+                                 index={ filter.index }
+                                 filter={ {...filter.data, stat: filterStat} } 
+                                 onChange={ onChangeAdvancedFilter }
+                                 onRemove={ onRemoveAdvancedFilter }
+                                 sport={ sport } 
+                             />
+                         })}
+                         <AdvancedFilters 
+                             filter={ {stat: null, op: null, value: ''} }
+                             onAdd={ onAddAdvancedFilter }
+                             sport={ sport }
+                         />
+                         {advancedFilterErrors && 
+                             <p className='filters-advanced__new__errors'>{ advancedFilterErrors }</p>
+                         }
+                     </div>
+                 </div>
+                 <div className='settings__form__section-submit'>
+                     <Button onClick={ saveUserSettings } isDisabled={ isPutLoading || !hasUnsaved }>Save</Button>
+                 </div>
+            </div>
         </div>
     );
 }

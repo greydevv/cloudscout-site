@@ -147,7 +147,7 @@ export default function Dashboard() {
     }
 
     if (isUserLoading) {
-        return (<SpinnerView />);
+        return <SpinnerView />;
     }
 
     const advancedFilters = userJson.account.advanced_filters.filter(f => f.sport === userJson.account.sport);
