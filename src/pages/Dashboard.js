@@ -45,7 +45,7 @@ export default function Dashboard() {
         let filterParams = {};
         for (const [key, value] of defaultFilters) {
             if (value.length > 0) {
-                filterParams.key = value.join(',');
+                filterParams[key] = value.join(',');
             }
         }
         setParams({
