@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import SearchBar from '../components/SearchBar';
-import PlayerTable from '../components/PlayerTable';
+import SearchBar from 'components/SearchBar';
+import PlayerTable from 'components/PlayerTable';
 import Filters, { FilterSection, Dropdown } from 'components/Filters'
 import { SpinnerView } from 'components/Spinner';
+import { ErrorView } from 'components/Error';
 import { useUserContext } from 'UserContext';
 import { useApi }  from 'api/api.js';
 import { useRest, usePut } from 'api/useRest';
@@ -18,7 +19,10 @@ export default function Dashboard() {
     const [ pageNo, setPageNo ] = useState(1);
     const [ favoritesPageNo, setFavoritesPageNo ] = useState(1);
     const [ isViewingFavorites, setIsViewingFavorites ] = useState(false);
-    const { json: userJson, isLoading: isUserLoading } = useRest({url: `/v1/users/${userId}`});
+    const { json: userJson, 
+            code: userCode, 
+            isLoading: isUserLoading,
+            refresh: refreshUserGet } = useRest({url: `/v1/users/${userId}`});
     const { refresh: refreshPut } = usePut(`/v1/users/${userId}`);
     const { json: playersJson, isLoading: isPlayersLoading } = useRest({url: 'v1/players', params: params}, true, {data:[], total:0}, false);
     const putOk = useRef(false);
@@ -37,7 +41,7 @@ export default function Dashboard() {
     }, [favoritePids])
 
     useEffect(() => {
-        if (isUserLoading) {
+        if (isUserLoading || userCode !== 200) {
             return;
         }
 
@@ -148,6 +152,14 @@ export default function Dashboard() {
 
     if (isUserLoading) {
         return <SpinnerView />;
+    }
+
+    if (userCode !== 200) {
+        return <ErrorView 
+            onTryAgain={() => {
+                refreshUserGet();
+            }}
+        /> 
     }
 
     const advancedFilters = userJson.account.advanced_filters.filter(f => f.sport === userJson.account.sport);
