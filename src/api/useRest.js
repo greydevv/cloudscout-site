@@ -80,20 +80,25 @@ export const useRest = (config, isEnabled=true, defaultJson={}, enabledOnFirstRe
                 audience: process.env.REACT_APP_AUTH0_AUDIENCE,
                 scope: 'read:players'
             });
-            const apiResponse = await restApi.request({
-                ...config, 
-                params: {
-                    ...config.params,
-                    ...params
-                },
-                headers: {
-                    ...config.headers, 
-                    'Authorization': `Bearer ${accessToken}`,
-                    'Content-Type': 'Application/JSON'
-                }
-            });
-            setJson(await apiResponse.data);
-            setCode(apiResponse.status);
+            try {
+                const apiResponse = await restApi.request({
+                    ...config, 
+                    params: {
+                        ...config.params,
+                        ...params
+                    },
+                    headers: {
+                        ...config.headers, 
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'Application/JSON'
+                    }
+                });
+                setJson(await apiResponse.data);
+                setCode(apiResponse.status);
+            } catch (error) {
+                setJson(error.response.data);
+                setCode(error.response.status);
+            }
             setIsLoading(false);
         }
         makeHttpReq();
